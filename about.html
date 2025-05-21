@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giới thiệu - My Music Player</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="img/favicon.png" type="image/png">
+    <!-- Assuming Font Awesome is linked for the GitHub icon, if not, you might need to add its CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* Style riêng cho trang about nếu cần */
+        .about-content-wrapper { /* New wrapper for language tabs and content */
+            padding: 20px 30px;
+        }
+
+        .language-tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #444; /* Separator line */
+        }
+
+        .lang-tab-btn {
+            padding: 10px 20px;
+            cursor: pointer;
+            border: none;
+            background-color: transparent;
+            color: #b3b3b3;
+            font-size: 1em;
+            margin-right: 5px; /* Spacing between tabs */
+            border-bottom: 3px solid transparent; /* For active indicator */
+            transition: color 0.3s, border-bottom-color 0.3s;
+        }
+
+        .lang-tab-btn:hover {
+            color: #fff;
+        }
+
+        .lang-tab-btn.active {
+            color: #1DB954; /* Spotify Green for active tab */
+            border-bottom-color: #1DB954;
+            font-weight: bold;
+        }
+
+        .lang-content {
+            display: none; /* Hide content by default */
+            line-height: 1.6;
+        }
+
+        .lang-content.active {
+            display: block; /* Show active language content */
+        }
+
+        .lang-content h1 {
+            margin-bottom: 20px;
+            font-size: 2em;
+        }
+
+        .lang-content h2 {
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+            border-bottom: 1px solid #333;
+            padding-bottom: 5px;
+        }
+
+        .lang-content p {
+            margin-bottom: 15px;
+            color: #b3b3b3;
+        }
+
+        .lang-content ul {
+            list-style: disc;
+            margin-left: 20px;
+            margin-bottom: 15px;
+            color: #b3b3b3;
+        }
+
+        .lang-content a {
+            color: #1DB954;
+            text-decoration: underline;
+        }
+
+        .lang-content a:hover {
+            color: #1ed760;
+        }
+         /* Style for the GitHub button if not using a framework like Bootstrap */
+        .btn-outline-dark {
+            display: inline-block;
+            font-weight: 400;
+            color: #ccc;
+            text-align: center;
+            vertical-align: middle;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            background-color: transparent;
+            border: 1px solid #555;
+            padding: .375rem .75rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            border-radius: .25rem;
+            text-decoration: none; /* Remove underline from button itself */
+            transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        }
+        .btn-outline-dark:hover {
+            color: #fff;
+            background-color: #343a40;
+            border-color: #343a40;
+        }
+        .btn-outline-dark .fab {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <button class="menu-toggle-btn" aria-label="Toggle menu">☰</button>
+    <audio id="audio-player"></audio>
+
+    <div class="music-player-container">
+        <!-- 1. Sidebar -->
+        <nav class="sidebar">
+            <div><img src="img/logo.png" height="80" alt="MyMusic Player Logo"></div>
+            <div class="sidebar-nav">
+                <ul>
+                    <li>
+                        <a href="index.html">
+                            <svg viewBox="0 0 24 24" class="icon-home"><path d="M12 3L4 9v12h5v-7h6v7h5V9z"></path></svg>
+                            Trang chủ
+                        </a>
+                    </li>
+                    <li>
+                        <a href="search.html">
+                            <svg viewBox="0 0 24 24" class="icon-search"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path></svg>
+                            Tìm kiếm
+                        </a>
+                    </li>
+                    <li>
+                        <a href="library.html">
+                            <svg viewBox="0 0 24 24" class="icon-library"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-3 2v5l-2.5-1.5L13 9V4h5zM8 16h12V4h-2v7l-2.5-1.5L13 9V4H8v12z"></path></svg>
+                            Thư viện
+                        </a>
+                    </li>
+                    <li>
+                        <a href="artists.html">
+                            <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" class="icon-artist"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" /></svg>
+                            Nghệ Sĩ
+                        </a>
+                    </li>
+                    <li>
+                        <a href="favorite.html">
+                            <svg viewBox="0 0 24 24" class="icon-like"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path></svg>
+                            Bài hát đã thích
+                        </a>
+                    </li>
+                    <li>
+                        <a href="about.html" class="sidebar-link active">
+                            <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" class="icon-info"><path d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"></path></svg>
+                            Giới thiệu
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="sidebar-playlists">
+                <h4>PLAYLISTS</h4>
+                <ul id="playlist-links-list">
+                    <!-- Các link playlist sẽ được tạo bởi JavaScript ở đây -->
+                </ul>
+            </div>
+        </nav>
+
+        <!-- 2. Main Content Area for About Page -->
+        <main class="main-content" id="about-content-container">
+            <div class="about-content-wrapper"> <!-- Wrapper for tabs and content -->
+                <div class="language-tabs">
+                    <button id="lang-vi-btn" class="lang-tab-btn active" data-lang="vi">Tiếng Việt</button>
+                    <button id="lang-en-btn" class="lang-tab-btn" data-lang="en">English</button>
+                </div>
+
+                <!-- Vietnamese Content -->
+                <div id="about-content-vi" class="lang-content active">
+                    <h1 class="text-center mb-4">Giới Thiệu MyMusic Player</h1>
+
+                    <p class="lead text-center mb-5">
+                        MyMusic Player là một giao diện trình phát nhạc trực tuyến được thiết kế và phát triển nhằm mang đến
+                        trải nghiệm nghe nhạc đơn giản, hiện đại và trực quan, lấy cảm hứng từ các nền tảng phổ biến như
+                        Spotify và Zing MP3.
+                    </p>
+
+                    <section class="mb-5">
+                        <h2 class="h4 border-bottom pb-2 mb-3">Mục Tiêu Dự Án</h2>
+                        <p>Mục tiêu chính của dự án là xây dựng một minh chứng (proof-of-concept) về khả năng phát triển
+                            giao diện người dùng (UI) và trải nghiệm người dùng (UX) cho ứng dụng web, tập trung vào các yếu
+                            tố sau:</p>
+                        <ul>
+                            <li><strong>Thiết kế Giao diện:</strong> Tạo lập một giao diện thẩm mỹ, gọn gàng và dễ dàng điều
+                                hướng cho người sử dụng.</li>
+                            <li><strong>Chức năng Cốt lõi:</strong> Triển khai các chức năng cơ bản của một trình phát nhạc,
+                                bao gồm phát/tạm dừng, hiển thị tiến trình và điều chỉnh âm lượng.</li>
+                            <li><strong>Tổ chức Nội dung:</strong> Trình bày hiệu quả các danh sách bài hát và thông tin
+                                liên quan.</li>
+                            <li><strong>Thiết kế Đáp ứng (Responsive):</strong> Đảm bảo giao diện hiển thị và hoạt động tối
+                                ưu trên các kích thước màn hình khác nhau, từ máy tính để bàn đến thiết bị di động.</li>
+                            <li><strong>Tương tác Động:</strong> Tận dụng JavaScript để tạo ra các yếu tố giao diện động và
+                                phản hồi tương tác người dùng một cách mượt mà.</li>
+                        </ul>
+                        <p><em>Dự án cũng là cơ hội để thực hành và củng cố các kỹ năng phát triển front-end cốt lõi.</em>
+                        </p>
+                    </section>
+
+                    <section class="mb-5">
+                        <h2 class="h4 border-bottom pb-2 mb-3">Nền Tảng Công Nghệ</h2>
+                        <p>MyMusic Player được xây dựng hoàn toàn bằng các công nghệ front-end cơ bản:</p>
+                        <ul>
+                            <li><strong>HTML5:</strong> Cung cấp cấu trúc ngữ nghĩa cho nội dung trang web.</li>
+                            <li><strong>CSS3:</strong> Định dạng giao diện, bao gồm các kỹ thuật layout hiện đại như
+                                Flexbox, Grid Layout và sử dụng biến CSS (Custom Properties) để quản lý theme.</li>
+                            <li><strong>JavaScript (ES6+):</strong> Xử lý logic ứng dụng, tương tác người dùng, quản lý
+                                trạng thái trình phát và cập nhật giao diện động (không sử dụng framework/thư viện bên
+                                ngoài).</li>
+                            <li><strong>Hosting:</strong> Triển khai dưới dạng trang web tĩnh thông qua GitHub Pages.</li>
+                        </ul>
+                    </section>
+
+                    <section class="mb-5">
+                        <h2 class="h4 border-bottom pb-2 mb-3">Phạm Vi và Giới Hạn</h2>
+                        <p>MyMusic Player là một ứng dụng web tĩnh (static web application), được triển khai trên GitHub
+                            Pages. Do đó, ứng dụng hoạt động hoàn toàn phía client (trình duyệt) và có các giới hạn sau:</p>
+                        <ul>
+                            <li><strong>Dữ liệu tĩnh:</strong> Danh sách bài hát, thông tin nghệ sĩ và ảnh bìa được định
+                                nghĩa cố định trong mã nguồn (JavaScript) và không thể được người dùng thêm/sửa/xóa thông
+                                qua giao diện.</li>
+                            <li><strong>Không có tính năng phía máy chủ:</strong> Không có cơ sở dữ liệu, chức năng đăng
+                                nhập/đăng ký người dùng, lưu trữ playlist cá nhân trên server, hoặc khả năng tải lên tập tin
+                                nhạc.</li>
+                            <li><strong>Hoạt động độc lập:</strong> Không có sự đồng bộ hóa trạng thái nghe nhạc giữa các
+                                thiết bị hoặc phiên làm việc khác nhau.</li>
+                        </ul>
+                        <p><em>Các giới hạn này phản ánh bản chất của một dự án front-end tĩnh tập trung vào giao diện và
+                                trải nghiệm người dùng phía client.</em></p>
+                    </section>
+
+                    <section class="mb-4">
+                        <h2 class="h4 border-bottom pb-2 mb-3">Thông Tin Nhà Phát Triển</h2>
+                        <p>Dự án được phát triển bởi <strong>Trần Hữu Đạt</strong>.</p>
+                        <p>Để xem thêm các dự án khác hoặc liên hệ, vui lòng truy cập hồ sơ GitHub:</p>
+                        <p><a href="https://github.com/TranHuuDat2004/" target="_blank" rel="noopener noreferrer"
+                                class="btn btn-outline-dark">
+                                <i class="fab fa-github"></i>
+                                Xem trên GitHub
+                            </a></p>
+                    </section>
+                    <hr>
+                    <p class="text-center text-muted mt-4">Cảm ơn bạn đã dành thời gian tìm hiểu về MyMusic Player!</p>
+                </div>
+
+                <!-- English Content -->
+                <div id="about-content-en" class="lang-content">
+                    <h1 class="text-center mb-4">About MyMusic Player</h1>
+
+                    <p class="lead text-center mb-5">
+                        MyMusic Player is an online music player interface designed and developed to provide a simple, modern, and intuitive music listening experience, inspired by popular platforms like Spotify and Zing MP3.
+                    </p>
+
+                    <section class="mb-5">
+                        <h2 class="h4 border-bottom pb-2 mb-3">Project Goals</h2>
+                        <p>The main goal of the project is to build a proof-of-concept demonstrating capabilities in developing user interface (UI) and user experience (UX) for web applications, focusing on the following aspects:</p>
+                        <ul>
+                            <li><strong>Interface Design:</strong> Create an aesthetically pleasing, clean, and easy-to-navigate interface for users.</li>
+                            <li><strong>Core Functionality:</strong> Implement basic music player functions, including play/pause, progress display, and volume control.</li>
+                            <li><strong>Content Organization:</strong> Effectively present song lists and related information.</li>
+                            <li><strong>Responsive Design:</strong> Ensure the interface displays and functions optimally across various screen sizes, from desktops to mobile devices.</li>
+                            <li><strong>Dynamic Interaction:</strong> Utilize JavaScript to create dynamic interface elements and respond smoothly to user interactions.</li>
+                        </ul>
+                        <p><em>The project also serves as an opportunity to practice and reinforce core front-end development skills.</em></p>
+                    </section>
+
+                    <section class="mb-5">
+                        <h2 class="h4 border-bottom pb-2 mb-3">Technology Stack</h2>
+                        <p>MyMusic Player is built entirely with fundamental front-end technologies:</p>
+                        <ul>
+                            <li><strong>HTML5:</strong> Provides the semantic structure for the web page content.</li>
+                            <li><strong>CSS3:</strong> Styles the interface, including modern layout techniques like Flexbox, Grid Layout, and using CSS Custom Properties for theme management.</li>
+                            <li><strong>JavaScript (ES6+):</strong> Handles application logic, user interactions, player state management, and dynamic interface updates (without using external frameworks/libraries).</li>
+                            <li><strong>Hosting:</strong> Deployed as a static website via GitHub Pages.</li>
+                        </ul>
+                    </section>
+
+                    <section class="mb-5">
+                        <h2 class="h4 border-bottom pb-2 mb-3">Scope and Limitations</h2>
+                        <p>MyMusic Player is a static web application, deployed on GitHub Pages. Therefore, the application operates entirely on the client-side (browser) and has the following limitations:</p>
+                        <ul>
+                            <li><strong>Static Data:</strong> Song lists, artist information, and album art are hardcoded in the source (JavaScript) and cannot be added/edited/deleted by users through the interface.</li>
+                            <li><strong>No Server-Side Features:</strong> There is no database, user login/registration functionality, server-side personal playlist storage, or music file upload capability.</li>
+                            <li><strong>Standalone Operation:</strong> There is no synchronization of listening status between different devices or sessions.</li>
+                        </ul>
+                        <p><em>These limitations reflect the nature of a static front-end project focused on client-side interface and user experience.</em></p>
+                    </section>
+
+                    <section class="mb-4">
+                        <h2 class="h4 border-bottom pb-2 mb-3">Developer Information</h2>
+                        <p>This project was developed by <strong>Trần Hữu Đạt</strong>.</p>
+                        <p>To see more projects or get in touch, please visit the GitHub profile:</p>
+                        <p><a href="https://github.com/TranHuuDat2004/" target="_blank" rel="noopener noreferrer"
+                                class="btn btn-outline-dark">
+                                <i class="fab fa-github"></i>
+                                View on GitHub
+                            </a></p>
+                    </section>
+                    <hr>
+                    <p class="text-center text-muted mt-4">Thank you for taking the time to learn about MyMusic Player!</p>
+                </div>
+            </div>
+        </main>
+
+        <!-- 3. Player Bar (Assuming it's the same as before) -->
+        <footer class="player-bar">
+            <div class="song-info"> <img src="img/favicon.png" alt="Now Playing" id="now-playing-art">
+                <div class="text-details">
+                    <h4 id="now-playing-title">Chưa có nhạc</h4>
+                    <p id="now-playing-artist">Chọn một bài hát</p>
+                </div>
+                <div class="actions"> <button title="Thích"><svg viewBox="0 0 24 24" width="18" height="18" class="icon-like"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path></svg></button> </div>
+            </div>
+            <div class="player-controls">
+                <div class="buttons"> <button title="Ngẫu nhiên"><svg viewBox="0 0 24 24" width="20" height="20" class="icon-shuffle"><path d="M10.59 9.17L5.41 4 4 5.41l5.17 5.17 1.42-1.41zM14.5 4l2.04 2.04L4 18.59 5.41 20 17.96 7.46 20 9.5V4h-5.5zm.33 9.41l-1.41 1.41 3.13 3.13L14.5 20H20v-5.5l-2.04 2.04-3.13-3.13z"></path></svg></button> <button title="Trước"><svg viewBox="0 0 24 24" width="20" height="20" class="icon-prev"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"></path></svg></button> <button class="play-pause-btn" id="main-play-pause-btn" title="Phát"><svg viewBox="0 0 24 24" width="24" height="24" class="icon-play"><path d="M8 5v14l11-7z"></path></svg></button> <button title="Tiếp theo"><svg viewBox="0 0 24 24" width="20" height="20" class="icon-next"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"></path></svg></button> <button title="Lặp lại"><svg viewBox="0 0 24 24" width="20" height="20" class="icon-repeat"><path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"></path></svg></button> </div>
+                <div class="progress-bar-container"> <span id="current-time">0:00</span> <input type="range" id="progress-bar" min="0" max="100" value="0" title="Thanh tiến trình"> <span id="total-time">0:00</span> </div>
+            </div>
+            <div class="other-controls"> <button title="Lời bài hát"><svg viewBox="0 0 24 24" width="18" height="18" class="icon-lyrics"><path d="M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"></path></svg></button> <button title="Hàng đợi"><svg viewBox="0 0 24 24" width="18" height="18" class="icon-queue"><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zm0-10h14V7H7v2z"></path></svg></button> <button title="Âm lượng"><svg viewBox="0 0 24 24" width="18" height="18" class="icon-volume"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"></path></svg></button>
+                <div class="volume-bar-container"><input type="range" id="volume-bar" min="0" max="100" value="70" title="Thanh âm lượng"></div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="data/music.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/player.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Sidebar Playlist Links ---
+            const playlistUl = document.getElementById('playlist-links-list');
+            if (typeof ALL_MUSIC_SECTIONS !== 'undefined' && playlistUl && typeof window.renderPlaylistLinks === 'function') {
+                window.renderPlaylistLinks(ALL_MUSIC_SECTIONS, playlistUl);
+            }
+
+            // --- Sidebar Active Link ---
+            // Remove active from all first
+            document.querySelectorAll('.sidebar-nav a').forEach(link => link.classList.remove('active'));
+            // Add active to the current page's link
+            const aboutLink = document.querySelector('.sidebar-nav a[href="about.html"]');
+            if (aboutLink) {
+                aboutLink.classList.add('active');
+            }
+
+            // --- Language Tab Functionality ---
+            const langTabButtons = document.querySelectorAll('.lang-tab-btn');
+            const langContentDivs = document.querySelectorAll('.lang-content');
+
+            langTabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove active class from all buttons and content
+                    langTabButtons.forEach(btn => btn.classList.remove('active'));
+                    langContentDivs.forEach(content => content.classList.remove('active'));
+
+                    // Add active class to the clicked button
+                    button.classList.add('active');
+
+                    // Show the corresponding content
+                    const lang = button.dataset.lang; // vi or en
+                    const activeContent = document.getElementById(`about-content-${lang}`);
+                    if (activeContent) {
+                        activeContent.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
