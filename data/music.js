@@ -100,6 +100,26 @@ const ALL_MUSIC_SECTIONS = [
                 audioSrc: "audio/mahiru_gift.mp3",
                 isFavorite: true,
                 plays: "467.790" // Random
+            },
+            {
+                id: "mahiru6",
+                title: "君に届け - Piano.",
+                artistData: "Instrumental",
+                displayArtist: { name: "Instrumental", id: "MahiruShiina" },
+                artUrl: "img/mahiru5.png",
+                audioSrc: "audio/mahiru_ed3_piano.mp3",
+                isFavorite: true,
+                plays: "167.123" // Random
+            },
+            {
+                id: "mahiru7",
+                title: "Little Love Song",
+                artistData: "Ru's Piano Ru味春捲",
+                displayArtist: { name: "Ru's Piano Ru味春捲", id: "MahiruShiina" },
+                artUrl: "img/mahiru6.png",
+                audioSrc: "audio/Little_Love_Song.mp3",
+                isFavorite: true,
+                plays: "1.134.892" // Random
             }
         ]
     },
