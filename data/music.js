@@ -44,6 +44,26 @@ const ALL_MUSIC_SECTIONS = [
                 audioSrc: "audio/making-my-way.mp3",
                 isFavorite: false, // Ví dụ
                 plays: "85.321.678" // Random
+            },
+            {
+                id: "fav5",
+                title: "Tái Sinh Remix",
+                artistData: "Tùng Dương",
+                displayArtist: { name: "Tùng Dương", id: "tung-duong" },
+                artUrl: "img/tai-sinh-remix.webp",
+                audioSrc: "audio/tai-sinh-remix.mp3",
+                isFavorite: false, // Ví dụ
+                plays: "8.321.678" // Random
+            },
+            {
+                id: "fav6",
+                title: "Ải hồng nhan Remix",
+                artistData: "Cần Vinh, Lee Ken",
+                displayArtist: { name: "Cần Vinh, Lee Ken", id: "can-vinh" },
+                artUrl: "img/ai-hong-nhan.jpg",
+                audioSrc: "audio/ai-hong-nhan-remix.mp3",
+                isFavorite: false, // Ví dụ
+                plays: "8.321.678" // Random
             }
         ]
     },
