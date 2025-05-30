@@ -4,7 +4,7 @@
 
 MyMusic Player is an online music player interface designed and developed to provide a simple, modern, and intuitive music listening experience, inspired by popular platforms like Spotify and Zing MP3.
 
-**Live Demo:** [LINK_TO_YOUR_LIVE_DEMO_ON_GITHUB_PAGES] <!-- Ví dụ: https://tranhuudat2004.github.io/mymusic-player/ -->
+**Live Demo:** [(https://tranhuudat2004.github.io/mymusic/)] <!-- Ví dụ: https://tranhuudat2004.github.io/mymusic-player/ -->
 
 ## 🎯 Project Goals
 
@@ -25,7 +25,7 @@ MyMusic Player is built entirely with fundamental front-end technologies:
 *   **HTML5:** Provides the semantic structure for the web page content.
 *   **CSS3:** Styles the interface, including modern layout techniques like Flexbox, Grid Layout, and using CSS Custom Properties for theme management (e.g., dark/light mode if implemented).
 *   **JavaScript (ES6+):** Handles all application logic, user interactions, player state management, and dynamic interface updates. This project was built **without relying on external JavaScript frameworks or libraries** to focus on core JS capabilities.
-*   **Hosting:** Deployed as a static website via [GitHub Pages](https://pages.github.com/).
+*   **Hosting:** Deployed as a static website via [GitHub Pages](https://tranhuudat2004.github.io/mymusic/).
 
 ##  scope Scope and Limitations
 
@@ -43,24 +43,25 @@ These limitations are inherent to a static front-end project focused on demonstr
 
 ## 🖼️ Screenshots
 
-*(It's highly recommended to add a few screenshots here to showcase the player's interface. Create an `images` folder in your repository for these.)*
 
 **Main Player View:**
-![Main Player View](images/main_player_view.png)
+![Card View](img/card_view.jpg)
+![List View](img/list_view.jpg)
+
 
 **Playlist/Library View (if applicable):**
-![Playlist View](images/playlist_view.png)
+![Playlist View](img/playlist_view.jpg)
 
 *(Add more screenshots if they highlight different aspects of the UI)*
 
 ## 🚀 Getting Started / How to View
 
 1.  **Live Demo:** The easiest way to experience MyMusic Player is through the live demo:
-    [LINK_TO_YOUR_LIVE_DEMO_ON_GITHUB_PAGES]
+    [(https://tranhuudat2004.github.io/mymusic/)]
 2.  **Local Setup:**
     *   Clone the repository:
         ```bash
-        git clone https://github.com/[Your_Username]/[Your_Repo_Name].git
+        git clone https://github.com/TranHuuDat2004/mymusic.git
         ```
     *   Navigate to the project directory:
         ```bash
@@ -73,7 +74,7 @@ These limitations are inherent to a static front-end project focused on demonstr
 This project was developed by **Trần Hữu Đạt**.
 
 *   **GitHub Profile:** [@TranHuuDat2004](https://github.com/TranHuuDat2004)
-*   **Portfolio:** [Link_To_Your_Main_Portfolio_Page (e.g., https://tranhuudat2004.github.io/)]
+*   **Portfolio:** [@PortfolioPage] (https://tranhuudat2004.github.io/)
 
 ---
 
