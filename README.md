@@ -45,14 +45,13 @@ These limitations are inherent to a static front-end project focused on demonstr
 
 
 **Main Player View:**
-![Card View](img/card_view.jpg)
-![List View](img/list_view.jpg)
+
+| **Card View**                           | **List View**                       | **Playlist View**                      |
+| :-----------------------------------: | :----------------------------------: | :-----------------------------------: |
+| ![Card View](img/card_view.jpg)| ![List View](img/list_view.jpg)| ![Playlist View](img/playlist_view.jpg)|
 
 
-**Playlist/Library View (if applicable):**
-![Playlist View](img/playlist_view.jpg)
 
-*(Add more screenshots if they highlight different aspects of the UI)*
 
 ## 🚀 Getting Started / How to View
 
