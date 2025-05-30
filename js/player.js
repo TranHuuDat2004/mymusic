@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }).catch(error => {
                 console.error(`Lỗi khi phát "${songData.title}":`, error);
                 // Cập nhật UI báo lỗi
-                nowPlayingTitle.textContent = "Lỗi phát nhạc";
+                nowPlayingTitle.textContent = "Đang tải nhạc";
                 nowPlayingArtist.textContent = songData.title || "";
                 nowPlayingArt.src = "img/favicon.png"; // Ảnh mặc định
                 updatePlayPauseIcon(false);
