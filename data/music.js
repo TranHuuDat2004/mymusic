@@ -5,26 +5,26 @@ const ALL_MUSIC_SECTIONS = [
         id: "Vpop",
         title: "Nhạc Việt Nam",
         songs: [
-            {
-                id: "fav1",
-                title: "Bạc Phận",
-                artistData: "Jack, K-ICM",
-                displayArtist: { name: "Jack, K-ICM", id: "jack" },
-                artUrl: "img/bac-phan.jpg",
-                audioSrc: "audio/bac-phan.mp3",
-                isFavorite: true,
-                plays: "416.583.209" // Giữ lại giá trị cũ nếu bạn thích
-            },
-            {
-                id: "fav2",
-                title: "Sóng Gió",
-                artistData: "Jack, K-ICM",
-                displayArtist: { name: "Jack, K-ICM", id: "jack" },
-                artUrl: "img/song-gio.png",
-                audioSrc: "audio/song-gio.mp3",
-                isFavorite: true,
-                plays: "550.123.456" // Random
-            },
+            // {
+            //     id: "fav1",
+            //     title: "Bạc Phận",
+            //     artistData: "Jack, K-ICM",
+            //     displayArtist: { name: "Jack, K-ICM", id: "jack" },
+            //     artUrl: "img/bac-phan.jpg",
+            //     audioSrc: "audio/bac-phan.mp3",
+            //     isFavorite: true,
+            //     plays: "416.583.209" // Giữ lại giá trị cũ nếu bạn thích
+            // },
+            // {
+            //     id: "fav2",
+            //     title: "Sóng Gió",
+            //     artistData: "Jack, K-ICM",
+            //     displayArtist: { name: "Jack, K-ICM", id: "jack" },
+            //     artUrl: "img/song-gio.png",
+            //     audioSrc: "audio/song-gio.mp3",
+            //     isFavorite: true,
+            //     plays: "550.123.456" // Random
+            // },
             {
                 id: "fav3",
                 title: "Thay Lòng",
