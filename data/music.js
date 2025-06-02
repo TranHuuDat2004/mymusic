@@ -64,6 +64,16 @@ const ALL_MUSIC_SECTIONS = [
                 audioSrc: "audio/ai-hong-nhan-remix.mp3",
                 isFavorite: false, // Ví dụ
                 plays: "8.321.678" // Random
+            },
+            {
+                id: "fav7",
+                title: "Nên Chờ Hay Nên Quên Remix",
+                artistData: "Cần Vinh, Lee Ken",
+                displayArtist: { name: "Chu Thúy Quỳnh", id: "chu-thuy-quynh" },
+                artUrl: "img/Nên Chờ Hay Nên Quên Remix.png",
+                audioSrc: "audio/Nên Chờ Hay Nên Quên Remix.mp3",
+                isFavorite: false, // Ví dụ
+                plays: "8.321.678" // Random
             }
         ]
     },
