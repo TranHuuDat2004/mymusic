@@ -44,7 +44,15 @@ const ALL_MUSIC_SECTIONS = [
                 audioSrc: "audio/making-my-way.mp3",
                 isFavorite: false, // Ví dụ
                 plays: "85.321.678" // Random
-            },
+            }
+
+        ]
+    },
+        {
+        id: "VpopRemix",
+        title: "Nhạc Remix Cực Căng",
+        songs: [
+            
             {
                 id: "fav5",
                 title: "Tái Sinh Remix",
@@ -63,7 +71,7 @@ const ALL_MUSIC_SECTIONS = [
                 artUrl: "img/ai-hong-nhan.jpg",
                 audioSrc: "audio/ai-hong-nhan-remix.mp3",
                 isFavorite: false, // Ví dụ
-                plays: "8.321.678" // Random
+                plays: "8.456.798" // Random
             },
             {
                 id: "fav7",
@@ -73,10 +81,93 @@ const ALL_MUSIC_SECTIONS = [
                 artUrl: "img/Nên Chờ Hay Nên Quên Remix.png",
                 audioSrc: "audio/Nên Chờ Hay Nên Quên Remix.mp3",
                 isFavorite: false, // Ví dụ
-                plays: "8.321.678" // Random
-            }
+                plays: "2.456.789" // Random
+            },
+            {
+            id: "vpop_trucxinh",
+            title: "Trúc Xinh",
+            artistData: "Minh Vương M4U ft. Việt (ACV Remix)",
+            displayArtist: { name: "Minh Vương M4U ft. Việt", id: "minhvuong-m4u-viet" },
+            artUrl: "img/Trúc xinh.png", // Tên file từ ảnh bạn cung cấp
+            audioSrc: "audio/Trúc xinh.mp3", // Tên file MP3 tương ứng
+            isFavorite: false,
+            plays: "1.234.567"
+        },
+        {
+            id: "vpop_tralaithanhxuan",
+            title: "Trả Lại Thanh Xuân Cho Em",
+            artistData: "H2K (H2O Remix)",
+            displayArtist: { name: "H2K", id: "h2k" },
+            artUrl: "img/Trả Lại Thanh Xuân Cho Em.png",
+            audioSrc: "audio/Trả Lại Thanh Xuân Cho Em.mp3",
+            isFavorite: false,
+            plays: "2.345.678"
+        },
+        {
+            id: "vpop_ruoumung",
+            title: "Rượu Mừng Hóa Người Dưng",
+            artistData: "TLong (H2O Remix)",
+            displayArtist: { name: "TLong", id: "tlong" },
+            artUrl: "img/Rượu mừng hóa người dưng.png",
+            audioSrc: "audio/Rượu mừng hóa người dưng.mp3",
+            isFavorite: false,
+            plays: "987.654"
+        },
+        {
+            id: "vpop_nucuoi1820",
+            title: "Nụ Cười 18 20",
+            artistData: "Đoàn Hiếu (ACV Remix)",
+            displayArtist: { name: "Đoàn Hiếu", id: "doan-hieu" },
+            artUrl: "img/Nụ cười 18 20.png",
+            audioSrc: "audio/Nụ cười 18 20.mp3",
+            isFavorite: false,
+            plays: "1.876.543"
+        },
+        {
+            id: "vpop_mayremix",
+            title: "Mây (Remix)", // File list có "Mây Remix"
+            artistData: "Jank & Sỹ Tây (Orinn Remix)",
+            displayArtist: { name: "Jank & Sỹ Tây", id: "jank-sy-tay" },
+            artUrl: "img/Mây Remix.png", // Giả sử tên file art là Mây Remix.png
+            audioSrc: "audio/Mây Remix.mp3",
+            isFavorite: false,
+            plays: "2.109.876"
+        },
+        {
+            id: "vpop_ketheoduoianhsang",
+            title: "Kẻ Theo Đuổi Ánh Sáng",
+            artistData: "Huy Vạc X Tiến Nguyễn (Orinn Remix)",
+            displayArtist: { name: "Huy Vạc X Tiến Nguyễn", id: "huyvac-tiennguyen" },
+            // File list là "Kẻ Theo Đuổi Ánh Sáng (Orinn Remix) - ....png"
+            // Tôi sẽ chuẩn hóa tên file art và audio để đơn giản
+            artUrl: "img/Kẻ Theo Đuổi Ánh Sáng.png",
+            audioSrc: "audio/Kẻ Theo Đuổi Ánh Sáng.mp3",
+            isFavorite: false,
+            plays: "3.401.298"
+        },
+        {
+            id: "vpop_dunglonhecoanhday",
+            title: "Đừng Lo Nhé Có Anh Đây",
+            artistData: "Thiên Tú (Orinn Remix)",
+            displayArtist: { name: "Thiên Tú", id: "thien-tu" },
+            artUrl: "img/Đừng lo nhé có anh đây.png",
+            audioSrc: "audio/Đừng lo nhé có anh đây.mp3",
+            isFavorite: false,
+            plays: "2.567.111"
+        },
+        {
+            id: "vpop_dauconday",
+            title: "Đâu Còn Đây",
+            artistData: "Lee Ken X Nal (Orinn Remix)",
+            displayArtist: { name: "Lee Ken X Nal", id: "leeken-nal" },
+            artUrl: "img/Đâu Còn Đây.png",
+            audioSrc: "audio/Đâu Còn Đây.mp3",
+            isFavorite: false,
+            plays: "1.999.000"
+        }
         ]
     },
+
     {
         id: "Mahiru",
         title: "Thiên sứ nhà bên - Mahiru",
