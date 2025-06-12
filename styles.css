@@ -1394,5 +1394,86 @@ button:hover {
     }
 }
 
+/* styles.css */
 
+/* --- Styling cho trang Lịch sử phiên bản --- */
+
+/* Container chính cho lịch sử commit */
+#commit-history-container {
+    margin-top: 2rem;
+}
+
+/* Style cho mỗi mục commit (card) */
+.commit-entry {
+    background-color: #282828; /* Màu nền tối hơn một chút */
+    border-radius: 8px;
+    padding: 1rem 1.5rem;
+    margin-bottom: 1rem;
+    border-left: 4px solid #1db954; /* Viền trái màu xanh lá đặc trưng */
+    transition: background-color 0.2s ease;
+}
+
+.commit-entry:hover {
+    background-color: #333;
+}
+
+/* Tiêu đề của commit */
+.commit-entry h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.2rem;
+    color: #ffffff;
+}
+
+/* Thông tin meta (tác giả, ngày tháng) */
+.commit-entry .commit-meta {
+    font-size: 0.9rem;
+    color: #b3b3b3; /* Màu xám nhạt */
+    margin: 0 0 1rem 0;
+}
+
+.commit-entry .commit-meta strong {
+    color: #ffffff;
+    font-weight: 500;
+}
+
+/* Chi tiết của commit (nếu có) */
+.commit-entry .commit-body {
+    background-color: #121212; /* Nền tối hơn nữa cho khối code/chi tiết */
+    padding: 0.75rem;
+    border-radius: 4px;
+    white-space: pre-wrap; /* Giữ các dòng mới */
+    word-wrap: break-word;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+}
+
+/* Link xem chi tiết trên GitHub */
+.commit-entry .commit-link {
+    display: inline-block;
+    font-size: 0.9rem;
+    color: #b3b3b3;
+    text-decoration: none;
+    border: 1px solid #535353;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    transition: all 0.2s ease;
+}
+
+.commit-entry .commit-link:hover {
+    color: #ffffff;
+    background-color: #535353;
+    border-color: #777;
+}
+
+/* Tin nhắn báo lỗi hoặc đang tải */
+.loading-message, .error-message {
+    color: #b3b3b3;
+    text-align: center;
+    padding: 2rem;
+}
+
+.error-message {
+    color: #f16363; /* Màu đỏ cho lỗi */
+}
 

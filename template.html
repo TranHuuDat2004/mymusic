@@ -1,72 +1,32 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Playlist - My Music Player</title> <!-- Tiêu đề sẽ được cập nhật bằng JS -->
-    <link rel="stylesheet" href="styles.css">
+    <title>My Music Player (Interactive)</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link tới file CSS chung -->
+
     <link rel="icon" href="img/favicon.png" type="image/png">
-    <style>
-        /* Style riêng cho trang playlist nếu cần */
-        .playlist-header-details { /* Bổ sung cho header của playlist */
-            display: flex;
-            align-items: flex-end; /* Căn ảnh và text ở dưới */
-            gap: 20px;
-            margin-bottom: 30px;
-            padding: 20px;
-            background-color: rgba(255, 255, 255, 0.05); /* Nền nhẹ cho header */
-            border-radius: 8px;
-        }
-        .playlist-cover-art img {
-            width: 180px; /* Kích thước ảnh bìa playlist */
-            height: 180px;
-            object-fit: cover;
-            border-radius: 6px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-        }
-        .playlist-info {
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-        }
-        .playlist-info .playlist-type {
-            font-size: 0.8em;
-            font-weight: bold;
-            text-transform: uppercase;
-            margin-bottom: 8px;
-            color: #b3b3b3;
-        }
-        .playlist-info .playlist-main-title { /* Class mới cho tiêu đề playlist */
-            font-size: 2.5em;
-            font-weight: 700;
-            margin: 0;
-            line-height: 1.1;
-            color: #fff;
-        }
-        .playlist-info .playlist-description,
-        .playlist-info .playlist-stats {
-            font-size: 0.9em;
-            color: #b3b3b3;
-            margin-top: 8px;
-        }
-        /* Sử dụng lại .song-list-container và .song-list-item từ styles.css */
-    </style>
 </head>
+
 <body>
+
     <button class="menu-toggle-btn" aria-label="Toggle menu">☰</button>
-    <audio id="audio-player"></audio>
+    <audio id="audio-player"></audio> <!-- THE AUDIO ELEMENT -->
 
     <div class="music-player-container">
-        <!-- 1. Sidebar -->
+        <!-- 1. Sidebar (NO CHANGES HERE FROM PREVIOUS) -->
         <!-- Sidebar sẽ được chèn tự động bởi sidebar.js -->
         <nav id="sidebar-container" class="sidebar"></nav>
 
-        <!-- 2. Main Content Area for Specific Playlist -->
-        <main class="main-content" id="playlist-detail-container">
-            <!-- Nội dung chi tiết playlist sẽ được JS tạo ra ở đây -->
-            <p class="loading-message">Đang tải playlist...</p>
+        <!-- 2. Main Content Area -->
+        <main class="main-content" id="main-music-content">
+            <h1>Chào Trần Hữu Đạt</h1>
+            <!-- Các section nhạc sẽ được tạo bởi JavaScript ở đây -->
         </main>
-<!-- 3. Player Bar -->
+
+        <!-- 3. Player Bar -->
         <footer class="player-bar">
             <div class="song-info">
                 <img src="img/favicon.png" alt="Now Playing" id="now-playing-art">
@@ -150,13 +110,13 @@
             </div>
         </footer>
     </div>
-
-    <!-- Scripts -->
-    <script src="data/artists.js"></script>
-    <script src="data/music.js"></script>
-    <script src="js/playlist.js"></script> <!-- File JS mới cho trang playlist -->
-    <script src="js/player.js"></script>
-
-    <script src="js/sidebar.js" defer></script> <!-- Nạp sidebar.js -->
 </body>
+<!-- Scripts -->
+<script src="data/artists.js"></script>
+<script src="data/music.js"></script>
+<script src="js/utils.js"></script> <!-- Nạp file utils -->
+<script src="js/player.js"></script>
+<script src="js/main.js"></script> <!-- Thay vì search.js -->
+<!-- <script src="artist_page.js"></script> Nếu dùng -->
+    <script src="js/sidebar.js" defer></script> <!-- Nạp sidebar.js -->
 </html>
