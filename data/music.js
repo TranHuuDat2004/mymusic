@@ -167,7 +167,53 @@ const ALL_MUSIC_SECTIONS = [
             }
         ]
     },
+    {
+        id: "lycorisrecoil", // ID cho thể loại
+        title: "Lycoris Recoil OST", // Tên hiển thị cho thể loại
+        songs: [
+            {
+                id: "lyco_alive", // ID bài hát duy nhất
+                title: "ALIVE",
+                artistData: "ClariS",
+                displayArtist: { name: "ClariS", id: "claris" },
+                artUrl: "img/ALIVE.png", // Giả sử file ALIVE.PNG của bạn tên là vậy
+                audioSrc: "audio/ALIVE.mp3", // Đường dẫn tới file MP3
+                isFavorite: false,
+                plays: "15.234.567" // Random
+            },
+            {
+                id: "lyco_tower",
+                title: "Tower of Flower", // Tên gốc là 花の塔 (Hana no Tou)
+                artistData: "Sayuri",
+                displayArtist: { name: "Sayuri", id: "sayuri" },
+                artUrl: "img/Tower of Flower.png", // Ảnh bìa giả định, bạn cần có file này
+                audioSrc: "audio/Tower of Flower.mp3",
+                isFavorite: false,
+                plays: "22.987.654" // Random
+            },
+            {
+                id: "lyco_alive_inst",
+                title: "ALIVE (Instrumental)",
+                artistData: "ClariS", // Hoặc tên nhà soạn nhạc Shuhei Mutsuki
+                displayArtist: { name: "ClariS", id: "claris" }, // Hoặc { name: "Shuhei Mutsuki", id: "shuhei-mutsuki"}
+                artUrl: "img/ALIVE-Instrumental.jpg", // Thường dùng chung art với bản gốc
+                audioSrc: "audio/ALIVE-Instrumental.mp3",
+                isFavorite: false,
+                plays: "5.876.123" // Random
+            },
 
+            {
+                id: "lyco_tower_inst",
+                title: "Tower of Flower (Instrumental)",
+                artistData: "Sayuri", // Hoặc tên nhà soạn nhạc Ryo Eguchi
+                displayArtist: { name: "Sayuri", id: "sayuri" }, // Hoặc { name: "Ryo Eguchi", id: "ryo-eguchi" }
+                artUrl: "img/Tower of Flower instrumental.jpg", // Thường dùng chung art với bản gốc
+                audioSrc: "audio/Tower of Flower instrumental.mp3",
+                isFavorite: false,
+                plays: "8.123.456" // Random
+            }
+        ]
+    },
     {
         id: "Mahiru",
         title: "Thiên sứ nhà bên - Mahiru",
