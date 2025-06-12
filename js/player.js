@@ -25,6 +25,52 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let currentSongSrc = null; // Theo dõi bài hát hiện tại
 
+    // --- BẮT ĐẦU: Logic phát ngẫu nhiên khi hết bài ---
+
+    // 1. Tạo một danh sách phẳng chứa tất cả các bài hát từ ALL_MUSIC_SECTIONS
+    let allSongsFlat = [];
+    if (typeof ALL_MUSIC_SECTIONS !== 'undefined' && Array.isArray(ALL_MUSIC_SECTIONS)) {
+        allSongsFlat = ALL_MUSIC_SECTIONS.flatMap(section => section.songs);
+        console.log(`Đã tải ${allSongsFlat.length} bài hát để phát ngẫu nhiên.`);
+    } else {
+        console.error("Biến ALL_MUSIC_SECTIONS không tồn tại hoặc không phải là một mảng. Hãy đảm bảo file data/music.js được tải trước player.js.");
+    }
+
+    // 2. Hàm để chọn và phát bài hát ngẫu nhiên tiếp theo
+    function playNextRandomSong() {
+        if (allSongsFlat.length === 0) {
+            console.warn("Không có bài hát nào để phát tiếp theo.");
+            updatePlayPauseIcon(false); // Dừng lại nếu không có bài hát
+            return;
+        }
+
+        let nextSong;
+        // Nếu có nhiều hơn 1 bài, đảm bảo không phát lại bài cũ
+        if (allSongsFlat.length > 1) {
+            let randomIndex;
+            do {
+                randomIndex = Math.floor(Math.random() * allSongsFlat.length);
+                nextSong = allSongsFlat[randomIndex];
+            } while (nextSong.audioSrc === currentSongSrc);
+        } else {
+            // Nếu chỉ có 1 bài, phát lại chính nó
+            nextSong = allSongsFlat[0];
+        }
+
+        // 3. Chuẩn bị dữ liệu và gọi hàm phát nhạc
+        const songDataToPlay = {
+            src: nextSong.audioSrc,
+            title: nextSong.title,
+            artist: nextSong.artistData, // Lấy từ artistData
+            art: nextSong.artUrl
+        };
+
+        playSongImplementation(songDataToPlay);
+    }
+
+    // --- KẾT THÚC: Logic phát ngẫu nhiên khi hết bài ---
+
+
     // --- Các hàm xử lý Player ---
 
     function updatePlayPauseIcon(isPlaying) {
@@ -39,11 +85,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         console.log("Chuẩn bị phát:", songData);
 
-        // Tạm dừng bài hát hiện tại nếu đang phát bài khác
-        // if (!audioPlayer.paused && currentSongSrc !== songData.src) {
-        //     audioPlayer.pause();
-        // }
-
         audioPlayer.src = songData.src;
         const playPromise = audioPlayer.play();
 
@@ -54,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 nowPlayingTitle.textContent = songData.title || "Không có tiêu đề";
                 nowPlayingArtist.textContent = songData.artist || "Nghệ sĩ không xác định";
                 nowPlayingArt.src = songData.art || "img/favicon.png"; // Ảnh mặc định
-                currentSongSrc = songData.src;
+                currentSongSrc = songData.src; // Cập nhật bài hát hiện tại
                 updatePlayPauseIcon(true);
             }).catch(error => {
                 console.error(`Lỗi khi phát "${songData.title}":`, error);
@@ -70,10 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
      // --- Hàm gắn listener cho card (expose ra global) ---
      function addCardClickListenerImplementation(cardElement) {
         if (!cardElement) return;
-        // Gỡ listener cũ nếu có (đề phòng trường hợp gọi lại)
-        // cardElement.removeEventListener('click', handleCardClick); // Cần lưu trữ hàm handle
 
-        // Tạo hàm xử lý riêng để có thể gỡ nếu cần
         const handleCardClick = () => {
             const songData = {
                 src: cardElement.dataset.src,
@@ -82,7 +120,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 art: cardElement.dataset.art
             };
             if (songData.src) {
-                // Gọi hàm phát nhạc đã được expose
                 window.playSongFromData(songData);
             } else {
                 console.warn("Card này không có data-src để phát.");
@@ -98,11 +135,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Gắn các listener cho Player Controls ---
 
-    // Nút Play/Pause chính
     mainPlayPauseBtn.addEventListener('click', () => {
         if (!audioPlayer.src) {
-            console.log("Chưa có nhạc để phát/tạm dừng.");
-            // Có thể thêm logic phát bài đầu tiên ở đây nếu muốn
+            console.log("Chưa có nhạc, sẽ phát một bài ngẫu nhiên.");
+            playNextRandomSong(); // Nếu chưa có nhạc, nhấn play sẽ phát bài ngẫu nhiên đầu tiên
             return;
         }
         if (audioPlayer.paused) {
@@ -110,7 +146,6 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             audioPlayer.pause();
         }
-        // Icon sẽ tự cập nhật qua event 'play'/'pause' của audioPlayer
     });
 
     // Sự kiện của Audio Element
@@ -140,11 +175,10 @@ document.addEventListener('DOMContentLoaded', () => {
         updatePlayPauseIcon(false);
     });
 
+    // THAY ĐỔI TẠI ĐÂY: Sửa lại sự kiện 'ended'
     audioPlayer.addEventListener('ended', () => {
-        updatePlayPauseIcon(false);
-        progressBar.value = 0;
-        currentTimeEl.textContent = "0:00";
-        // Logic phát bài tiếp theo có thể thêm ở đây
+        console.log("Bài hát kết thúc. Tự động phát bài ngẫu nhiên tiếp theo...");
+        playNextRandomSong(); // Gọi hàm phát ngẫu nhiên
     });
 
     audioPlayer.addEventListener('error', (e) => {
@@ -158,7 +192,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Thanh Progress
     progressBar.addEventListener('input', () => {
-        if(audioPlayer.src && !isNaN(audioPlayer.duration)) { // Chỉ cho seek khi có nhạc và duration hợp lệ
+        if(audioPlayer.src && !isNaN(audioPlayer.duration)) {
              audioPlayer.currentTime = progressBar.value;
         }
     });
@@ -167,14 +201,12 @@ document.addEventListener('DOMContentLoaded', () => {
     volumeBar.addEventListener('input', () => {
         audioPlayer.volume = volumeBar.value / 100;
     });
-    // Set initial volume
     audioPlayer.volume = volumeBar.value / 100;
 
 
-    // --- Logic Sidebar Toggle (Có thể tách ra ui.js) ---
+    // --- Logic Sidebar Toggle (Giữ nguyên) ---
     const menuToggleBtn = document.querySelector('.menu-toggle-btn');
     const sidebar = document.querySelector('.sidebar');
-    // const mainContentForOverlay = document.querySelector('.main-content'); // Không cần nếu overlay thêm vào body
 
     if (menuToggleBtn && sidebar) {
         menuToggleBtn.addEventListener('click', (event) => {
@@ -184,7 +216,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Đóng sidebar khi click ra ngoài
     document.addEventListener('click', (event) => {
         if (sidebar && sidebar.classList.contains('active') &&
             !sidebar.contains(event.target) &&
@@ -194,7 +225,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Hàm quản lý overlay
     function toggleSidebarOverlay(show) {
         let overlay = document.querySelector('.sidebar-overlay');
         if (show) {
@@ -204,30 +234,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 overlay.style.cssText = `
                     position: fixed; top: 0; left: 0; right: 0; bottom: 0;
                     background-color: rgba(0,0,0,0.5);
-                    z-index: 999; /* Dưới sidebar */
+                    z-index: 999;
                 `;
                 document.body.appendChild(overlay);
-                overlay.addEventListener('click', () => { // Click overlay để đóng sidebar
+                overlay.addEventListener('click', () => {
                     if(sidebar) sidebar.classList.remove('active');
-                    toggleSidebarOverlay(false); // Gọi lại để xóa overlay
+                    toggleSidebarOverlay(false);
                 });
             }
         } else {
-            if (overlay) {
-                 // **Sửa lỗi removeChild:** Kiểm tra trước khi xóa
-                 if (overlay.parentNode === document.body) {
-                     document.body.removeChild(overlay);
-                 } else {
-                     // console.warn("Overlay không phải là con của body khi cố gắng xóa.");
-                 }
+            if (overlay && overlay.parentNode) {
+                 overlay.parentNode.removeChild(overlay);
             }
         }
     }
-     // --- SỬA LỖI removeChild TẠI ĐÂY ---
-     // Tìm dòng 124 cũ của bạn và đảm bảo logic xóa overlay sử dụng hàm toggleSidebarOverlay(false)
-     // hoặc kiểm tra trực tiếp như trong hàm toggleSidebarOverlay.
 
-    console.log("Player DOMContentLoaded End"); // Kiểm tra
+    console.log("Player DOMContentLoaded End");
 });
 
-console.log("player.js loaded"); // Để kiểm tra thứ tự load
+console.log("player.js loaded");
