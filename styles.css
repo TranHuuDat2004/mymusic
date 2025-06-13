@@ -1477,7 +1477,7 @@ button:hover {
     color: #f16363; /* Màu đỏ cho lỗi */
 }
 
-/* styles.css */
+
 
 /* --- Styling cho Notification --- */
 #notification-container {
@@ -1501,4 +1501,17 @@ button:hover {
     opacity: 1;
     visibility: visible;
     bottom: 95px; /* Hiệu ứng trượt lên một chút */
+}
+
+
+
+/* --- Styling cho các nút player đang active --- */
+/* Quy tắc này sẽ áp dụng cho tất cả các nút có class .active */
+.player-bar button.active {
+    color: #1db954; /* Màu xanh lá đặc trưng */
+}
+
+/* Áp dụng riêng cho nút Thích để tô đầy trái tim */
+.song-info .actions button#like-btn.active svg {
+    fill: #1db954; /* Tô đầy trái tim bằng màu xanh */
 }

@@ -46,13 +46,20 @@ document.addEventListener('DOMContentLoaded', () => {
                     </a>
                 </li>
                 <li>
+                    <a href="tutorial.html">
+                        <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" class="icon-tutorial">
+                           <path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"></path>
+                        </svg>
+                        Hướng dẫn
+                    </a>
+                </li>
+                <li>
                     <a href="about.html">
                         <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" class="icon-info"><path d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"></path></svg>
                         Giới thiệu
                     </a>
                 </li>
-                <!-- MỤC MỚI ĐƯỢC THÊM VÀO ĐÂY -->
-                <!-- ICON MỚI ĐƯỢC CẬP NHẬT TẠI ĐÂY -->
+
                 <li>
                     <a href="version.html">
                         <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" class="icon-version">
@@ -77,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const setActiveLink = () => {
         // Lấy tên file của trang hiện tại (ví dụ: "index.html", "search.html")
         const currentPage = window.location.pathname.split('/').pop();
-        
+
         // Nếu đang ở trang chủ (URL không có tên file), mặc định là 'index.html'
         const activePage = currentPage === '' ? 'index.html' : currentPage;
 
@@ -104,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const link = document.createElement('a');
                 // Giả sử bạn có trang playlist.html để hiển thị nội dung của từng playlist
                 // Chúng ta truyền id của section qua URL parameter
-                link.href = `playlist.html?id=${section.id}`; 
+                link.href = `playlist.html?id=${section.id}`;
                 link.textContent = section.title;
                 listItem.appendChild(link);
                 playlistList.appendChild(listItem);

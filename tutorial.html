@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hướng dẫn sử dụng - My Music Player</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="img/favicon.png" type="image/png">
+    <style>
+        /* CSS riêng cho trang Hướng dẫn */
+        .tutorial-content {
+            padding: 20px 30px;
+        }
+
+        .tutorial-section {
+            margin-bottom: 40px;
+            background-color: #181818;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .tutorial-section h2 {
+            font-size: 1.8em;
+            color: #1DB954; /* Màu xanh lá đặc trưng */
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .tutorial-section h2 .icon-container {
+            margin-right: 15px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #282828;
+            padding: 8px;
+            border-radius: 50%;
+        }
+        
+        .tutorial-section h2 .icon-container svg {
+            width: 24px;
+            height: 24px;
+            fill: #fff;
+        }
+
+        .tutorial-section h3 {
+            font-size: 1.3em;
+            margin-top: 25px;
+            margin-bottom: 10px;
+            color: #fff;
+            border-left: 3px solid #1DB954;
+            padding-left: 10px;
+        }
+
+        .tutorial-section p, .tutorial-section li {
+            color: #b3b3b3;
+            line-height: 1.7;
+        }
+        
+        .tutorial-section ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .tutorial-section li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 10px;
+        }
+
+        .tutorial-section li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #1DB954;
+            font-weight: bold;
+        }
+
+        .active-state-demo {
+            color: #fff;
+            background-color: #2a2a2a;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .note {
+            background-color: #282828;
+            border-left: 4px solid #535353;
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 4px;
+        }
+        
+        .note p {
+            margin: 0;
+        }
+        
+        .active-state-demo {
+            color: #1DB954;
+            font-weight: bold;
+        }
+        
+        .active-state-demo svg {
+             fill: #1DB954 !important;
+        }
+    </style>
+</head>
+
+<body>
+    <button class="menu-toggle-btn" aria-label="Toggle menu">☰</button>
+    <audio id="audio-player"></audio>
+
+    <div class="music-player-container">
+        <!-- Sidebar sẽ được chèn tự động bởi sidebar.js -->
+        <nav id="sidebar-container" class="sidebar"></nav>
+
+        <!-- Main Content cho trang Hướng dẫn -->
+        <main class="main-content">
+            <div class="tutorial-content">
+                <h1>Hướng dẫn sử dụng các tính năng</h1>
+                <p>Khám phá các chức năng điều khiển nâng cao để có trải nghiệm nghe nhạc tốt nhất trên MyMusic Player.</p>
+
+                <!-- Phần hướng dẫn Chức năng Ngẫu nhiên -->
+                <section class="tutorial-section">
+                    <h2>
+                        <span class="icon-container">
+                             <svg viewBox="0 0 24 24"><path d="M10.59 9.17L5.41 4 4 5.41l5.17 5.17 1.42-1.41zM14.5 4l2.04 2.04L4 18.59 5.41 20 17.96 7.46 20 9.5V4h-5.5zm.33 9.41l-1.41 1.41 3.13 3.13L14.5 20H20v-5.5l-2.04 2.04-3.13-3.13z"></path></svg>
+                        </span>
+                        Phát Ngẫu Nhiên (Shuffle)
+                    </h2>
+                    <p>Chức năng này cho phép bạn xáo trộn toàn bộ thư viện và phát các bài hát theo một thứ tự ngẫu nhiên, mang lại sự mới mẻ mỗi khi nghe nhạc.</p>
+                    
+                    <h3>Cách hoạt động</h3>
+                    <ul>
+                        <li><strong>Bật/Tắt:</strong> Nhấn vào biểu tượng <span class="active-state-demo">Ngẫu nhiên</span> trên thanh điều khiển để bật hoặc tắt chế độ này. Khi được bật, biểu tượng sẽ có màu <span class="active-state-demo">xanh lá</span>.</li>
+                        <li><strong>Khi chế độ TẮT:</strong> Các bài hát sẽ được phát theo thứ tự trong danh sách. Nút <span class="active-state-demo">Tiếp theo</span> sẽ chuyển đến bài hát ngay sau bài hiện tại.</li>
+                        <li><strong>Khi chế độ BẬT:</strong>
+                            <ul>
+                                <li>Khi bạn nhấn <span class="active-state-demo">Tiếp theo</span> hoặc khi một bài hát kết thúc, một bài hát hoàn toàn ngẫu nhiên từ thư viện sẽ được chọn để phát.</li>
+                                <li>Nếu bạn chọn một bài hát bất kỳ từ danh sách, bài hát đó sẽ được phát ngay lập tức, và các bài hát tiếp theo sẽ tiếp tục được phát ngẫu nhiên.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- Phần hướng dẫn Chức năng Lặp lại -->
+                <section class="tutorial-section">
+                     <h2>
+                        <span class="icon-container">
+                            <svg viewBox="0 0 24 24"><path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"></path></svg>
+                        </span>
+                        Lặp Lại (Repeat)
+                    </h2>
+                    <p>Chức năng Lặp lại có 3 chế độ khác nhau, cho phép bạn toàn quyền kiểm soát cách các bài hát được phát sau khi kết thúc.</p>
+                    
+                    <h3>Các chế độ</h3>
+                    <p>Nhấn vào biểu tượng <span class="active-state-demo">Lặp lại</span> để chuyển qua lại giữa 3 chế độ:</p>
+                    
+                    <ol style="list-style: none; padding-left: 0;">
+                        <li>
+                            <h3>1. Tắt Lặp Lại (Mặc định)</h3>
+                            <p>Đây là chế độ ban đầu. Biểu tượng có màu xám.</p>
+                             <ul>
+                                <li>Khi bài hát cuối cùng trong danh sách (hoặc playlist) kết thúc và chế độ Ngẫu nhiên đang tắt, trình phát nhạc sẽ dừng lại.</li>
+                                <li>Nếu chế độ Ngẫu nhiên đang bật, một bài hát ngẫu nhiên khác sẽ được phát.</li>
+                            </ul>
+                        </li>
+                        
+                        <li>
+                            <h3>2. Lặp Lại Tất Cả (Repeat All)</h3>
+                             <p>Nhấn lần đầu tiên, biểu tượng sẽ chuyển sang màu <span class="active-state-demo">xanh lá</span>. </p>
+                             <ul>
+                                <li>Khi bài hát cuối cùng trong danh sách kết thúc, trình phát sẽ tự động quay trở lại và phát bài hát đầu tiên.</li>
+                                <li>Chế độ này tạo thành một vòng lặp vô tận cho toàn bộ danh sách phát của bạn.</li>
+                            </ul>
+                        </li>
+                        
+                        <li>
+                            <h3>3. Lặp Lại Một Bài (Repeat One)</h3>
+                            <p>Nhấn lần thứ hai, biểu tượng sẽ có màu <span class="active-state-demo">xanh lá</span> và có thêm <span class="active-state-demo">số 1</span> nhỏ bên trong.</p>
+                            <ul>
+                                <li>Khi bài hát hiện tại kết thúc, nó sẽ tự động được phát lại từ đầu.</li>
+                                <li>Chế độ này rất hữu ích khi bạn muốn nghe đi nghe lại một bài hát yêu thích.</li>
+                            </ul>
+                        </li>
+                    </ol>
+
+                    <div class="note">
+                        <p><strong>Mẹo:</strong> Nhấn vào nút Lặp lại lần thứ ba để quay về chế độ "Tắt Lặp Lại".</p>
+                    </div>
+                </section>
+            </div>
+        </main>
+        
+        <!-- Placeholder cho Player Bar -->
+        <footer id="player-bar-container"></footer>
+
+        <!-- Placeholder cho Notification -->
+        <div id="notification-container"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="data/music.js"></script>
+    <script src="js/utils.js" defer></script>
+    <script src="js/sidebar.js" defer></script>
+    <script src="js/player.js" defer></script>
+    <script>
+        // Active link hướng dẫn trong sidebar
+        document.addEventListener('DOMContentLoaded', () => {
+             const tutorialLink = document.querySelector('.sidebar-nav a[href="tutorial.html"]');
+             if(tutorialLink) {
+                // Xóa active khỏi các link khác trước
+                document.querySelectorAll('.sidebar-nav a.active').forEach(link => link.classList.remove('active'));
+                tutorialLink.classList.add('active');
+             }
+        });
+    </script>
+</body>
+
+</html>
