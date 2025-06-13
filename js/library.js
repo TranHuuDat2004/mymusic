@@ -48,71 +48,59 @@ document.addEventListener('DOMContentLoaded', async () => { // Thêm async vì i
         });
     }
 
-    // --- Hàm tạo một mục bài hát trong danh sách (kiểu bảng) ---
-    function createSongListItem(songData, index, artistNameToDisplay) {
+    // Trong js/library.js
+
+    // --- Hàm tạo một mục bài hát trong danh sách (kiểu bảng) (PHIÊN BẢN MỚI) ---
+    function createSongListItem(songData, index) {
         const songItem = document.createElement('div');
         songItem.classList.add('song-list-item');
+        // Vẫn lưu dataset để dự phòng hoặc cho các mục đích khác
         songItem.dataset.src = songData.audioSrc || '';
         songItem.dataset.title = songData.title || 'Không có tiêu đề';
-        songItem.dataset.artist = artistNameToDisplay || songData.artistData || 'N/A';
+        songItem.dataset.artist = songData.artistNameToDisplay || songData.artistData || 'N/A';
         songItem.dataset.art = songData.albumArt || songData.artUrl || 'https://via.placeholder.com/40';
 
         const durationDisplay = songData.duration || 'N/A';
+        const artistNameToDisplay = songData.artistNameToDisplay || 'Nghệ sĩ không xác định';
 
         songItem.innerHTML = `
-            <span class="song-index">${index}</span>
-            <img src="${songData.albumArt || songData.artUrl || 'https://via.placeholder.com/40'}" alt="${songData.title || 'Art'}" class="album-art-small">
-            <div class="song-details">
-                <div class="song-title">${songData.title || 'Không có tiêu đề'}</div>
-                
-            </div>
-            <div class="song-artist-column">${artistNameToDisplay || 'Nghệ sĩ không xác định'}</div>
-            <div class="song-plays">${songData.plays || 'N/A'}</div>
-            <div class="song-duration">${durationDisplay}</div>
-            <div class="song-actions">
-                <button title="Thích" class="like-song-btn" data-song-id="${songData.id || ''}">
-                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
-                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                    </svg>
-                </button>
-            </div>
-        `;
+        <span class="song-index">${index}</span>
+        <img src="${songData.albumArt || songData.artUrl || 'https://via.placeholder.com/40'}" alt="${songData.title || 'Art'}" class="album-art-small">
+        <div class="song-details">
+            <div class="song-title">${songData.title || 'Không có tiêu đề'}</div>
+        </div>
+        <div class="song-artist-column">${artistNameToDisplay}</div>
+        <div class="song-plays">${songData.plays || 'N/A'}</div>
+        <div class="song-duration">${durationDisplay}</div>
+        <div class="song-actions">
+            <button title="Thích" class="like-song-btn" data-song-id="${songData.id || ''}">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                </svg>
+            </button>
+        </div>
+    `;
 
-        songItem.addEventListener('click', function(event) {
-            if (event.target.closest('button.like-song-btn') || event.target.closest('a')) {
-                return;
-            }
-            if (typeof window.playSongFromData === 'function' && this.dataset.src) {
-                window.playSongFromData({
-                    src: this.dataset.src,
-                    title: this.dataset.title,
-                    artist: this.dataset.artist,
-                    art: this.dataset.art
-                });
-            } else {
-                console.warn("Không thể phát bài hát từ danh sách. Thiếu playSongFromData() hoặc data-src.");
-            }
-        });
+        // **QUAN TRỌNG: Xóa bỏ addEventListener('click') khỏi đây.**
+        // Việc gắn listener sẽ được thực hiện ở hàm renderLibraryContent.
 
         const likeBtn = songItem.querySelector('.like-song-btn');
         if (likeBtn) {
             if (songData.isFavorite) {
                 likeBtn.classList.add('liked');
-                likeBtn.innerHTML = '<svg viewBox="0 0 24 24" width="18" height="18" fill="#1DB954"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>';
+                likeBtn.querySelector('svg').setAttribute('fill', '#1DB954');
             }
-            likeBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
+            likeBtn.addEventListener('click', function (e) {
+                e.stopPropagation(); // Ngăn sự kiện click lan ra songItem
                 this.classList.toggle('liked');
                 songData.isFavorite = this.classList.contains('liked');
-                this.innerHTML = songData.isFavorite ?
-                    '<svg viewBox="0 0 24 24" width="18" height="18" fill="#1DB954"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>' :
-                    '<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>';
+                this.querySelector('svg').setAttribute('fill', songData.isFavorite ? '#1DB954' : 'currentColor');
             });
         }
         return songItem;
     }
 
-    // --- Hàm render nội dung dựa trên chế độ xem ---
+    // --- Hàm render nội dung dựa trên chế độ xem (PHIÊN BẢN MỚI, ĐỒNG BỘ LOGIC) ---
     function renderLibraryContent(viewMode) {
         if (!songsDisplayContainer) {
             console.error("Container hiển thị bài hát (#library-songs-display) không tồn tại.");
@@ -120,39 +108,53 @@ document.addEventListener('DOMContentLoaded', async () => { // Thêm async vì i
         }
         songsDisplayContainer.innerHTML = ''; // Xóa nội dung cũ
 
-        if (allLibrarySongs.length > 0) {
-            if (viewMode === 'grid') {
-                songsDisplayContainer.className = 'card-grid';
-                allLibrarySongs.forEach(song => {
-                    if (typeof window.createSongCard === 'function') {
-                        const card = window.createSongCard(song); // Gọi từ utils.js
-                        songsDisplayContainer.appendChild(card);
-                    } else {
-                        console.error("Hàm window.createSongCard không tồn tại.");
-                    }
-                });
-            } else if (viewMode === 'list') {
-                songsDisplayContainer.className = 'song-list-container';
-                const tableHeader = document.createElement('div');
-                tableHeader.classList.add('song-list-header', 'song-list-item');
-                tableHeader.innerHTML = `
-                    <span class="song-index">#</span>
-                    <span class="song-art-placeholder"></span>
-                    <div class="song-details"><div class="song-title">TIÊU ĐỀ</div></div>
-                    <div style="padding-left:40px" class="song-artist-column">NGHỆ SĨ</div>
-                    <div class="song-plays">LƯỢT NGHE</div>
-                    <div class="song-duration">THỜI LƯỢNG</div>
-                    <div class="song-actions-placeholder"></div>
-                `;
-                songsDisplayContainer.appendChild(tableHeader);
-
-                allLibrarySongs.forEach((song, index) => {
-                    const songItem = createSongListItem(song, index + 1, song.artistNameToDisplay); // Gọi hàm cục bộ
-                    songsDisplayContainer.appendChild(songItem);
-                });
-            }
-        } else {
+        if (allLibrarySongs.length === 0) {
             songsDisplayContainer.innerHTML = '<p class="search-initial-message">Thư viện của bạn trống.</p>';
+            return;
+        }
+
+        if (viewMode === 'grid') {
+            songsDisplayContainer.className = 'card-grid';
+            allLibrarySongs.forEach(song => {
+                const card = createSongCard(song);
+                // Gắn listener sau khi tạo card
+                if (typeof window.addCardClickListener === 'function') {
+                    window.addCardClickListener(card);
+                }
+                songsDisplayContainer.appendChild(card);
+            });
+        } else if (viewMode === 'list') {
+            songsDisplayContainer.className = 'song-list-container';
+            // Tạo header cho bảng
+            const tableHeader = document.createElement('div');
+            tableHeader.classList.add('song-list-header', 'song-list-item');
+            tableHeader.innerHTML = `
+            <span class="song-index">#</span>
+            <span class="song-art-placeholder"></span>
+            <div class="song-details"><div class="song-title">TIÊU ĐỀ</div></div>
+            <div class="song-artist-column">NGHỆ SĨ</div>
+            <div class="song-plays">LƯỢT NGHE</div>
+            <div class="song-duration">THỜI LƯỢNG</div>
+            <div class="song-actions-placeholder"></div>
+        `;
+            songsDisplayContainer.appendChild(tableHeader);
+
+            // Tạo từng dòng bài hát
+            allLibrarySongs.forEach((song, index) => {
+                const songItem = createSongListItem(song, index + 1);
+
+                // Gắn listener click để phát nhạc cho cả dòng
+                songItem.addEventListener('click', (event) => {
+                    // Không phát nhạc nếu click vào nút like
+                    if (event.target.closest('button.like-song-btn')) {
+                        return;
+                    }
+                    // Luôn gọi với đối tượng `song` đầy đủ từ mảng
+                    window.playSongFromData(song);
+                });
+
+                songsDisplayContainer.appendChild(songItem);
+            });
         }
     }
 
@@ -263,7 +265,7 @@ document.addEventListener('DOMContentLoaded', async () => { // Thêm async vì i
     // Active link thư viện
     document.querySelectorAll('.sidebar-nav a').forEach(link => link.classList.remove('active'));
     const libraryLink = document.querySelector('.sidebar-nav a[href="library.html"]');
-    if(libraryLink) libraryLink.classList.add('active');
+    if (libraryLink) libraryLink.classList.add('active');
 
     // Khởi tạo thư viện
     initializeLibrary().catch(err => {

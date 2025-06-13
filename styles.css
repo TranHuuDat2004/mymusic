@@ -1477,3 +1477,28 @@ button:hover {
     color: #f16363; /* Màu đỏ cho lỗi */
 }
 
+/* styles.css */
+
+/* --- Styling cho Notification --- */
+#notification-container {
+    position: fixed;
+    bottom: 80px; /* Ngay trên thanh player-bar */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #28a745; /* Màu xanh lá thành công */
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    z-index: 1050; /* Hiển thị trên mọi thứ */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease, bottom 0.3s ease;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+#notification-container.active {
+    opacity: 1;
+    visibility: visible;
+    bottom: 95px; /* Hiệu ứng trượt lên một chút */
+}
