@@ -108,15 +108,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
         currentIndex = index;
         const songData = currentQueue[currentIndex];
-        
+
         nowPlayingTitle.textContent = songData.title || "Không có tiêu đề";
         nowPlayingArtist.textContent = songData.artistData || "Nghệ sĩ không xác định";
         nowPlayingArt.src = songData.artUrl || "img/favicon.png";
         audioPlayer.src = songData.audioSrc;
-        
+
         // Cập nhật trạng thái nút Thích cho bài hát mới
         likeBtn.classList.toggle('active', !!songData.isFavorite);
-        
+
         const playPromise = audioPlayer.play();
         // Đoạn mã đã sửa
         if (playPromise) {
@@ -138,7 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.playSongFromData = (clickedSong) => {
         currentQueue = [...allSongsFlat];
         const index = currentQueue.findIndex(song => song.audioSrc === clickedSong.audioSrc);
-        
+
         if (index === -1) {
             console.error("Không tìm thấy bài hát được click.", clickedSong);
             return;
@@ -166,7 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function playNext() {
         if (currentQueue.length === 0) return;
         let nextIndex = isShuffle ? Math.floor(Math.random() * currentQueue.length) : (currentIndex + 1) % currentQueue.length;
-        if(isShuffle && currentQueue.length > 1 && nextIndex === currentIndex) return playNext(); // Tránh lặp lại bài cũ khi shuffle
+        if (isShuffle && currentQueue.length > 1 && nextIndex === currentIndex) return playNext(); // Tránh lặp lại bài cũ khi shuffle
         playSongByIndex(nextIndex);
     }
 
@@ -182,6 +182,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- 7. GẮN CÁC LISTENER ---
     mainPlayPauseBtn.addEventListener('click', () => {
+        // THÊM ĐOẠN NÀY VÀO ĐẦU HÀM
+        if (!isVolumeInitialized) {
+            audioPlayer.volume = volumeBar.value / 100;
+            isVolumeInitialized = true;
+        }
+
+
         if (currentIndex === -1 && allSongsFlat.length > 0) {
             window.playSongFromData(allSongsFlat[0]);
             return;
@@ -223,17 +230,53 @@ document.addEventListener('DOMContentLoaded', () => {
         showNotification(song.isFavorite ? "Đã thêm vào bài hát yêu thích" : "Đã xóa khỏi bài hát yêu thích");
     });
 
+    // Thay thế listener của volumeBtn
     let lastVolume = audioPlayer.volume;
     volumeBtn.addEventListener('click', () => {
-        audioPlayer.volume = audioPlayer.volume > 0 ? 0 : lastVolume;
-        volumeBar.value = audioPlayer.volume * 100;
+        // Thay vì chỉ kiểm tra volume, hãy kiểm tra trạng thái muted
+        if (audioPlayer.muted) {
+            audioPlayer.muted = false;
+            audioPlayer.volume = lastVolume; // Khôi phục volume cũ
+            volumeBar.value = lastVolume * 100;
+        } else {
+            lastVolume = audioPlayer.volume; // Lưu lại volume trước khi tắt tiếng
+            audioPlayer.muted = true;
+            // Một số trình duyệt tự động set volume = 0 khi muted, một số không.
+            // Dòng dưới để đảm bảo giao diện đồng bộ.
+            volumeBar.value = 0;
+        }
+    });
+
+    // Và cập nhật lại listener 'volumechange'
+    audioPlayer.addEventListener('volumechange', () => {
+        volumeBtn.classList.toggle('active', !audioPlayer.muted && audioPlayer.volume > 0);
+        if (!audioPlayer.muted) {
+            volumeBar.value = audioPlayer.volume * 100;
+            lastVolume = audioPlayer.volume;
+        }
+    });
+
+    // Và listener của thanh volume
+    volumeBar.addEventListener('input', () => {
+        audioPlayer.muted = false; // Bỏ tắt tiếng khi người dùng kéo thanh trượt
+        audioPlayer.volume = volumeBar.value / 100;
     });
 
     // Listeners cho Audio Element
     audioPlayer.addEventListener('play', () => updatePlayPauseIcon(true));
     audioPlayer.addEventListener('pause', () => updatePlayPauseIcon(false));
+    // Thay thế listener 'volumechange' cũ bằng cái này
     audioPlayer.addEventListener('volumechange', () => {
-        volumeBtn.classList.toggle('active', audioPlayer.volume > 0);
+        const barValue = volumeBar.value / 100;
+
+        // Nếu volume của audio player không khớp với thanh trượt
+        // (có thể do Safari tự đặt lại), hãy ép nó về đúng giá trị.
+        // Dùng một sai số nhỏ để tránh vòng lặp vô hạn.
+        if (Math.abs(audioPlayer.volume - barValue) > 0.01) {
+            audioPlayer.volume = barValue;
+        }
+
+        volumeBtn.classList.toggle('active', audioPlayer.volume > 0 && !audioPlayer.muted);
         if (audioPlayer.volume > 0) lastVolume = audioPlayer.volume;
     });
     audioPlayer.addEventListener('error', () => { nowPlayingTitle.textContent = "Lỗi tải nhạc"; });
@@ -256,7 +299,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Listeners cho các thanh trượt
     progressBar.addEventListener('input', () => { if (audioPlayer.src) audioPlayer.currentTime = progressBar.value; });
     volumeBar.addEventListener('input', () => { audioPlayer.volume = volumeBar.value / 100; });
-    audioPlayer.volume = volumeBar.value / 100;
+    // Thêm vào khu vực quản lý trạng thái
+    let isVolumeInitialized = false;
 
     // --- LOGIC SIDEBAR TOGGLE (GIỮ NGUYÊN) ---
     const menuToggleBtn = document.querySelector('.menu-toggle-btn');
@@ -296,7 +340,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     }
-    
+
     console.log("Player DOMContentLoaded End");
 });
 
