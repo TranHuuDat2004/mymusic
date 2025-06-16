@@ -1105,7 +1105,7 @@ button:hover {
 
 @media (max-width: 480px) {
     .card-grid {
-        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
         gap: 12px;
     }
 }
@@ -1162,11 +1162,6 @@ button:hover {
         font-size: 1.8em;
     }
 
-    .card-grid {
-        /* Hiển thị 2 cột trên tablet, hoặc tự động fill */
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-        gap: 16px;
-    }
 
     .card .play-button-overlay {
         width: 40px;
@@ -1285,11 +1280,6 @@ button:hover {
         margin-bottom: 15px;
     }
 
-    .card-grid {
-        /* 1 hoặc 2 cột, tùy thuộc vào minmax */
-        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-        gap: 12px;
-    }
 
     .card {
         padding: 12px;

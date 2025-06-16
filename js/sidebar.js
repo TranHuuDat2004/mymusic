@@ -121,11 +121,80 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+// js/sidebar.js
+
+// ... (toàn bộ code hiện có của bạn từ dòng 1 đến dòng setActiveLink() và generatePlaylistLinks()) ...
+
     // --- 5. Gọi các hàm thực thi ---
     setActiveLink();
     generatePlaylistLinks();
 
+    // --- BẮT ĐẦU: THÊM LẠI LOGIC ĐÓNG/MỞ SIDEBAR ---
+
+    const menuToggleBtn = document.querySelector('.menu-toggle-btn');
+    // Lưu ý: sidebarContainer chính là phần tử sidebar của chúng ta
+    if (menuToggleBtn && sidebarContainer) {
+        menuToggleBtn.addEventListener('click', (event) => {
+            event.stopPropagation(); // Ngăn sự kiện click lan ra ngoài
+            sidebarContainer.classList.toggle('active');
+            toggleSidebarOverlay(sidebarContainer.classList.contains('active'));
+        });
+    }
+
+    // Đóng sidebar khi click ra ngoài
+    document.addEventListener('click', (event) => {
+        // Kiểm tra xem sidebar có class 'active' không
+        // và nơi click không phải là sidebar hoặc nằm trong sidebar
+        // và nơi click cũng không phải là nút toggle
+        if (sidebarContainer && sidebarContainer.classList.contains('active') &&
+            !sidebarContainer.contains(event.target) &&
+            event.target !== menuToggleBtn) {
+            sidebarContainer.classList.remove('active');
+            toggleSidebarOverlay(false);
+        }
+    });
+
+    // Hàm quản lý lớp phủ (overlay)
+    function toggleSidebarOverlay(show) {
+        let overlay = document.querySelector('.sidebar-overlay');
+        if (show) {
+            if (!overlay) {
+                overlay = document.createElement('div');
+                overlay.classList.add('sidebar-overlay');
+                // CSS cho overlay (bạn có thể chuyển vào file styles.css)
+                overlay.style.cssText = `
+                    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+                    background-color: rgba(0,0,0,0.5);
+                    z-index: 999; /* Dưới sidebar (z-index 1000) nhưng trên mọi thứ khác */
+                    display: none; /* Ẩn ban đầu */
+                `;
+                document.body.appendChild(overlay);
+                
+                // Thêm listener click cho overlay để đóng sidebar
+                overlay.addEventListener('click', () => { 
+                    if(sidebarContainer) sidebarContainer.classList.remove('active');
+                    toggleSidebarOverlay(false); // Gọi lại để xóa chính nó
+                });
+            }
+            // Thêm một chút delay để đảm bảo overlay được tạo trước khi hiển thị
+            setTimeout(() => {
+                if (overlay) overlay.style.display = 'block';
+            }, 10);
+        } else {
+            if (overlay) {
+                 overlay.style.display = 'none'; // Ẩn đi thay vì xóa ngay để có thể tái sử dụng
+                 // Nếu muốn xóa hoàn toàn:
+                 // if (overlay.parentNode) {
+                 //     overlay.parentNode.removeChild(overlay);
+                 // }
+            }
+        }
+    }
+    // --- KẾT THÚC: LOGIC ĐÓNG/MỞ SIDEBAR ---
+
+
     console.log("Sidebar DOMContentLoaded End");
 });
+
 
 console.log("sidebar.js loaded");
