@@ -128,7 +128,7 @@ function createSongListItem(songData, index, artistNameToDisplay) {
             likeBtn.classList.add('liked');
             likeBtn.innerHTML = '<svg viewBox="0 0 24 24" width="18" height="18" fill="#1DB954"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>';
         }
-        likeBtn.addEventListener('click', function(e) {
+        likeBtn.addEventListener('click', function (e) {
             e.stopPropagation(); // Ngăn sự kiện click của item cha
             this.classList.toggle('liked');
             songData.isFavorite = this.classList.contains('liked'); // Cập nhật trong phiên
@@ -209,8 +209,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         playlistCoverArtDiv.classList.add('playlist-cover-art');
         const coverImg = document.createElement('img');
         coverImg.src = targetSection.songs && targetSection.songs.length > 0 ?
-                       (targetSection.songs[0].artUrl || 'https://via.placeholder.com/180?text=Playlist') :
-                       'https://via.placeholder.com/180?text=Playlist';
+            (targetSection.songs[0].artUrl || 'https://via.placeholder.com/180?text=Playlist') :
+            'https://via.placeholder.com/180?text=Playlist';
         coverImg.alt = targetSection.title;
         playlistCoverArtDiv.appendChild(coverImg);
         playlistHeaderDiv.appendChild(playlistCoverArtDiv);
@@ -278,16 +278,14 @@ document.addEventListener('DOMContentLoaded', async () => {
                         index + 1,
                         songData.displayArtist?.name || songData.artistData
                     );
-                    songItem.addEventListener('click', function(event) {
+                    // trong playlist.js
+                    songItem.addEventListener('click', function (event) {
                         if (event.target.closest('button.like-song-btn') || event.target.closest('a')) return;
+
                         if (typeof window.playSongFromData === 'function' && songData.audioSrc) {
-                            const songToPlayForPlayer = {
-                                src: songData.audioSrc,
-                                title: songData.title,
-                                artist: songData.displayArtist?.name || songData.artistData,
-                                art: songData.artUrl || songData.albumArt,
-                            };
-                            window.playSongFromData(songToPlayForPlayer, songsToDisplay);
+                            // Gọi hàm với chính đối tượng `songData` đầy đủ
+                            // và mảng `songsToDisplay` làm context playlist
+                            window.playSongFromData(songData, songsToDisplay);
                         } else {
                             console.warn("Playlist: Không thể phát bài hát.");
                         }

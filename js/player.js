@@ -1,4 +1,4 @@
-// js/player.js (Phiên bản đầy đủ chức năng)
+// js/player.js (Phiên bản đầy đủ chức năng, đã sửa lỗi favicon)
 
 document.addEventListener('DOMContentLoaded', () => {
     console.log("Player DOMContentLoaded Start");
@@ -70,6 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentIndex = -1;
     let isShuffle = false;
     let repeatMode = 'none'; // 'none', 'all', 'one'
+    let isVolumeInitialized = false; // Cờ cho Safari
 
     if (typeof ALL_MUSIC_SECTIONS !== 'undefined' && Array.isArray(ALL_MUSIC_SECTIONS)) {
         allSongsFlat = ALL_MUSIC_SECTIONS.flatMap(section => section.songs);
@@ -98,35 +99,45 @@ document.addEventListener('DOMContentLoaded', () => {
     function updatePlayPauseIcon(isPlaying) {
         mainPlayPauseBtn.innerHTML = isPlaying ? pauseIconSVG : playIconSVG;
     }
+    
+    // ĐỊNH NGHĨA HÀM TIỆN ÍCH Ở ĐÂY, TRƯỚC KHI ĐƯỢC GỌI
+    function updateFavicon(iconUrl) {
+        let link = document.querySelector("link[rel~='icon']");
+        if (!link) {
+            link = document.createElement('link');
+            link.rel = 'icon';
+            document.head.appendChild(link);
+        }
+        link.href = iconUrl;
+    }
 
     function playSongByIndex(index) {
         if (index < 0 || index >= currentQueue.length) {
-            console.error("Index bài hát không hợp lệ.");
+            document.title = "MyMusic Player";
+            updateFavicon("img/favicon.png");
             updatePlayPauseIcon(false);
             return;
         }
 
         currentIndex = index;
         const songData = currentQueue[currentIndex];
+        
+        // Cập nhật tiêu đề và favicon
+        document.title = `${songData.title} - ${songData.artistData}`;
+        updateFavicon(songData.artUrl || "img/favicon.png");
 
+        // Cập nhật UI player bar
         nowPlayingTitle.textContent = songData.title || "Không có tiêu đề";
         nowPlayingArtist.textContent = songData.artistData || "Nghệ sĩ không xác định";
         nowPlayingArt.src = songData.artUrl || "img/favicon.png";
         audioPlayer.src = songData.audioSrc;
-
-        // Cập nhật trạng thái nút Thích cho bài hát mới
+        
         likeBtn.classList.toggle('active', !!songData.isFavorite);
-
+        
         const playPromise = audioPlayer.play();
-        // Đoạn mã đã sửa
         if (playPromise) {
             playPromise.catch(error => {
-                // Kiểm tra xem lỗi có phải là AbortError không
-                if (error.name === 'AbortError') {
-                    // Đây là lỗi dự kiến khi người dùng click nhanh, bỏ qua nó
-                    console.log(`Play request for "${songData.title}" was interrupted. This is expected.`);
-                } else {
-                    // Nếu là một lỗi khác, hãy báo cáo và cập nhật UI
+                if (error.name !== 'AbortError') {
                     console.error(`Lỗi khi phát "${songData.title}":`, error);
                     nowPlayingTitle.textContent = "Lỗi tải nhạc";
                     updatePlayPauseIcon(false);
@@ -138,12 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.playSongFromData = (clickedSong) => {
         currentQueue = [...allSongsFlat];
         const index = currentQueue.findIndex(song => song.audioSrc === clickedSong.audioSrc);
-
-        if (index === -1) {
-            console.error("Không tìm thấy bài hát được click.", clickedSong);
-            return;
-        }
-
+        if (index === -1) return;
         if (isShuffle) {
             const firstSong = currentQueue.splice(index, 1)[0];
             currentQueue.sort(() => Math.random() - 0.5);
@@ -162,11 +168,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    // --- 6. CÁC HÀM ĐIỀU KHIỂN (NEXT, PREV) ---
+    // --- 6. CÁC HÀM ĐIỀU KHIỂN ---
     function playNext() {
         if (currentQueue.length === 0) return;
         let nextIndex = isShuffle ? Math.floor(Math.random() * currentQueue.length) : (currentIndex + 1) % currentQueue.length;
-        if (isShuffle && currentQueue.length > 1 && nextIndex === currentIndex) return playNext(); // Tránh lặp lại bài cũ khi shuffle
+        if (isShuffle && currentQueue.length > 1 && nextIndex === currentIndex) return playNext();
         playSongByIndex(nextIndex);
     }
 
@@ -177,23 +183,28 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
         const prevIndex = (currentIndex - 1 + currentQueue.length) % currentQueue.length;
-        playSongByIndex(isShuffle ? (Math.floor(Math.random() * currentQueue.length)) : prevIndex);
+        playSongByIndex(isShuffle ? Math.floor(Math.random() * currentQueue.length) : prevIndex);
     }
 
     // --- 7. GẮN CÁC LISTENER ---
     mainPlayPauseBtn.addEventListener('click', () => {
-        // THÊM ĐOẠN NÀY VÀO ĐẦU HÀM
         if (!isVolumeInitialized) {
             audioPlayer.volume = volumeBar.value / 100;
             isVolumeInitialized = true;
         }
 
-
         if (currentIndex === -1 && allSongsFlat.length > 0) {
             window.playSongFromData(allSongsFlat[0]);
             return;
         }
-        audioPlayer.paused ? audioPlayer.play().catch(e => console.error(e)) : audioPlayer.pause();
+        
+        if (audioPlayer.paused) {
+            audioPlayer.play().catch(e => console.error(e));
+        } else {
+            audioPlayer.pause();
+            document.title = "MyMusic Player";
+            updateFavicon("img/favicon.png");
+        }
     });
 
     nextBtn.addEventListener('click', playNext);
@@ -230,54 +241,21 @@ document.addEventListener('DOMContentLoaded', () => {
         showNotification(song.isFavorite ? "Đã thêm vào bài hát yêu thích" : "Đã xóa khỏi bài hát yêu thích");
     });
 
-    // Thay thế listener của volumeBtn
-    let lastVolume = audioPlayer.volume;
+    let lastVolume = 0.7;
     volumeBtn.addEventListener('click', () => {
-        // Thay vì chỉ kiểm tra volume, hãy kiểm tra trạng thái muted
-        if (audioPlayer.muted) {
-            audioPlayer.muted = false;
-            audioPlayer.volume = lastVolume; // Khôi phục volume cũ
-            volumeBar.value = lastVolume * 100;
-        } else {
-            lastVolume = audioPlayer.volume; // Lưu lại volume trước khi tắt tiếng
-            audioPlayer.muted = true;
-            // Một số trình duyệt tự động set volume = 0 khi muted, một số không.
-            // Dòng dưới để đảm bảo giao diện đồng bộ.
-            volumeBar.value = 0;
-        }
+        audioPlayer.muted = !audioPlayer.muted;
+        volumeBar.value = audioPlayer.muted ? 0 : lastVolume * 100;
     });
 
-    // Và cập nhật lại listener 'volumechange'
+    // Listeners cho Audio Element
+    audioPlayer.addEventListener('play', () => updatePlayPauseIcon(true));
+    audioPlayer.addEventListener('pause', () => updatePlayPauseIcon(false));
     audioPlayer.addEventListener('volumechange', () => {
         volumeBtn.classList.toggle('active', !audioPlayer.muted && audioPlayer.volume > 0);
         if (!audioPlayer.muted) {
             volumeBar.value = audioPlayer.volume * 100;
             lastVolume = audioPlayer.volume;
         }
-    });
-
-    // Và listener của thanh volume
-    volumeBar.addEventListener('input', () => {
-        audioPlayer.muted = false; // Bỏ tắt tiếng khi người dùng kéo thanh trượt
-        audioPlayer.volume = volumeBar.value / 100;
-    });
-
-    // Listeners cho Audio Element
-    audioPlayer.addEventListener('play', () => updatePlayPauseIcon(true));
-    audioPlayer.addEventListener('pause', () => updatePlayPauseIcon(false));
-    // Thay thế listener 'volumechange' cũ bằng cái này
-    audioPlayer.addEventListener('volumechange', () => {
-        const barValue = volumeBar.value / 100;
-
-        // Nếu volume của audio player không khớp với thanh trượt
-        // (có thể do Safari tự đặt lại), hãy ép nó về đúng giá trị.
-        // Dùng một sai số nhỏ để tránh vòng lặp vô hạn.
-        if (Math.abs(audioPlayer.volume - barValue) > 0.01) {
-            audioPlayer.volume = barValue;
-        }
-
-        volumeBtn.classList.toggle('active', audioPlayer.volume > 0 && !audioPlayer.muted);
-        if (audioPlayer.volume > 0) lastVolume = audioPlayer.volume;
     });
     audioPlayer.addEventListener('error', () => { nowPlayingTitle.textContent = "Lỗi tải nhạc"; });
     audioPlayer.addEventListener('loadedmetadata', () => {
@@ -289,23 +267,28 @@ document.addEventListener('DOMContentLoaded', () => {
         currentTimeEl.textContent = window.formatTime(audioPlayer.currentTime || 0);
     });
     audioPlayer.addEventListener('ended', () => {
-        if (repeatMode === 'one') playSongByIndex(currentIndex);
-        else if (repeatMode === 'none' && !isShuffle && currentIndex === currentQueue.length - 1) {
+        if (repeatMode === 'one') {
+            playSongByIndex(currentIndex);
+        } else if (repeatMode === 'none' && !isShuffle && currentIndex === currentQueue.length - 1) {
             updatePlayPauseIcon(false);
             progressBar.value = progressBar.max;
-        } else playNext();
+            document.title = "MyMusic Player";
+            updateFavicon("img/favicon.png");
+        } else {
+            playNext();
+        }
     });
 
     // Listeners cho các thanh trượt
     progressBar.addEventListener('input', () => { if (audioPlayer.src) audioPlayer.currentTime = progressBar.value; });
-    volumeBar.addEventListener('input', () => { audioPlayer.volume = volumeBar.value / 100; });
-    // Thêm vào khu vực quản lý trạng thái
-    let isVolumeInitialized = false;
+    volumeBar.addEventListener('input', () => {
+        audioPlayer.muted = false;
+        audioPlayer.volume = volumeBar.value / 100;
+    });
 
     // --- LOGIC SIDEBAR TOGGLE (GIỮ NGUYÊN) ---
     const menuToggleBtn = document.querySelector('.menu-toggle-btn');
     const sidebar = document.querySelector('.sidebar');
-
     if (menuToggleBtn && sidebar) {
         menuToggleBtn.addEventListener('click', (event) => {
             event.stopPropagation();
@@ -313,14 +296,12 @@ document.addEventListener('DOMContentLoaded', () => {
             toggleSidebarOverlay(sidebar.classList.contains('active'));
         });
     }
-
     document.addEventListener('click', (event) => {
         if (sidebar && sidebar.classList.contains('active') && !sidebar.contains(event.target) && event.target !== menuToggleBtn) {
             sidebar.classList.remove('active');
             toggleSidebarOverlay(false);
         }
     });
-
     function toggleSidebarOverlay(show) {
         let overlay = document.querySelector('.sidebar-overlay');
         if (show) {
@@ -340,7 +321,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     }
-
+    
     console.log("Player DOMContentLoaded End");
 });
 
