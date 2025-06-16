@@ -1515,3 +1515,154 @@ button:hover {
 .song-info .actions button#like-btn.active svg {
     fill: #1db954; /* Tô đầy trái tim bằng màu xanh */
 }
+
+/* styles.css */
+
+/* --- Styling cho Now Playing Fullscreen --- */
+#now-playing-fullscreen-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2000; /* Hiển thị trên mọi thứ khác */
+    pointer-events: none; /* Cho phép click xuyên qua khi bị ẩn */
+}
+
+.np-fullscreen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(24, 24, 24, 0.95); /* Nền mờ */
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+    color: #fff;
+    opacity: 0;
+    transform: translateY(100%); /* Bắt đầu từ dưới màn hình */
+    transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#now-playing-fullscreen-container.active .np-fullscreen {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#now-playing-fullscreen-container.active {
+    pointer-events: auto; /* Cho phép tương tác khi hiện ra */
+}
+
+
+.np-close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+}
+.np-close-btn svg {
+    fill: #b3b3b3;
+}
+.np-close-btn:hover svg {
+    fill: #fff;
+}
+
+
+.np-art-wrapper {
+    width: 70vw;
+    max-width: 350px;
+    aspect-ratio: 1 / 1;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    border-radius: 12px;
+}
+#np-fullscreen-art {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.np-details {
+    text-align: center;
+    margin-bottom: 20px;
+}
+#np-fullscreen-title {
+    font-size: 1.8em;
+    font-weight: 700;
+    margin: 0 0 5px;
+}
+#np-fullscreen-artist {
+    font-size: 1.1em;
+    color: #b3b3b3;
+}
+
+
+.np-progress {
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.8em;
+    color: #b3b3b3;
+}
+#np-fullscreen-progress-bar {
+    flex-grow: 1;
+}
+
+.np-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    margin: 20px 0;
+}
+.np-controls button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #fff;
+    padding: 0;
+}
+.np-controls .play-pause-btn svg {
+    background-color: #fff;
+    color: #000;
+    border-radius: 50%;
+}
+.np-controls button:hover {
+    transform: scale(1.05);
+}
+
+
+.np-extra-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 500px;
+    margin-top: 20px;
+}
+
+.np-extra-controls button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #b3b3b3;
+}
+.np-extra-controls button.active {
+    color: #1DB954;
+}
+
+#np-fullscreen-volume-bar {
+    width: 100px;
+}
