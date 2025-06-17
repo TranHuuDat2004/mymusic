@@ -161,25 +161,35 @@ document.addEventListener('DOMContentLoaded', () => {
         currentIndex = index;
         const songData = currentQueue[currentIndex];
 
-        // --- BẮT ĐẦU: CẬP NHẬT MEDIA SESSION API ---
-        // Kiểm tra xem trình duyệt có hỗ trợ Media Session API không
+        // --- BẮT ĐẦU: CẬP NHẬT MEDIA SESSION API (PHIÊN BẢN ĐÃ SỬA) ---
         if ('mediaSession' in navigator) {
+            // Xác định URL ảnh sẽ sử dụng: ưu tiên ảnh bìa của bài hát,
+            // nếu không có thì mới dùng ảnh mặc định.
+            const imageUrl = songData.artUrl || 'img/favicon-512x512.png'; // Dùng ảnh favicon lớn nhất làm ảnh dự phòng
+
             navigator.mediaSession.metadata = new MediaMetadata({
                 title: songData.title || "Không có tiêu đề",
                 artist: songData.artistData || "Nghệ sĩ không xác định",
-                album: 'MyMusic Player', // Bạn có thể đặt tên album hoặc playlist ở đây
+                album: 'MyMusic Player',
                 artwork: [
-                    // Cung cấp nhiều kích thước ảnh để hệ điều hành chọn
-                    { src: songData.artUrl || 'img/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
-                    { src: songData.artUrl || 'img/favicon-128x128.png', sizes: '128x128', type: 'image/png' },
-                    { src: songData.artUrl || 'img/favicon-192x192.png', sizes: '192x192', type: 'image/png' },
-                    { src: songData.artUrl || 'img/favicon-256x256.png', sizes: '256x256', type: 'image/png' },
-                    { src: songData.artUrl || 'img/favicon-384x384.png', sizes: '384x384', type: 'image/png' },
-                    { src: songData.artUrl || 'img/favicon-512x512.png', sizes: '512x512', type: 'image/png' },
+                    // LUÔN SỬ DỤNG imageUrl (là ảnh bìa hoặc ảnh dự phòng)
+                    { src: imageUrl, sizes: '96x96', type: 'image/png' },
+                    { src: imageUrl, sizes: '128x128', type: 'image/png' },
+                    { src: imageUrl, sizes: '192x192', type: 'image/png' },
+                    { src: imageUrl, sizes: '256x256', type: 'image/png' },
+                    { src: imageUrl, sizes: '384x384', type: 'image/png' },
+                    { src: imageUrl, sizes: '512x512', type: 'image/png' },
                 ]
             });
+
+            // Cập nhật hành động cho các nút trên widget media
+            navigator.mediaSession.setActionHandler('play', () => { mainPlayPauseBtn.click(); });
+            navigator.mediaSession.setActionHandler('pause', () => { mainPlayPauseBtn.click(); });
+            navigator.mediaSession.setActionHandler('previoustrack', () => { prevBtn.click(); });
+            navigator.mediaSession.setActionHandler('nexttrack', () => { nextBtn.click(); });
         }
         // --- KẾT THÚC: CẬP NHẬT MEDIA SESSION API ---
+
 
         document.title = `${songData.title} - ${songData.artistData}`;
         updateFavicon(songData.artUrl || "img/favicon.png");
