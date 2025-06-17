@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const npFsVolumeBar = document.getElementById('np-fullscreen-volume-bar');
     const npFsShuffleBtn = document.getElementById('np-fullscreen-shuffle-btn');
     const npFsRepeatBtn = document.getElementById('np-fullscreen-repeat-btn');
-    
+
     // --- 3. QUẢN LÝ TRẠNG THÁI PLAYER ---
     let allSongsFlat = [], currentQueue = [], currentIndex = -1;
     let isShuffle = false, repeatMode = 'none', isVolumeInitialized = false, lastVolume = 0.7;
@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const pauseIconSVG = '<svg viewBox="0 0 24 24" width="24" height="24" class="icon-pause"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"></path></svg>';
     const repeatIconSVG_HTML = '<svg viewBox="0 0 24 24" width="20" height="20" class="icon-repeat"><path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"></path></svg>';
     const repeatOneIconSVG_HTML = '<svg viewBox="0 0 24 24" width="20" height="20" class="icon-repeat"><path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4zM13 15V9h-1l-2 1v1h1.5v4H13z"></path></svg>';
-    
+
     // --- 4. HỆ THỐNG NOTIFICATION & HÀM TIỆN ÍCH ---
     const notificationContainer = document.getElementById('notification-container');
     let notificationTimeout;
@@ -131,15 +131,23 @@ document.addEventListener('DOMContentLoaded', () => {
         notificationContainer.classList.add('active');
         notificationTimeout = setTimeout(() => notificationContainer.classList.remove('active'), 2000);
     }
-    
+
+    // --- HÀM CẬP NHẬT FAVICON - PHIÊN BẢN TƯƠNG THÍCH SAFARI/IOS ---
     function updateFavicon(iconUrl) {
-        let link = document.querySelector("link[rel~='icon']");
-        if (!link) {
-            link = document.createElement('link');
-            link.rel = 'icon';
-            document.head.appendChild(link);
-        }
-        link.href = iconUrl;
+        // Bước 1: Tìm và xóa tất cả các thẻ link favicon cũ.
+        // Dùng querySelectorAll để đảm bảo xóa hết mọi loại (icon, shortcut icon, apple-touch-icon).
+        const oldLinks = document.querySelectorAll("link[rel*='icon']");
+        oldLinks.forEach(link => link.parentNode.removeChild(link));
+
+        // Bước 2: Tạo một thẻ link mới hoàn toàn.
+        const newLink = document.createElement('link');
+        newLink.rel = 'icon';
+        newLink.type = 'image/png'; // Thêm type để rõ ràng hơn
+        newLink.href = iconUrl;
+
+        // Bước 3: Thêm thẻ link mới vào <head>.
+        // Việc này sẽ buộc trình duyệt phải tải lại tài nguyên.
+        document.head.appendChild(newLink);
     }
 
     // --- 5. CÁC HÀM XỬ LÝ PLAYER CHÍNH ---
@@ -152,21 +160,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
         currentIndex = index;
         const songData = currentQueue[currentIndex];
-        
+
         document.title = `${songData.title} - ${songData.artistData}`;
         updateFavicon(songData.artUrl || "img/favicon.png");
 
         nowPlayingTitle.textContent = songData.title;
         nowPlayingArtist.textContent = songData.artistData;
         nowPlayingArt.src = songData.artUrl;
-        
+
         npFsTitle.textContent = songData.title;
         npFsArtist.textContent = songData.artistData;
         npFsArt.src = songData.artUrl;
 
         audioPlayer.src = songData.audioSrc;
         likeBtn.classList.toggle('active', !!songData.isFavorite);
-        
+
         const playPromise = audioPlayer.play();
         if (playPromise) {
             playPromise.catch(error => {
@@ -231,7 +239,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     nextBtn.addEventListener('click', playNext);
     prevBtn.addEventListener('click', playPrev);
-    
+
     // Đồng bộ click
     npFsPlayPauseBtn.addEventListener('click', () => mainPlayPauseBtn.click());
     npFsNextBtn.addEventListener('click', () => nextBtn.click());
@@ -246,24 +254,24 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     shuffleBtn.addEventListener('click', toggleShuffle);
     npFsShuffleBtn.addEventListener('click', toggleShuffle);
-    
+
     const toggleRepeat = () => {
         const modes = ['none', 'all', 'one'];
-        const messages = {"all": "Lặp lại tất cả", "one": "Lặp lại một bài", "none": "Đã tắt lặp lại"};
+        const messages = { "all": "Lặp lại tất cả", "one": "Lặp lại một bài", "none": "Đã tắt lặp lại" };
         let currentModeIndex = modes.indexOf(repeatMode);
         repeatMode = modes[(currentModeIndex + 1) % modes.length];
         showNotification(messages[repeatMode]);
 
         const isActive = repeatMode !== 'none';
         const iconHTML = repeatMode === 'one' ? repeatOneIconSVG_HTML : repeatIconSVG_HTML;
-        
+
         [repeatBtn, npFsRepeatBtn].forEach(btn => btn.classList.toggle('active', isActive));
         repeatBtn.innerHTML = iconHTML;
         npFsRepeatBtn.innerHTML = iconHTML.replace('width="20" height="20"', 'width="24" height="24"');
     };
     repeatBtn.addEventListener('click', toggleRepeat);
     npFsRepeatBtn.addEventListener('click', toggleRepeat);
-    
+
     likeBtn.addEventListener('click', () => {
         if (currentIndex === -1) return;
         const song = currentQueue[currentIndex];

@@ -161,7 +161,7 @@ const ALL_MUSIC_SECTIONS = [
                 artistData: "Lee Ken X Nal (Orinn Remix)",
                 displayArtist: { name: "Lee Ken X Nal", id: "leeken-nal" },
                 artUrl: "img/Đâu Còn Đây.png",
-                audioSrc: "audio/Đâu Còn Đây.mp3",
+                audioSrc: "audio/Đâu-Còn-Đây.mp3",
                 isFavorite: false,
                 plays: "1.999.000"
             }
