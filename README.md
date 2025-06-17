@@ -17,7 +17,7 @@
 ---
 
 <details>
-<summary><strong>🇻🇳 Tiếng Việt (Nhấn để xem)</strong></summary>
+<summary><strong> Tiếng Việt (Nhấn để xem)</strong></summary>
 
 ![MyMusic Player Screenshot](img/demo.jpg)
 
@@ -68,7 +68,7 @@ Các giới hạn này phản ánh bản chất của một dự án front-end t
 </details>
 
 <details open>
-<summary><strong>🇬🇧 English (Click to view)</strong></summary>
+<summary><strong> English (Click to view)</strong></summary>
 
 ![MyMusic Player Screenshot](img/demo.jpg)
 
@@ -126,7 +126,7 @@ These limitations are inherent to a front-end project focused on demonstrating c
 | **Card View (iPadOS)** | **Fullscreen Player** | **Media Session (iPadOS)** |
 | ![Fullscreen View](img/card_view_iPadOS.png) | ![Fullscreen View](img/fullscreen_view.PNG)  | ![Media Session Widget](img/media_session_view.png) |
 
-*(Please replace `img/demo.jpg`, `card_view.jpg`, etc., with the actual paths to your new screenshots.)*
+
 
 ### 🧑‍💻 Developer
 
