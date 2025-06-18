@@ -119,7 +119,7 @@ const ALL_MUSIC_SECTIONS = [
                 artistData: "Đoàn Hiếu (ACV Remix)",
                 displayArtist: { name: "Đoàn Hiếu", id: "doan-hieu" },
                 artUrl: "img/Nụ cười 18 20.png",
-                audioSrc: "audio/Nụ cười 18 20.mp3",
+                audioSrc: "audio/Nụ-Cười-18-20.mp3",
                 isFavorite: false,
                 plays: "1.876.543"
             },

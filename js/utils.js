@@ -74,6 +74,8 @@ function renderPlaylistLinks(sectionsData, targetUlElement) {
         targetUlElement.innerHTML = '<li>Lỗi tải playlist</li>'; return;
     }
     targetUlElement.innerHTML = '';
+
+    
     const currentPage = window.location.pathname.split("/").pop();
     const urlParams = new URLSearchParams(window.location.search);
     const currentPlaylistId = urlParams.get('id');
