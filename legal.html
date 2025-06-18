@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giới thiệu - My Music Player</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="img/favicon.png" type="image/png">
+    <!-- Assuming Font Awesome is linked for the GitHub icon, if not, you might need to add its CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+</head>
+
+<body>
+    <button class="menu-toggle-btn" aria-label="Toggle menu">☰</button>
+    <audio id="audio-player"></audio>
+
+    <div class="music-player-container">
+        <!-- 1. Sidebar -->
+        <!-- Sidebar sẽ được chèn tự động bởi sidebar.js -->
+        <nav id="sidebar-container" class="sidebar"></nav>
+
+        <!-- 2. Main Content Area for About Page -->
+        <main class="main-content" id="about-content-container">
+            <div class="text-content-page">
+                <h1 style="text-align: center;">Pháp lý</h1>
+                <p style="text-align: center;">Cập nhật lần cuối: Ngày 18 tháng 6 năm 2025</p>
+
+                <p>Chào mừng bạn đến với MyMusic Player. Bằng việc truy cập và sử dụng trang web này, bạn đồng ý tuân
+                    thủ các điều khoản và chính sách được liệt kê dưới đây. Vui lòng đọc kỹ các tài liệu sau để hiểu rõ
+                    về quyền và trách nhiệm của bạn khi sử dụng dịch vụ của chúng tôi.</p>
+
+                <h2 style="margin-top: 30px;">Các tài liệu pháp lý chính</h2>
+                <ul>
+                    <li><a href="privacy.html">Chính sách Quyền riêng tư</a>: Giải thích cách chúng tôi xử lý thông tin
+                        (nếu có) và cam kết bảo vệ quyền riêng tư của bạn.</li>
+                    <li><a href="cookie.html">Chính sách Cookie</a>: Mô tả về các cookie có thể được sử dụng trên trang
+                        web và cách bạn có thể quản lý chúng.</li>
+                    <li><a href="#terms-of-use">Điều khoản sử dụng</a>: Các quy định về việc sử dụng nội dung và chức
+                        năng trên trang web.</li>
+                    <li><a href="#intellectual-property">Quyền sở hữu trí tuệ</a>: Tuyên bố về bản quyền nội dung âm
+                        nhạc và hình ảnh.</li>
+                </ul>
+
+                <hr style="margin: 40px 0;">
+
+                <section id="terms-of-use">
+                    <h2>Điều khoản sử dụng</h2>
+                    <p>MyMusic Player là một dự án cá nhân, phi thương mại, được tạo ra với mục đích học tập và trình
+                        diễn kỹ năng. Dịch vụ được cung cấp "nguyên trạng" (as-is) mà không có bất kỳ sự bảo đảm nào.
+                    </p>
+                    <p>Bạn không được phép:</p>
+                    <ul>
+                        <li>Sử dụng trang web cho bất kỳ mục đích thương mại nào.</li>
+                        <li>Tái tạo, sao chép, hoặc phân phối lại mã nguồn của dự án mà không tuân thủ các điều khoản
+                            của giấy phép MIT đã cung cấp.</li>
+                        <li>Cố gắng trích xuất, tải xuống hoặc phân phối lại các tệp âm thanh được nhúng trên trang web.
+                        </li>
+                    </ul>
+                </section>
+
+                <section id="intellectual-property" style="margin-top: 30px;">
+                    <h2>Quyền sở hữu trí tuệ</h2>
+                    <p>Chúng tôi tôn trọng quyền sở hữu trí tuệ của các nghệ sĩ và nhà sản xuất.</p>
+                    <ul>
+                        <li><strong>Mã nguồn dự án:</strong> Mã nguồn của trang web MyMusic Player được phát hành dưới
+                            giấy phép MIT. Bạn có thể tự do sử dụng, sửa đổi và phân phối lại theo các điều khoản của
+                            giấy phép này.</li>
+                        <li><strong>Nội dung âm nhạc và hình ảnh:</strong> Toàn bộ nội dung âm nhạc, ảnh bìa album, và
+                            hình ảnh nghệ sĩ được nhúng hoặc hiển thị trên trang web này thuộc về bản quyền của các nghệ
+                            sĩ, hãng thu âm, và các bên liên quan. MyMusic Player không sở hữu và không tuyên bố quyền
+                            sở hữu đối với bất kỳ nội dung nào trong số này. Việc sử dụng chúng chỉ nhằm mục đích minh
+                            họa và trình diễn chức năng của một trình phát nhạc.</li>
+                    </ul>
+                </section>
+            </div>
+        </main>
+
+        <!-- 3. Player Bar -->
+        <!-- Placeholder cho Player Bar, player.js sẽ tự động điền vào đây -->
+        <footer id="player-bar-container"></footer>
+        <!-- THÊM MỚI: Placeholder cho màn hình Now Playing -->
+        <div id="now-playing-fullscreen-container"></div>
+
+        <!-- Placeholder cho Notification -->
+        <div id="notification-container"></div>
+    </div>
+    <script src="js/sidebar.js" defer></script> <!-- Nạp sidebar.js -->
+    <script src="data/music.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/player.js"></script>
+    <!-- Trong các file HTML -->
+    <script src="js/footer.js" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Sidebar Playlist Links ---
+            const playlistUl = document.getElementById('playlist-links-list');
+            if (typeof ALL_MUSIC_SECTIONS !== 'undefined' && playlistUl && typeof window.renderPlaylistLinks === 'function') {
+                window.renderPlaylistLinks(ALL_MUSIC_SECTIONS, playlistUl);
+            }
+
+            // --- Sidebar Active Link ---
+            // Remove active from all first
+            document.querySelectorAll('.sidebar-nav a').forEach(link => link.classList.remove('active'));
+            // Add active to the current page's link
+            const aboutLink = document.querySelector('.sidebar-nav a[href="about.html"]');
+            if (aboutLink) {
+                aboutLink.classList.add('active');
+            }
+
+            // --- Language Tab Functionality ---
+            const langTabButtons = document.querySelectorAll('.lang-tab-btn');
+            const langContentDivs = document.querySelectorAll('.lang-content');
+
+            langTabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove active class from all buttons and content
+                    langTabButtons.forEach(btn => btn.classList.remove('active'));
+                    langContentDivs.forEach(content => content.classList.remove('active'));
+
+                    // Add active class to the clicked button
+                    button.classList.add('active');
+
+                    // Show the corresponding content
+                    const lang = button.dataset.lang; // vi or en
+                    const activeContent = document.getElementById(`about-content-${lang}`);
+                    if (activeContent) {
+                        activeContent.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+
+</html>

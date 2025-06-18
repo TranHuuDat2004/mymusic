@@ -1656,3 +1656,178 @@ button:hover {
 #np-fullscreen-volume-bar {
     width: 100px;
 }
+
+
+/* styles.css */
+
+/* --- Styling cho Main Content Footer --- */
+
+.main-content-footer {
+    padding: 80px 0 40px 0;
+    color: #fff;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: 50px; /* Tạo khoảng cách với nội dung bên trên */
+}
+
+.footer-links-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    padding: 0 20px;
+}
+
+.footer-column {
+    flex: 1;
+    min-width: 160px;
+    margin-bottom: 30px;
+}
+
+.footer-column h4 {
+    font-size: 1em;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-column li {
+    margin-bottom: 15px;
+}
+
+.footer-column a {
+    color: #b3b3b3;
+    text-decoration: none;
+    font-size: 0.9em;
+    transition: color 0.2s;
+}
+
+.footer-column a:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
+.social-links-column {
+    display: flex;
+    gap: 15px;
+}
+
+.social-icon {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background-color: #292929;
+    border-radius: 50%;
+    color: #fff;
+    transition: background-color 0.2s;
+}
+.social-icon:hover {
+    background-color: #727272;
+}
+.social-icon svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+}
+
+
+.footer-divider {
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 0 20px 30px 20px;
+}
+
+
+.footer-bottom {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8em;
+    color: #b3b3b3;
+    padding: 0 20px;
+}
+
+.legal-links a {
+    color: #b3b3b3;
+    text-decoration: none;
+    margin-right: 20px;
+}
+.legal-links a:hover {
+    color: #fff;
+}
+
+
+/* styles.css */
+
+/* --- STYLING CHO CÁC TRANG NỘI DUNG TĨNH (LEGAL, PRIVACY, ABOUT, ETC.) --- */
+
+/* Sử dụng một class chung cho các container chứa văn bản */
+.text-content-page {
+    padding: 20px 30px; /* Thêm padding */
+    line-height: 1.7;   /* Tăng khoảng cách dòng cho dễ đọc */
+    color: #b3b3b3;     /* Màu chữ chính: xám nhạt, dễ chịu hơn màu trắng tinh */
+}
+
+/* Định dạng cho tiêu đề chính H1 */
+.text-content-page h1 {
+    color: #ffffff; /* Tiêu đề chính có thể dùng màu trắng để nổi bật */
+    font-size: 2.5em;
+    font-weight: 900; /* Làm cho font đậm hơn */
+    margin-bottom: 10px;
+    text-align: left; /* Căn lề trái thay vì căn giữa */
+}
+
+/* Định dạng cho các tiêu đề phụ H2 */
+.text-content-page h2 {
+    color: #ffffff; /* Tiêu đề phụ cũng có thể dùng màu trắng */
+    font-size: 1.5em;
+    font-weight: 700;
+    margin-top: 40px; /* Tạo khoảng cách rõ ràng giữa các phần */
+    margin-bottom: 20px;
+    border-bottom: 1px solid #333; /* Thêm đường gạch chân mờ */
+    padding-bottom: 8px;
+}
+
+/* Định dạng cho các đoạn văn bản P */
+.text-content-page p {
+    margin-bottom: 15px;
+}
+
+/* Định dạng cho danh sách UL/OL */
+.text-content-page ul,
+.text-content-page ol {
+    margin-left: 20px;
+    margin-bottom: 15px;
+    padding-left: 10px;
+}
+
+/* Định dạng cho các mục trong danh sách LI */
+.text-content-page li {
+    margin-bottom: 10px;
+}
+
+/* Định dạng cho các thẻ link A */
+.text-content-page a {
+    color: #1DB954; /* Màu xanh lá đặc trưng của Spotify */
+    text-decoration: none; /* Bỏ gạch chân mặc định */
+    transition: color 0.2s;
+}
+
+.text-content-page a:hover {
+    color: #1ed760; /* Sáng hơn một chút khi hover */
+    text-decoration: underline; /* Thêm gạch chân khi hover */
+}
+
+/* Định dạng cho thẻ in đậm/nhấn mạnh */
+.text-content-page strong,
+.text-content-page b {
+    color: #ffffff; /* Làm cho chữ in đậm có màu trắng để nổi bật hơn */
+    font-weight: 600;
+}

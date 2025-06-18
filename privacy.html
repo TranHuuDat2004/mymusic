@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giới thiệu - My Music Player</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="img/favicon.png" type="image/png">
+    <!-- Assuming Font Awesome is linked for the GitHub icon, if not, you might need to add its CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+</head>
+
+<body>
+    <button class="menu-toggle-btn" aria-label="Toggle menu">☰</button>
+    <audio id="audio-player"></audio>
+
+    <div class="music-player-container">
+        <!-- 1. Sidebar -->
+        <!-- Sidebar sẽ được chèn tự động bởi sidebar.js -->
+        <nav id="sidebar-container" class="sidebar"></nav>
+
+        <!-- 2. Main Content Area for About Page -->
+        <main class="main-content" id="about-content-container">
+            <div class="text-content-page">
+                <h1 style="text-align: center;">Chính sách Quyền riêng tư</h1>
+                <p style="text-align: center;">Cập nhật lần cuối:  Ngày 18 tháng 6 năm 2025</p>
+
+                <p>Sự riêng tư của bạn rất quan trọng đối với chúng tôi. Chính sách này giải thích rõ ràng về việc
+                    MyMusic Player <b>không</b> thu thập, lưu trữ, hay chia sẻ bất kỳ Thông tin Nhận dạng Cá nhân
+                    (Personally Identifiable Information - PII) nào từ người dùng.</p>
+
+                <h2>1. Không thu thập dữ liệu cá nhân</h2>
+                <p>MyMusic Player là một ứng dụng web tĩnh (static web application). Chúng tôi không có máy chủ hay cơ
+                    sở dữ liệu để lưu trữ thông tin. Chúng tôi <b>không</b> yêu cầu bạn đăng ký tài khoản, cung cấp email,
+                    tên, số điện thoại, hay bất kỳ thông tin cá nhân nào khác.</p>
+
+                <h2>2. Dữ liệu được lưu trữ trên trình duyệt của bạn (Client-Side)</h2>
+                <p>Mọi trạng thái của ứng dụng, chẳng hạn như bài hát bạn đang nghe, mức âm lượng, hoặc trạng thái "yêu
+                    thích" một bài hát, đều chỉ được lưu trữ tạm thời trong phiên làm việc của trình duyệt và sẽ bị mất
+                    khi bạn đóng tab hoặc làm mới trang. Chúng tôi không sử dụng Local Storage hay các cơ chế lưu trữ
+                    lâu dài khác trên trình duyệt của bạn để theo dõi hành vi.</p>
+
+                <h2>3. Dịch vụ của bên thứ ba (GitHub Pages)</h2>
+                <p>Trang web này được lưu trữ trên GitHub Pages. GitHub có thể thu thập dữ liệu ẩn danh về lượt truy cập
+                    (như địa chỉ IP, loại trình duyệt) cho mục đích phân tích và bảo mật, theo <a
+                        href="https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement"
+                        target="_blank" rel="noopener noreferrer">Chính sách Quyền riêng tư của GitHub</a>. Chúng tôi
+                    không có quyền truy cập vào dữ liệu chi tiết này.</p>
+
+                <h2>4. Liên kết đến các trang web khác</h2>
+                <p>Trang web có thể chứa các liên kết đến các trang khác (ví dụ: GitHub). Chúng tôi không chịu trách
+                    nhiệm về nội dung hay chính sách quyền riêng tư của các trang web đó. Chúng tôi khuyến khích bạn đọc
+                    chính sách của họ khi truy cập.</p>
+
+                <h2>5. Thay đổi chính sách</h2>
+                <p>Chúng tôi có thể cập nhật chính sách này trong tương lai. Mọi thay đổi sẽ được đăng tải trên trang
+                    này.</p>
+            </div>
+        </main>
+
+        <!-- 3. Player Bar -->
+        <!-- Placeholder cho Player Bar, player.js sẽ tự động điền vào đây -->
+        <footer id="player-bar-container"></footer>
+        <!-- THÊM MỚI: Placeholder cho màn hình Now Playing -->
+        <div id="now-playing-fullscreen-container"></div>
+
+        <!-- Placeholder cho Notification -->
+        <div id="notification-container"></div>
+    </div>
+    <script src="js/sidebar.js" defer></script> <!-- Nạp sidebar.js -->
+    <script src="data/music.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/player.js"></script>
+    <!-- Trong các file HTML -->
+    <script src="js/footer.js" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Sidebar Playlist Links ---
+            const playlistUl = document.getElementById('playlist-links-list');
+            if (typeof ALL_MUSIC_SECTIONS !== 'undefined' && playlistUl && typeof window.renderPlaylistLinks === 'function') {
+                window.renderPlaylistLinks(ALL_MUSIC_SECTIONS, playlistUl);
+            }
+
+            // --- Sidebar Active Link ---
+            // Remove active from all first
+            document.querySelectorAll('.sidebar-nav a').forEach(link => link.classList.remove('active'));
+            // Add active to the current page's link
+            const aboutLink = document.querySelector('.sidebar-nav a[href="about.html"]');
+            if (aboutLink) {
+                aboutLink.classList.add('active');
+            }
+
+            // --- Language Tab Functionality ---
+            const langTabButtons = document.querySelectorAll('.lang-tab-btn');
+            const langContentDivs = document.querySelectorAll('.lang-content');
+
+            langTabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove active class from all buttons and content
+                    langTabButtons.forEach(btn => btn.classList.remove('active'));
+                    langContentDivs.forEach(content => content.classList.remove('active'));
+
+                    // Add active class to the clicked button
+                    button.classList.add('active');
+
+                    // Show the corresponding content
+                    const lang = button.dataset.lang; // vi or en
+                    const activeContent = document.getElementById(`about-content-${lang}`);
+                    if (activeContent) {
+                        activeContent.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+
+</html>
