@@ -93,6 +93,7 @@ function renderPlaylistLinks(sectionsData, targetUlElement) {
             targetUlElement.appendChild(listItem);
         }
     });
+    
 }
 
 // Expose hàm renderPlaylistLinks ra global

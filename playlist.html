@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,27 +9,34 @@
     <link rel="icon" href="img/favicon.png" type="image/png">
     <style>
         /* Style riêng cho trang playlist nếu cần */
-        .playlist-header-details { /* Bổ sung cho header của playlist */
+        .playlist-header-details {
+            /* Bổ sung cho header của playlist */
             display: flex;
-            align-items: flex-end; /* Căn ảnh và text ở dưới */
+            align-items: flex-end;
+            /* Căn ảnh và text ở dưới */
             gap: 20px;
             margin-bottom: 30px;
             padding: 20px;
-            background-color: rgba(255, 255, 255, 0.05); /* Nền nhẹ cho header */
+            background-color: rgba(255, 255, 255, 0.05);
+            /* Nền nhẹ cho header */
             border-radius: 8px;
         }
+
         .playlist-cover-art img {
-            width: 180px; /* Kích thước ảnh bìa playlist */
+            width: 180px;
+            /* Kích thước ảnh bìa playlist */
             height: 180px;
             object-fit: cover;
             border-radius: 6px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
+
         .playlist-info {
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
         }
+
         .playlist-info .playlist-type {
             font-size: 0.8em;
             font-weight: bold;
@@ -36,55 +44,59 @@
             margin-bottom: 8px;
             color: #b3b3b3;
         }
-        .playlist-info .playlist-main-title { /* Class mới cho tiêu đề playlist */
+
+        .playlist-info .playlist-main-title {
+            /* Class mới cho tiêu đề playlist */
             font-size: 2.5em;
             font-weight: 700;
             margin: 0;
             line-height: 1.1;
             color: #fff;
         }
+
         .playlist-info .playlist-description,
         .playlist-info .playlist-stats {
             font-size: 0.9em;
             color: #b3b3b3;
             margin-top: 8px;
         }
+
         /* Sử dụng lại .song-list-container và .song-list-item từ styles.css */
     </style>
 </head>
+
 <body>
     <button class="menu-toggle-btn" aria-label="Toggle menu">☰</button>
     <audio id="audio-player"></audio>
 
-    <div class="music-player-container">
-        <!-- 1. Sidebar -->
-        <!-- Sidebar sẽ được chèn tự động bởi sidebar.js -->
+<div class="music-player-container">
+        <!-- Sidebar -->
         <nav id="sidebar-container" class="sidebar"></nav>
 
-        <!-- 2. Main Content Area for Specific Playlist -->
+        <!-- CHỈ CÓ MỘT THẺ <main> DUY NHẤT -->
         <main class="main-content" id="playlist-detail-container">
             <!-- Nội dung chi tiết playlist sẽ được JS tạo ra ở đây -->
             <p class="loading-message">Đang tải playlist...</p>
-        </main>
-        <!-- 3. Player Bar -->
-        <!-- Placeholder cho Player Bar, player.js sẽ tự động điền vào đây -->
-        <footer id="player-bar-container"></footer>
 
-                <!-- THÊM MỚI: Placeholder cho màn hình Now Playing -->
-        <div id="now-playing-fullscreen-container"></div>
+            <!-- Placeholder cho footer NẰM BÊN TRONG thẻ main -->
+            <div id="footer-placeholder"></div> 
+        </main>
         
-        <!-- Placeholder cho Notification -->
+        <!-- Player bar và các thành phần khác nằm BÊN NGOÀI thẻ main -->
+        <footer id="player-bar-container"></footer>
+        <div id="now-playing-fullscreen-container"></div>
         <div id="notification-container"></div>
     </div>
 
     <!-- Scripts -->
 
     <script src="data/music.js"></script>
-<script src="js/utils.js" defer></script> 
+    <script src="js/utils.js" defer></script>
     <script src="js/player.js" defer></script>
     <script src="js/sidebar.js" defer></script>
     <script src="js/playlist.js" defer></script> <!-- File logic cho trang này -->
     <!-- Trong các file HTML -->
-<script src="js/footer.js" defer></script>
+<script src="js/appendMainFooter.js" defer></script>
 </body>
+
 </html>

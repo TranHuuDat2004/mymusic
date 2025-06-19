@@ -77,7 +77,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
      }
      
-
+    // GỌI HÀM CHÈN FOOTER SAU KHI MỌI THỨ ĐÃ XONG
+    if (typeof window.appendMainFooter === 'function') {
+        window.appendMainFooter();
+    }
     console.log("Main DOMContentLoaded End");
 });
 

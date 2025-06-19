@@ -1,20 +1,25 @@
-// js/footer.js (Phiên bản đã sửa lỗi)
+// js/footer.js (Phiên bản mới, được gọi theo yêu cầu)
 
-document.addEventListener('DOMContentLoaded', () => {
-    const footerPlaceholder = document.getElementById('footer-placeholder');
+function appendMainFooter() {
+    // Tìm thẻ <main> trong trang hiện tại.
+    const mainContentContainer = document.querySelector('.main-content');
 
-    if (!footerPlaceholder) {
-        // Không tìm thấy placeholder, không làm gì cả.
+    if (!mainContentContainer) {
+        console.warn("Footer.js: Không tìm thấy thẻ <main> để chèn footer.");
+        return;
+    }
+    
+    // Nếu footer đã tồn tại, không chèn lại.
+    if (mainContentContainer.querySelector('.main-content-footer')) {
         return;
     }
 
-    // Bước 1: Tạo một phần tử footer mới RỖNG
     const footerElement = document.createElement('footer');
     footerElement.classList.add('main-content-footer');
-
-    // Bước 2: Chuẩn bị nội dung HTML
-    const footerHTML = `
-        <div class="footer-links-container">
+    
+    // HTML của footer (giữ nguyên)
+    footerElement.innerHTML = `
+            <div class="footer-links-container">
             <div class="footer-column">
                 <h4>Về MyMusic</h4>
                 <ul>
@@ -68,12 +73,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 <span>© ${new Date().getFullYear()} MyMusic by Tran Huu Dat</span>
             </div>
         </div>
-    `;
-     // Bước 3: Gán nội dung HTML vào footerElement
-    footerElement.innerHTML = footerHTML;
+    `; // Giữ nguyên nội dung HTML của footer
+    
+    // Chèn footer vào cuối cùng của thẻ <main>
+    mainContentContainer.appendChild(footerElement);
+}
 
-    // Bước 4: Thay thế placeholder bằng footer đã hoàn thiện
-    footerPlaceholder.replaceWith(footerElement);
-
-    console.log("Main content footer initialized via placeholder.");
-});
+// "Expose" hàm ra global scope để các file khác có thể gọi
+window.appendMainFooter = appendMainFooter;

@@ -59,14 +59,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
         });
-        
+
         const uniqueArtists = Array.from(artistsMap.values());
         if (uniqueArtists.length === 0) return;
 
         const sectionEl = document.createElement('section');
         sectionEl.classList.add('content-section');
         sectionEl.innerHTML = `<h2 class="section-title">Nghệ sĩ nổi bật</h2>`;
-        
+
         const gridEl = document.createElement('div');
         gridEl.classList.add('card-grid');
 
@@ -92,14 +92,14 @@ document.addEventListener('DOMContentLoaded', () => {
      */
     function renderDailyMixWidget(count = 6) {
         if (typeof ALL_MUSIC_SECTIONS === 'undefined' || ALL_MUSIC_SECTIONS.length === 0) return;
-        
+
         // Trộn ngẫu nhiên các section để giả lập "Daily Mix"
         const shuffledSections = [...ALL_MUSIC_SECTIONS].sort(() => 0.5 - Math.random());
-        
+
         const sectionEl = document.createElement('section');
         sectionEl.classList.add('content-section');
         sectionEl.innerHTML = `<h2 class="section-title">Playlist ngẫu nhiên <a href="all_playlists.html">(Xem tất cả Playlist)</a></h2>`;
-        
+
         const gridEl = document.createElement('div');
         gridEl.classList.add('card-grid');
 
@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const card = document.createElement('a');
             card.href = `playlist.html?id=${playlist.id}`;
             card.classList.add('card', 'playlist-card'); // Có thể style riêng cho playlist card
-            
+
             const coverArt = (playlist.songs && playlist.songs.length > 0) ? playlist.songs[0].artUrl : 'img/song-holder.png';
 
             card.innerHTML = `
@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- XÂY DỰNG TRANG CHỦ ---
     // Bây giờ bạn có thể gọi các hàm render theo thứ tự bạn muốn
-    
+
     // 1. Chào mừng
     const welcomeHeader = document.createElement('h1');
     welcomeHeader.textContent = "Chào Trần Hữu Đạt";
@@ -132,7 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 2. Render widget Daily Mix
     renderDailyMixWidget(6);
-    
+
     // 3. Render một vài section nhạc tiêu chuẩn
     if (typeof ALL_MUSIC_SECTIONS !== 'undefined') {
         renderStandardSection(ALL_MUSIC_SECTIONS.find(s => s.id === 'Vpop'));
@@ -142,5 +142,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // 4. Render widget Nghệ sĩ nổi bật
     renderTopArtistsWidget(6);
 
+    // GỌI HÀM CHÈN FOOTER SAU KHI MỌI THỨ ĐÃ XONG
+    if (typeof window.appendMainFooter === 'function') {
+        window.appendMainFooter();
+    }
     console.log("Main (Home) DOMContentLoaded End");
 });

@@ -317,6 +317,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     });
 
+    // GỌI HÀM CHÈN FOOTER SAU KHI MỌI THỨ ĐÃ XONG
+    if (typeof window.appendMainFooter === 'function') {
+        window.appendMainFooter();
+    }
+
     console.log("Playlist DOMContentLoaded End");
 });
 

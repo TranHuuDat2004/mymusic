@@ -273,6 +273,11 @@ document.addEventListener('DOMContentLoaded', async () => { // Thêm async vì i
         if (libraryContainer) libraryContainer.innerHTML = '<h1>Thư viện</h1><p>Đã xảy ra lỗi khi tải thư viện. Vui lòng thử lại.</p>';
     });
 
+        // GỌI HÀM CHÈN FOOTER SAU KHI MỌI THỨ ĐÃ XONG
+    if (typeof window.appendMainFooter === 'function') {
+        window.appendMainFooter();
+    }
+
     console.log("Library DOMContentLoaded End");
 });
 
