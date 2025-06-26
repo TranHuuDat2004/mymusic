@@ -203,7 +203,7 @@
                     artistPopularSongsContainer.innerHTML = "<p>Chưa có bài hát nổi bật nào.</p>";
                     return;
                 }
-                songs.slice(0, 5).forEach((song, index) => {
+                songs.slice(0, 20).forEach((song, index) => {
                     const songEl = createSongListItem(song, index + 1, artistName);
                     songEl.addEventListener('click', (e) => {
                         if (e.target.closest('.like-song-btn')) return;

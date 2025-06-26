@@ -119,7 +119,7 @@ const ALL_MUSIC_SECTIONS = [
                 artistData: "Đoàn Hiếu (ACV Remix)",
                 displayArtist: { name: "Đoàn Hiếu", id: "doan-hieu" },
                 artUrl: "img/Nụ cười 18 20.png",
-                audioSrc: "audio/Nụ-Cười-18-20.mp3",
+                audioSrc: "audio/nu-cuoi.mp3",
                 isFavorite: false,
                 plays: "1.876.543"
             },
@@ -167,6 +167,115 @@ const ALL_MUSIC_SECTIONS = [
             }
         ]
     },
+
+        {
+        id: "ElectronicEDM", // ID cho thể loại mới
+        title: "Electronic & EDM", // Tên hiển thị
+        songs: [            
+            {
+                id: "edm_a_moment_apart",
+                title: "A Moment Apart",
+                artistData: "ODESZA",
+                displayArtist: { name: "ODESZA", id: "odesza" }, // Tạo id mới cho ODESZA
+                artUrl: "img/A Moment Apart.png",
+                audioSrc: "audio/ODESZA - A Moment Apart.mp3",
+                isFavorite: false,
+                plays: "12.345.678"
+            },
+            // --- BẮT ĐẦU CÁC BÀI HÁT MỚI ---
+            {
+                id: "edm_faded",
+                title: "Faded",
+                artistData: "Alan Walker",
+                displayArtist: { name: "Alan Walker", id: "alanwalker" },
+                artUrl: "img/faded.png",
+                audioSrc: "audio/Alan Walker - Faded (Lyrics).mp3",
+                isFavorite: false,
+                plays: "1.8B" // Abbreviation for billion
+            },
+            {
+                id: "edm_lily",
+                title: "Lily",
+                artistData: "Alan Walker, K-391 & Emelie Hollow",
+                displayArtist: { name: "Alan Walker", id: "alanwalker" }, // Chính là Alan Walker
+                artUrl: "img/lily.jpg",
+                audioSrc: "audio/Alan Walker, K-391 & Emelie Hollow - Lily (Lyrics).mp3",
+                isFavorite: true,
+                plays: "1.5B"
+            },
+            {
+                id: "edm_spectre",
+                title: "The Spectre",
+                artistData: "Alan Walker",
+                displayArtist: { name: "Alan Walker", id: "alanwalker" },
+                artUrl: "img/spectre.jpg",
+                audioSrc: "audio/Alan Walker - The Spectre (Lyrics).mp3",
+                isFavorite: false,
+                plays: "980M"
+            },
+            {
+                id: "edm_all_falls_down",
+                title: "All Falls Down",
+                artistData: "Alan Walker ft. Noah Cyrus",
+                displayArtist: { name: "Alan Walker", id: "alanwalker" },
+                artUrl: "img/Alan_Walker_All_Falls_Down.jpg",
+                audioSrc: "audio/Alan Walker - All Falls Down (feat. Noah Cyrus with Digital Farm Animals).mp3",
+                isFavorite: false,
+                plays: "550M"
+            },
+            {
+                id: "edm_ignite",
+                title: "Ignite",
+                artistData: "K-391 & Alan Walker",
+                displayArtist: { name: "K-391", id: "k391" }, // Có thể để là K-391 hoặc Alan Walker
+                artUrl: "img/K-391-Ignite.png",
+                audioSrc: "audio/K-391 & Alan Walker - Ignite (feat. Julie Bergan & Seungri).mp3",
+                isFavorite: false,
+                plays: "750M"
+            },
+            {
+                id: "edm_on_on",
+                title: "On & On",
+                artistData: "Cartoon ft. Daniel Levi",
+                displayArtist: { name: "Cartoon", id: "cartoon" },
+                artUrl: "img/on&on.png",
+                audioSrc: "audio/Cartoon, Jéja - On & On (Lyrics) feat. Daniel Levi.mp3",
+                isFavorite: true,
+                plays: "480M"
+            },
+            {
+                id: "edm_way_back_home",
+                title: "Way Back Home",
+                artistData: "SHAUN ft. Conor Maynard (Sam Feldt Edit)",
+                displayArtist: { name: "SHAUN", id: "shaun" },
+                artUrl: "img/Way Back Home.jpg",
+                audioSrc: "audio/SHAUN feat. Conor Maynard - Way Back Home (Lyrics) Sam Feldt Edit.mp3",
+                isFavorite: false,
+                plays: "420M"
+            },
+            {
+                id: "vpop_ngau_hung", // Chuyển sang V-Pop nếu muốn, hoặc giữ ở đây
+                title: "Ngẫu Hứng",
+                artistData: "Hoaprox",
+                displayArtist: { name: "Hoaprox", id: "hoaprox" },
+                artUrl: "img/ngẫu hứng.png",
+                audioSrc: "audio/WITH YOU (NGẪU HỨNG) - HOAPROX, NICK STRAND & MIO - OFFICIAL MV.mp3",
+                isFavorite: false,
+                plays: "150M"
+            },
+            {
+                id: "vpop_that_girl",
+                title: "That Girl",
+                artistData: "Olly Murs",
+                displayArtist: { name: "Olly Murs", id: "ollymurs" },
+                artUrl: "img/that girl.png",
+                audioSrc: "audio/[Vietsub + Kara] That Girl - Olly Murs (lyrics) - Tik Tok.mp3",
+                isFavorite: false,
+                plays: "120M"
+            }
+        ]
+    },
+
     {
         id: "lycorisrecoil", // ID cho thể loại
         title: "Lycoris Recoil OST", // Tên hiển thị cho thể loại
@@ -440,6 +549,64 @@ const ALL_MUSIC_SECTIONS = [
                 isFavorite: true,
                 plays: "1.500.900"
             }
+        ]
+    },
+    // Dán khối này vào trong mảng ALL_MUSIC_SECTIONS của file data/music.js
+
+    {
+        id: "HonkaiStarRailOST",
+        title: "Honkai: Star Rail - Robin", // Tên hiển thị cho playlist/section
+        songs: [
+            {
+                id: "hsr_if_i_can_stop",
+                title: "If I Can Stop One Heart From Breaking",
+                artistData: "Robin, HOYO-MiX",
+                displayArtist: { name: "HOYO-MiX", id: "HOYOMiX" }, // Tái sử dụng id của HOYO-MiX
+                artUrl: "img/robin3.png", // Dựa trên file robin.png
+                audioSrc: "audio/If I Can Stop One Heart From Breaking.mp3", // Dựa trên tên file
+                isFavorite: false,
+                plays: "9.876.543" 
+            },
+            {
+                id: "hsr_hope_is_a_thing",
+                title: "Hope Is the Thing With Feathers",
+                artistData: "HOYO-MiX",
+                displayArtist: { name: "HOYO-MiX", id: "HOYOMiX" },
+                artUrl: "img/robin.png", // Dựa trên file robin2.png
+                audioSrc: "audio/Hope Is the Thing With Feathers.mp3",
+                isFavorite: false,
+                plays: "8.765.432"
+            },
+            {
+                id: "hsr_sway_to_my_beat",
+                title: "Sway to My Beat in Cosmos",
+                artistData: "HOYO-MiX",
+                displayArtist: { name: "HOYO-MiX", id: "HOYOMiX" },
+                artUrl: "img/robin.png", // Dựa trên file robin3.png
+                audioSrc: "audio/Sway to My Beat in Cosmos.mp3",
+                isFavorite: false,
+                plays: "7.654.321"
+            },
+            {
+                id: "hsr_had_i_not_seen",
+                title: "Had I Not Seen the Sun",
+                artistData: "HOYO-MiX",
+                displayArtist: { name: "HOYO-MiX", id: "HOYOMiX" },
+                artUrl: "img/robin2.png", // Tạm thời dùng chung ảnh bìa, bạn có thể thay đổi
+                audioSrc: "audio/Had I Not Seen the Sun.mp3",
+                isFavorite: false,
+                plays: "6.543.210"
+            },
+            {
+                id: "edm_proi_proi",
+                title: "Proi Proi",
+                artistData: "HOYO-MiX", // Giả định tác giả là HOYO-MiX
+                displayArtist: { name: "HOYO-MiX", id: "HOYOMiX" },
+                artUrl: "img/proi proi.png", // Dựa trên file proi proi.png
+                audioSrc: "audio/Proi Proi.mp3",
+                isFavorite: false,
+                plays: "5.432.109"
+            },
         ]
     },
     {
