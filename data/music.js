@@ -258,7 +258,7 @@ const ALL_MUSIC_SECTIONS = [
                 title: "Ngẫu Hứng",
                 artistData: "Hoaprox",
                 displayArtist: { name: "Hoaprox", id: "hoaprox" },
-                artUrl: "img/ngau hung.png",
+                artUrl: "img/ngau-hung.PNG",
                 audioSrc: "audio/WITH YOU (NGẪU HỨNG) - HOAPROX, NICK STRAND & MIO - OFFICIAL MV.mp3",
                 isFavorite: false,
                 plays: "150.456.789" // ~150M
