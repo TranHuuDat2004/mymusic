@@ -168,10 +168,10 @@ const ALL_MUSIC_SECTIONS = [
         ]
     },
 
-        {
+    {
         id: "ElectronicEDM", // ID cho thể loại mới
         title: "Electronic & EDM", // Tên hiển thị
-        songs: [            
+        songs: [
             {
                 id: "edm_a_moment_apart",
                 title: "A Moment Apart",
@@ -191,17 +191,17 @@ const ALL_MUSIC_SECTIONS = [
                 artUrl: "img/faded.png",
                 audioSrc: "audio/Alan Walker - Faded (Lyrics).mp3",
                 isFavorite: false,
-                plays: "1.8B" // Abbreviation for billion
+                plays: "1.812.345.678" // ~1.8B
             },
             {
                 id: "edm_lily",
                 title: "Lily",
                 artistData: "Alan Walker, K-391 & Emelie Hollow",
-                displayArtist: { name: "Alan Walker", id: "alanwalker" }, // Chính là Alan Walker
+                displayArtist: { name: "Alan Walker", id: "alanwalker" },
                 artUrl: "img/lily.jpg",
                 audioSrc: "audio/Alan Walker, K-391 & Emelie Hollow - Lily (Lyrics).mp3",
                 isFavorite: true,
-                plays: "1.5B"
+                plays: "1.523.456.789" // ~1.5B
             },
             {
                 id: "edm_spectre",
@@ -211,7 +211,7 @@ const ALL_MUSIC_SECTIONS = [
                 artUrl: "img/spectre.jpg",
                 audioSrc: "audio/Alan Walker - The Spectre (Lyrics).mp3",
                 isFavorite: false,
-                plays: "980M"
+                plays: "980.123.456" // ~980M
             },
             {
                 id: "edm_all_falls_down",
@@ -221,17 +221,17 @@ const ALL_MUSIC_SECTIONS = [
                 artUrl: "img/Alan_Walker_All_Falls_Down.jpg",
                 audioSrc: "audio/Alan Walker - All Falls Down (feat. Noah Cyrus with Digital Farm Animals).mp3",
                 isFavorite: false,
-                plays: "550M"
+                plays: "550.987.123" // ~550M
             },
             {
                 id: "edm_ignite",
                 title: "Ignite",
                 artistData: "K-391 & Alan Walker",
-                displayArtist: { name: "K-391", id: "k391" }, // Có thể để là K-391 hoặc Alan Walker
+                displayArtist: { name: "K-391", id: "k391" },
                 artUrl: "img/K-391-Ignite.png",
                 audioSrc: "audio/K-391 & Alan Walker - Ignite (feat. Julie Bergan & Seungri).mp3",
                 isFavorite: false,
-                plays: "750M"
+                plays: "750.333.222" // ~750M
             },
             {
                 id: "edm_on_on",
@@ -241,7 +241,7 @@ const ALL_MUSIC_SECTIONS = [
                 artUrl: "img/on&on.png",
                 audioSrc: "audio/Cartoon, Jéja - On & On (Lyrics) feat. Daniel Levi.mp3",
                 isFavorite: true,
-                plays: "480M"
+                plays: "480.777.888" // ~480M
             },
             {
                 id: "edm_way_back_home",
@@ -251,17 +251,17 @@ const ALL_MUSIC_SECTIONS = [
                 artUrl: "img/Way Back Home.jpg",
                 audioSrc: "audio/SHAUN feat. Conor Maynard - Way Back Home (Lyrics) Sam Feldt Edit.mp3",
                 isFavorite: false,
-                plays: "420M"
+                plays: "420.123.999" // ~420M
             },
             {
-                id: "vpop_ngau_hung", // Chuyển sang V-Pop nếu muốn, hoặc giữ ở đây
+                id: "vpop_ngau_hung",
                 title: "Ngẫu Hứng",
                 artistData: "Hoaprox",
                 displayArtist: { name: "Hoaprox", id: "hoaprox" },
-                artUrl: "img/ngẫu hứng.png",
+                artUrl: "img/ngau hung.png",
                 audioSrc: "audio/WITH YOU (NGẪU HỨNG) - HOAPROX, NICK STRAND & MIO - OFFICIAL MV.mp3",
                 isFavorite: false,
-                plays: "150M"
+                plays: "150.456.789" // ~150M
             },
             {
                 id: "vpop_that_girl",
@@ -271,7 +271,7 @@ const ALL_MUSIC_SECTIONS = [
                 artUrl: "img/that girl.png",
                 audioSrc: "audio/[Vietsub + Kara] That Girl - Olly Murs (lyrics) - Tik Tok.mp3",
                 isFavorite: false,
-                plays: "120M"
+                plays: "120.987.654" // ~120M
             }
         ]
     },
@@ -555,7 +555,7 @@ const ALL_MUSIC_SECTIONS = [
 
     {
         id: "HonkaiStarRailOST",
-        title: "Honkai: Star Rail - Robin", // Tên hiển thị cho playlist/section
+        title: "Honkai: Star Rail", // Tên hiển thị cho playlist/section
         songs: [
             {
                 id: "hsr_if_i_can_stop",
@@ -565,7 +565,7 @@ const ALL_MUSIC_SECTIONS = [
                 artUrl: "img/robin3.png", // Dựa trên file robin.png
                 audioSrc: "audio/If I Can Stop One Heart From Breaking.mp3", // Dựa trên tên file
                 isFavorite: false,
-                plays: "9.876.543" 
+                plays: "9.876.543"
             },
             {
                 id: "hsr_hope_is_a_thing",

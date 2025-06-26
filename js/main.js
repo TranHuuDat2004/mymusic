@@ -137,6 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (typeof ALL_MUSIC_SECTIONS !== 'undefined') {
         renderStandardSection(ALL_MUSIC_SECTIONS.find(s => s.id === 'Vpop'));
         renderStandardSection(ALL_MUSIC_SECTIONS.find(s => s.id === 'VpopRemix'));
+        renderStandardSection(ALL_MUSIC_SECTIONS.find(s => s.id === 'ElectronicEDM'));
     }
 
     // 4. Render widget Nghệ sĩ nổi bật
