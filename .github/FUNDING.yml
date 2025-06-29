@@ -4,18 +4,3 @@
 # GitHub sẽ tự động nhận diện username này và tạo nút tương ứng.
  github: TranHuuDat2004
 
-# (Tùy chọn) Thêm các nền tảng khác nếu bạn có tài khoản.
-# Ví dụ: nếu bạn có Ko-fi hoặc Buy Me a Coffee, hãy bỏ comment và điền username.
-# ko_fi: tranhuudat2004
-# buy_me_a_coffee: tranhuudat
-
-# Thêm các link ủng hộ tùy chỉnh.
-# Các link này sẽ xuất hiện dưới dạng các nút bấm trong popup "Sponsor".
-custom:
-  # Link đến trang hiển thị mã VietQR (khuyến nghị) hoặc link ảnh QR trực tiếp.
-  # Nếu bạn tạo một trang donate.html đơn giản, link sẽ là: 'https://tranhuudatlego.github.io/anime.tv/donate.html'
-  # Nếu bạn muốn link trực tiếp đến ảnh, bạn có thể để như sau, nhưng trang riêng sẽ tốt hơn.
-  - "https://img.vietqr.io/image/VCB-1031355714-compact.png?addInfo=Dev%20from%20GitHub&accountName=TRAN%20HUU%20DAT"
-
-  # (Tùy chọn) Ví dụ thêm link Momo nếu có
-  # - "https://me.momo.vn/your-momo-username"
