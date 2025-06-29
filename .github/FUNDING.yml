@@ -15,7 +15,7 @@ custom:
   # Link đến trang hiển thị mã VietQR (khuyến nghị) hoặc link ảnh QR trực tiếp.
   # Nếu bạn tạo một trang donate.html đơn giản, link sẽ là: 'https://tranhuudatlego.github.io/anime.tv/donate.html'
   # Nếu bạn muốn link trực tiếp đến ảnh, bạn có thể để như sau, nhưng trang riêng sẽ tốt hơn.
-  - "https://img.vietqr.io/image/VCB-1031355714-compact.png?addInfo=Donate%20ANIME.TV&accountName=TRAN%20HUU%20DAT"
+  - "https://img.vietqr.io/image/VCB-1031355714-compact.png?&accountName=TRAN%20HUU%20DAT"
 
   # (Tùy chọn) Ví dụ thêm link Momo nếu có
   # - "https://me.momo.vn/your-momo-username"
