@@ -664,7 +664,10 @@ const ALL_MUSIC_SECTIONS = [
                 plays: "2.777.999"
             }
         ]
-    }
+    },
+    // Dán toàn bộ khối mã này vào trong mảng ALL_MUSIC_SECTIONS của file data/music.js
+
+
 ];
 
 // Nếu dùng ES Modules: export { ALL_MUSIC_SECTIONS };
