@@ -1,4 +1,4 @@
-// main.js
+// all_song.js
 
 document.addEventListener('DOMContentLoaded', () => {
     console.log("Main DOMContentLoaded Start");
