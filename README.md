@@ -23,7 +23,7 @@
 
 MyMusic Player là một giao diện trình phát nhạc trực tuyến được thiết kế và phát triển nhằm mang đến trải nghiệm nghe nhạc đơn giản, hiện đại và trực quan, lấy cảm hứng từ các nền tảng phổ biến như Spotify.
 
-**Bản dùng thử trực tiếp:** [**https://tranhuudat2004.github.io/mymusic/**](https://tranhuudat2004.github.io/mymusic/)
+**Bản dùng thử trực tiếp:** [**https://tranhuudat2004.github.io/mymusic-demo/**](https://tranhuudat2004.github.io/mymusic-demo/)
 
 ### ✨ Tính Năng Nổi Bật
 
@@ -43,7 +43,7 @@ MyMusic Player là một giao diện trình phát nhạc trực tuyến được
 *   **HTML5:** Cung cấp cấu trúc ngữ nghĩa cho trang web.
 *   **CSS3:** Định dạng giao diện, sử dụng Flexbox, Grid Layout và Biến CSS (Custom Properties).
 *   **JavaScript (ES6+):** Xử lý toàn bộ logic ứng dụng, tương tác người dùng, và quản lý trạng thái. Dự án được xây dựng **không sử dụng framework/thư viện** để tập trung vào kỹ năng JS cốt lõi.
-*   **Hosting:** Triển khai dưới dạng trang web tĩnh qua [GitHub Pages](https://tranhuudat2004.github.io/mymusic/).
+*   **Hosting:** Triển khai dưới dạng trang web tĩnh qua [GitHub Pages](https://tranhuudat2004.github.io/mymusic-demo/).
 
 ### 📜 Phạm Vi và Giới Hạn
 
@@ -56,7 +56,7 @@ Các giới hạn này phản ánh bản chất của một dự án front-end t
 
 ### 🚀 Bắt đầu
 
-1.  **Dùng thử trực tiếp:** Cách dễ nhất là truy cập bản demo tại: [**https://tranhuudat2004.github.io/mymusic/**](https://tranhuudat2004.github.io/mymusic/)
+1.  **Dùng thử trực tiếp:** Cách dễ nhất là truy cập bản demo tại: [**https://tranhuudat2004.github.io/mymusic-demo/**](https://tranhuudat2004.github.io/mymusic-demo/)
 2.  **Cài đặt tại máy:**
     *   Clone repository này:
         ```bash
@@ -74,7 +74,7 @@ Các giới hạn này phản ánh bản chất của một dự án front-end t
 
 MyMusic Player is an online music player interface designed and developed to provide a simple, modern, and intuitive music listening experience, inspired by popular platforms like Spotify.
 
-**Live Demo:** [**https://tranhuudat2004.github.io/mymusic/**](https://tranhuudat2004.github.io/mymusic/)
+**Live Demo:** [**https://tranhuudat2004.github.io/mymusic-demo/**](https://tranhuudat2004.github.io/mymusic-demo/)
 
 ### ✨ Key Features
 
@@ -94,7 +94,7 @@ MyMusic Player is an online music player interface designed and developed to pro
 *   **HTML5:** Provides the semantic structure for the web page.
 *   **CSS3:** Styles the interface, including modern layout techniques like Flexbox, Grid Layout, and CSS Custom Properties.
 *   **JavaScript (ES6+):** Handles all application logic, user interactions, and state management. This project was built **without relying on external frameworks/libraries** to focus on core JS capabilities.
-*   **Hosting:** Deployed as a static website via [GitHub Pages](https://tranhuudat2004.github.io/mymusic/).
+*   **Hosting:** Deployed as a static website via [GitHub Pages](https://tranhuudat2004.github.io/mymusic-demo/).
 
 ### 📜 Scope and Limitations
 
@@ -107,7 +107,7 @@ These limitations are inherent to a front-end project focused on demonstrating c
 
 ### 🚀 Getting Started
 
-1.  **Live Demo:** The easiest way to experience MyMusic Player is through the live demo: [**https://tranhuudat2004.github.io/mymusic/**](https://tranhuudat2004.github.io/mymusic/)
+1.  **Live Demo:** The easiest way to experience MyMusic Player is through the live demo: [**https://tranhuudat2004.github.io/mymusic-demo/**](https://tranhuudat2004.github.io/mymusic-demo/)
 2.  **Local Setup:**
     *   Clone the repository:
         ```bash
