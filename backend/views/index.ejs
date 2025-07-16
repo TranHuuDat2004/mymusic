@@ -36,8 +36,9 @@
                     </h2>
                     <div class="card-grid">
                         <% section.songs.slice(0, 50).forEach(song=> { %>
-                            <div class="card" data-src="<%= song.audioSrc %>" data-title="<%= song.title %>"
-                                data-artist="<%= song.artistName %>" data-art="<%= song.artUrl %>">
+                            <div class="card" data-id="<%= song._id %>" data-src="<%= song.audioSrc %>"
+                                data-title="<%= song.title %>" data-artist="<%= song.artistName %>"
+                                data-art="<%= song.artUrl %>">
                                 <img src="/<%= song.artUrl %>" alt="<%= song.title %>" class="album-art" loading="lazy">
                                 <h3 class="song-title">
                                     <%= song.title %>

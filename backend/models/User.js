@@ -28,6 +28,11 @@ const userSchema = new mongoose.Schema({
     // avatarUrl: { type: String, default: 'img/default-avatar.png' },
     // likedSongs: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Song' }],
     // playlists: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Playlist' }]
+     // --- THÊM TRƯỜNG MỚI ---
+    likedSongs: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Song' // Tham chiếu đến model 'Song'
+    }],
 }, {
     timestamps: true // Tự động thêm createdAt và updatedAt
 });

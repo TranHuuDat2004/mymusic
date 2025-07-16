@@ -12,6 +12,7 @@ const Artist = require('./models/Artist');
 const Playlist = require('./models/Playlist');
 const User = require('./models/User'); // Import User model
 const authRoutes = require('./routes/authRoutes'); // Import auth routes
+const songRoutes = require('./routes/songRoutes');
 // ------------------------------------------
 
 
@@ -257,8 +258,25 @@ app.get('/register', (req, res) => {
     });
 });
 
+// --- ROUTE CHO TRANG THƯ VIỆN ---
+// (Đảm bảo route này tồn tại và đúng)
+app.get('/library', (req, res) => {
+    // Chúng ta sẽ cần một middleware để bảo vệ route này sau, nhưng bây giờ cứ render
+    res.render('library', { 
+        title: 'Thư viện - My Music Player'
+    });
+});
+
+app.get('/favorite', (req, res) => {
+    // Chúng ta sẽ cần một middleware để bảo vệ route này sau, nhưng bây giờ cứ render
+    res.render('favorite', { 
+        title: 'Nhạc yêu thích - My Music Player'
+    });
+});
 // --- ===== API ROUTES ===== ---
 app.use('/api/auth', authRoutes);
+app.use('/api/songs', songRoutes); // THÊM DÒNG NÀY
+
 // --- 1. API cho Artists ---
 
 // GET /api/artists - Lấy danh sách tất cả nghệ sĩ
