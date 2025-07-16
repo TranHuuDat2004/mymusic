@@ -19,7 +19,7 @@
 <details>
 <summary><strong> Tiếng Việt (Nhấn để xem)</strong></summary>
 
-![MyMusic Player Screenshot](img/demo.jpg)
+![MyMusic Player Screenshot](screenshot/demo.jpg)
 
 MyMusic Player là một giao diện trình phát nhạc trực tuyến được thiết kế và phát triển nhằm mang đến trải nghiệm nghe nhạc đơn giản, hiện đại và trực quan, lấy cảm hứng từ các nền tảng phổ biến như Spotify.
 
@@ -70,7 +70,7 @@ Các giới hạn này phản ánh bản chất của một dự án front-end t
 <details open>
 <summary><strong> English (Click to view)</strong></summary>
 
-![MyMusic Player Screenshot](img/demo.jpg)
+![MyMusic Player Screenshot](screenshot/demo.jpg)
 
 MyMusic Player is an online music player interface designed and developed to provide a simple, modern, and intuitive music listening experience, inspired by popular platforms like Spotify.
 
@@ -122,9 +122,9 @@ These limitations are inherent to a front-end project focused on demonstrating c
 
 | **Card View** | **List View** |  **Playlist View**  |
 | :---: | :---: |:---: |
-| ![Card View](img/card_view.jpg) | ![List View](img/list_view.jpg) | ![Playlist View](img/playlist_view.jpg) |
+| ![Card View](screenshot/card_view.jpg) | ![List View](screenshot/list_view.jpg) | ![Playlist View](screenshot/playlist_view.jpg) |
 | **Card View (iPadOS)** | **Fullscreen Player** | **Media Session (iPadOS)** |
-| ![Fullscreen View](img/card_view_iPadOS.png) | ![Fullscreen View](img/fullscreen_view.PNG)  | ![Media Session Widget](img/media_session_view.png) |
+| ![Fullscreen View](screenshot/card_view_iPadOS.png) | ![Fullscreen View](screenshot/fullscreen_view.PNG)  | ![Media Session Widget](screenshot/media_session_view.png) |
 
 
 
