@@ -14,6 +14,9 @@
   </a>
 </p>
 
+Project link (Fullstack - Coming soon): ![MyMusic Player Fullstack](https://github.com/TranHuuDat2004/mymusic) 
+
+Live demo (HTML, CSS, JS): ![Live demo](https://tranhuudat2004.github.io/mymusic-demo/) 
 ---
 
 <details>
