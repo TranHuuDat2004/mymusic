@@ -54,7 +54,7 @@
                 <h2>Bài hát nổi bật</h2>
                 <div id="artist-popular-songs" class="song-list-container">
                     <% if (artist.songs && artist.songs.length > 0) { %>
-                        <% artist.songs.slice(0, 5).forEach((song, index) => { %>
+                        <% artist.songs.slice(0, 50).forEach((song, index) => { %>
                             <div class="song-list-item" 
                                  data-src="<%= song.audioSrc %>" 
                                  data-title="<%= song.title %>" 

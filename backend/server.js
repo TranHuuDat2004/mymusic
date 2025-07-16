@@ -192,6 +192,14 @@ app.get('/artists', async (req, res) => {
     }
 });
 
+// --- THÊM ROUTE MỚI CHO TRANG TÌM KIẾM ---
+app.get('/search', (req, res) => {
+    // Chỉ cần render trang tĩnh, không cần truyền dữ liệu ban đầu
+    res.render('search', {
+        title: 'Tìm kiếm - My Music Player'
+    });
+});
+
 // --- ===== API ROUTES ===== ---
 
 // --- 1. API cho Artists ---
@@ -299,6 +307,46 @@ app.get('/api/playlists/:id', async (req, res) => {
     } catch (err) {
         console.error(`Error fetching playlist ${req.params.id}:`, err);
         res.status(500).json({ message: "Lỗi máy chủ khi lấy chi tiết playlist." });
+    }
+});
+
+// --- API ROUTE MỚI CHO TÌM KIẾM ---
+app.get('/api/search', async (req, res) => {
+    // Lấy query tìm kiếm từ URL, ví dụ: /api/search?q=sơn tùng
+    const query = req.query.q;
+
+    if (!query) {
+        // Nếu không có query, trả về mảng rỗng
+        return res.json({ artists: [], songs: [] });
+    }
+
+    try {
+        // Tạo một biểu thức chính quy (regular expression) để tìm kiếm không phân biệt hoa thường
+        // 'i' là cờ cho "case-insensitive"
+        const regex = new RegExp(query, 'i');
+
+        // Dùng Promise.all để tìm kiếm song song trên cả hai collection
+        const [foundArtists, foundSongs] = await Promise.all([
+            // Tìm nghệ sĩ có tên khớp với regex
+            Artist.find({ name: { $regex: regex } }).limit(10), // Giới hạn 10 kết quả
+            // Tìm bài hát có tiêu đề HOẶC tên nghệ sĩ khớp với regex
+            Song.find({ 
+                $or: [
+                    { title: { $regex: regex } }, 
+                    { artistName: { $regex: regex } }
+                ]
+            }).limit(50) // Giới hạn 50 kết quả
+        ]);
+        
+        // Trả về kết quả dưới dạng một object JSON
+        res.json({
+            artists: foundArtists,
+            songs: foundSongs
+        });
+
+    } catch (error) {
+        console.error("API search error:", error);
+        res.status(500).json({ message: "Lỗi server khi thực hiện tìm kiếm." });
     }
 });
 

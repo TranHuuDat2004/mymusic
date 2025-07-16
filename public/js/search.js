@@ -1,96 +1,109 @@
-// search.js
+// public/js/search.js (Phiên bản cuối cùng, gọi API tìm kiếm của server)
 
 document.addEventListener('DOMContentLoaded', () => {
-    console.log("Search DOMContentLoaded Start");
-
     const searchInput = document.getElementById('search-input');
     const resultsContainer = document.getElementById('search-results-container');
     const clearSearchBtn = document.getElementById('clear-search-btn');
-    const playlistUl = document.getElementById('playlist-links-list'); // Lấy Ul sidebar
-
-    // --- Tạo link playlist động trong sidebar (Gọi hàm từ utils.js) ---
-    // Vẫn cần render playlist trên trang search để sidebar hiển thị đúng
-     if (typeof ALL_MUSIC_SECTIONS !== 'undefined' && playlistUl && typeof window.renderPlaylistLinks === 'function') {
-        window.renderPlaylistLinks(ALL_MUSIC_SECTIONS, playlistUl);
-        // KHÔNG gọi attachSmoothScrollListeners ở đây
-    } else {
-         console.error("Lỗi: Không tìm thấy dữ liệu nhạc, ul playlist hoặc hàm renderPlaylistLinks trên trang search.");
-    }
-
-    // --- Logic tìm kiếm (như cũ) ---
-    if (typeof ALL_MUSIC_SECTIONS === 'undefined') {
-        // ... xử lý lỗi dữ liệu ...
-        return;
-    }
-    if (typeof window.createSongCard !== 'function') {
-       // ... xử lý lỗi thiếu hàm ...
-        return;
-    }
-
-    function performSearch(query) {
-       // ... code hàm performSearch như trước, gọi window.createSongCard ...
-        if (!resultsContainer) return;
+    
+    // Hàm để hiển thị kết quả tìm kiếm từ dữ liệu API trả về
+    function displayResults(data, query) {
         resultsContainer.innerHTML = ''; // Xóa kết quả cũ
 
-        const initialMessage = '<p class="search-initial-message">Nhập từ khóa để bắt đầu tìm kiếm.</p>';
-        if (!query) {
-             resultsContainer.innerHTML = initialMessage;
+        const { artists, songs } = data;
+
+        if (artists.length === 0 && songs.length === 0) {
+            resultsContainer.innerHTML = `<p>Không tìm thấy kết quả nào cho "<strong>${query}</strong>".</p>`;
             return;
         }
 
-        const lowerCaseQuery = query.toLowerCase().trim();
-        const foundSongs = [];
-
-        ALL_MUSIC_SECTIONS.forEach(section => {
-            if (Array.isArray(section.songs)) {
-                section.songs.forEach(song => {
-                    const titleMatch = song.title?.toLowerCase().includes(lowerCaseQuery);
-                    const artistMatch = song.displayArtist?.name?.toLowerCase().includes(lowerCaseQuery);
-                    const artistDataMatch = song.artistData?.toLowerCase().includes(lowerCaseQuery);
-
-                    if (titleMatch || artistMatch || artistDataMatch) {
-                        const uniqueId = song.id || `${song.title}-${song.artistData}`;
-                        if (!foundSongs.some(found => (found.id || `${found.title}-${found.artistData}`) === uniqueId)) {
-                            foundSongs.push(song);
-                        }
-                    }
-                });
-            }
-        });
-
-        if (foundSongs.length > 0) {
-            const resultGrid = document.createElement('div');
-            resultGrid.classList.add('card-grid');
-            foundSongs.forEach(song => {
-                const card = window.createSongCard(song);
-                resultGrid.appendChild(card);
+        // Hiển thị nghệ sĩ
+        if (artists.length > 0) {
+            const artistsSection = document.createElement('div');
+            artistsSection.className = 'search-result-section';
+            artistsSection.innerHTML = `<h2>Nghệ sĩ</h2>`;
+            const artistsGrid = document.createElement('div');
+            artistsGrid.className = 'card-grid';
+            
+            artists.forEach(artist => {
+                const artistCard = document.createElement('a');
+                artistCard.href = `/artist?artistId=${artist._id}`;
+                artistCard.className = 'card artist-card';
+                artistCard.innerHTML = `
+                    <img src="/${artist.avatarUrl || 'img/singer-holder.png'}" alt="${artist.name}" class="album-art">
+                    <h3 class="artist-card-name">${artist.name}</h3>
+                    <p class="artist-card-type">Nghệ sĩ</p>
+                `;
+                artistsGrid.appendChild(artistCard);
             });
-            resultsContainer.appendChild(resultGrid);
-        } else {
-            resultsContainer.innerHTML = `<p>Không tìm thấy kết quả nào cho "${query}".</p>`;
+            artistsSection.appendChild(artistsGrid);
+            resultsContainer.appendChild(artistsSection);
+        }
+
+        // Hiển thị bài hát
+        if (songs.length > 0) {
+            const songsSection = document.createElement('div');
+            songsSection.className = 'search-result-section';
+            songsSection.innerHTML = `<h2>Bài hát</h2>`;
+            const songsGrid = document.createElement('div');
+            songsGrid.className = 'card-grid';
+
+            songs.forEach(song => {
+                if (typeof window.createSongCard !== 'function') return;
+                const songCard = window.createSongCard(song);
+                
+                songCard.addEventListener('click', () => {
+                    if (typeof window.playSongFromData !== 'function') return;
+                    // Context playlist bây giờ là chính danh sách các bài hát tìm được
+                    window.playSongFromData(song, songs);
+                });
+                songsGrid.appendChild(songCard);
+            });
+            songsSection.appendChild(songsGrid);
+            resultsContainer.appendChild(songsSection);
         }
     }
 
+    // Hàm gọi API tìm kiếm
+    async function performSearch(query) {
+        if (!query.trim()) {
+            resultsContainer.innerHTML = `<p class="search-initial-message">Nhập từ khóa để bắt đầu tìm kiếm.</p>`;
+            return;
+        }
 
-    // Xử lý input tìm kiếm
-    if (searchInput && clearSearchBtn) {
-        searchInput.addEventListener('input', () => {
-            const query = searchInput.value;
-            performSearch(query);
-            clearSearchBtn.style.display = query ? 'inline-block' : 'none';
-        });
+        resultsContainer.innerHTML = `<p class="loading-message">Đang tìm kiếm...</p>`;
 
-        clearSearchBtn.addEventListener('click', () => {
-            searchInput.value = '';
-            performSearch('');
-            clearSearchBtn.style.display = 'none';
-            searchInput.focus();
-        });
-    } else {
-        console.warn("Không tìm thấy search input hoặc nút clear.");
+        try {
+            // Gọi API endpoint mới, encode query để xử lý các ký tự đặc biệt
+            const response = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
+            if (!response.ok) {
+                throw new Error('Phản hồi từ server không hợp lệ.');
+            }
+            const data = await response.json();
+            displayResults(data, query);
+
+        } catch (error) {
+            console.error("Lỗi khi gọi API tìm kiếm:", error);
+            resultsContainer.innerHTML = `<p class="error-message">Có lỗi xảy ra, không thể tìm kiếm.</p>`;
+        }
     }
 
-    console.log("Search DOMContentLoaded End");
-});
+    // Gắn sự kiện cho thanh tìm kiếm với Debounce
+    let searchTimeout;
+    searchInput.addEventListener('input', () => {
+        clearTimeout(searchTimeout);
+        const query = searchInput.value;
+        
+        searchTimeout = setTimeout(() => {
+            performSearch(query);
+        }, 300); // Chờ 300ms sau khi ngừng gõ
 
-console.log("search.js loaded"); // Để kiểm tra thứ tự load
+        clearSearchBtn.style.display = query ? 'block' : 'none';
+    });
+
+    clearSearchBtn.addEventListener('click', () => {
+        searchInput.value = '';
+        searchInput.focus();
+        resultsContainer.innerHTML = `<p class="search-initial-message">Nhập từ khóa để bắt đầu tìm kiếm.</p>`;
+        clearSearchBtn.style.display = 'none';
+    });
+});
