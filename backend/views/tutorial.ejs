@@ -1,25 +1,23 @@
 <!DOCTYPE html>
 <html lang="vi">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hướng dẫn sử dụng - My Music Player</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="icon" href="img/favicon.png" type="image/png">
+    <title><%= title %></title>
+    <!-- Sửa đường dẫn CSS -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="icon" href="/img/favicon.png" type="image/png">
     <style>
         /* CSS riêng cho trang Hướng dẫn */
         .tutorial-content {
             padding: 20px 30px;
         }
-
         .tutorial-section {
             margin-bottom: 40px;
             background-color: #181818;
             padding: 20px;
             border-radius: 8px;
         }
-
         .tutorial-section h2 {
             font-size: 1.8em;
             color: #1DB954; /* Màu xanh lá đặc trưng */
@@ -27,7 +25,6 @@
             display: flex;
             align-items: center;
         }
-        
         .tutorial-section h2 .icon-container {
             margin-right: 15px;
             display: inline-flex;
@@ -37,13 +34,11 @@
             padding: 8px;
             border-radius: 50%;
         }
-        
         .tutorial-section h2 .icon-container svg {
             width: 24px;
             height: 24px;
             fill: #fff;
         }
-
         .tutorial-section h3 {
             font-size: 1.3em;
             margin-top: 25px;
@@ -52,23 +47,19 @@
             border-left: 3px solid #1DB954;
             padding-left: 10px;
         }
-
         .tutorial-section p, .tutorial-section li {
             color: #b3b3b3;
             line-height: 1.7;
         }
-        
         .tutorial-section ul {
             list-style-type: none;
             padding-left: 0;
         }
-        
         .tutorial-section li {
             position: relative;
             padding-left: 25px;
             margin-bottom: 10px;
         }
-
         .tutorial-section li::before {
             content: '✓';
             position: absolute;
@@ -76,7 +67,6 @@
             color: #1DB954;
             font-weight: bold;
         }
-
         .active-state-demo {
             color: #fff;
             background-color: #2a2a2a;
@@ -84,7 +74,6 @@
             border-radius: 4px;
             font-family: 'Courier New', Courier, monospace;
         }
-
         .note {
             background-color: #282828;
             border-left: 4px solid #535353;
@@ -92,16 +81,11 @@
             margin-top: 15px;
             border-radius: 4px;
         }
-        
-        .note p {
-            margin: 0;
-        }
-        
+        .note p { margin: 0; }
         .active-state-demo {
             color: #1DB954;
             font-weight: bold;
         }
-        
         .active-state-demo svg {
              fill: #1DB954 !important;
         }
@@ -113,10 +97,9 @@
     <audio id="audio-player"></audio>
 
     <div class="music-player-container">
-        <!-- Sidebar sẽ được chèn tự động bởi sidebar.js -->
+        <!-- Sidebar -->
         <nav id="sidebar-container" class="sidebar"></nav>
 
-        <!-- Main Content cho trang Hướng dẫn -->
         <main class="main-content">
             <div class="tutorial-content">
                 <h1>Hướng dẫn sử dụng các tính năng</h1>
@@ -192,37 +175,22 @@
                     </div>
                 </section>
             </div>
-            <div id="footer-placeholder"></div>
+            
+            <!-- Footer -->
         </main>
         
-        <!-- Placeholder cho Player Bar -->
         <footer id="player-bar-container"></footer>
-
-                <!-- THÊM MỚI: Placeholder cho màn hình Now Playing -->
         <div id="now-playing-fullscreen-container"></div>
-        
-        <!-- Placeholder cho Notification -->
         <div id="notification-container"></div>
     </div>
 
     <!-- Scripts -->
-    <script src="data/music.js"></script>
-    <script src="js/utils.js" defer></script>
-    <script src="js/sidebar.js" defer></script>
-    <script src="js/player.js" defer></script>
-    <!-- Trong các file HTML -->
-<script src="js/footer.js" defer></script>
-    <script>
-        // Active link hướng dẫn trong sidebar
-        document.addEventListener('DOMContentLoaded', () => {
-             const tutorialLink = document.querySelector('.sidebar-nav a[href="tutorial.html"]');
-             if(tutorialLink) {
-                // Xóa active khỏi các link khác trước
-                document.querySelectorAll('.sidebar-nav a.active').forEach(link => link.classList.remove('active'));
-                tutorialLink.classList.add('active');
-             }
-        });
-    </script>
+    <!-- Các trang tĩnh chỉ cần các script chung này -->
+    <script src="/js/utils.js" defer></script>
+    <script src="/js/player.js" defer></script>
+    <script src="/js/sidebar.js" defer></script>
+    <script src="/js/appendMainFooter.js" defer></script>
+    
+    <!-- Trang này không cần script inline đặc biệt vì không có tương tác động phức tạp -->
 </body>
-
 </html>

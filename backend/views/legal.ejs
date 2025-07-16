@@ -1,15 +1,12 @@
 <!DOCTYPE html>
 <html lang="vi">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Giới thiệu - My Music Player</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="icon" href="img/favicon.png" type="image/png">
-    <!-- Assuming Font Awesome is linked for the GitHub icon, if not, you might need to add its CDN -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    
+    <title><%= title %></title>
+    <!-- Sửa đường dẫn CSS -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="icon" href="/img/favicon.png" type="image/png">
 </head>
 
 <body>
@@ -17,12 +14,10 @@
     <audio id="audio-player"></audio>
 
     <div class="music-player-container">
-        <!-- 1. Sidebar -->
-        <!-- Sidebar sẽ được chèn tự động bởi sidebar.js -->
+        <!-- Sidebar -->
         <nav id="sidebar-container" class="sidebar"></nav>
 
-        <!-- 2. Main Content Area for About Page -->
-        <main class="main-content" id="about-content-container">
+        <main class="main-content">
             <div class="text-content-page">
                 <h1 style="text-align: center;">Pháp lý</h1>
                 <p style="text-align: center;">Cập nhật lần cuối: Ngày 18 tháng 6 năm 2025</p>
@@ -33,9 +28,9 @@
 
                 <h2 style="margin-top: 30px;">Các tài liệu pháp lý chính</h2>
                 <ul>
-                    <li><a href="privacy.html">Chính sách Quyền riêng tư</a>: Giải thích cách chúng tôi xử lý thông tin
+                    <li><a href="/privacy">Chính sách Quyền riêng tư</a>: Giải thích cách chúng tôi xử lý thông tin
                         (nếu có) và cam kết bảo vệ quyền riêng tư của bạn.</li>
-                    <li><a href="cookie.html">Chính sách Cookie</a>: Mô tả về các cookie có thể được sử dụng trên trang
+                    <li><a href="/cookie">Chính sách Cookie</a>: Mô tả về các cookie có thể được sử dụng trên trang
                         web và cách bạn có thể quản lý chúng.</li>
                     <li><a href="#terms-of-use">Điều khoản sử dụng</a>: Các quy định về việc sử dụng nội dung và chức
                         năng trên trang web.</li>
@@ -74,66 +69,20 @@
                             họa và trình diễn chức năng của một trình phát nhạc.</li>
                     </ul>
                 </section>
-                <div id="footer-placeholder"></div>
             </div>
+            
+            <!-- Footer -->
         </main>
-
-        <!-- 3. Player Bar -->
-        <!-- Placeholder cho Player Bar, player.js sẽ tự động điền vào đây -->
+        
         <footer id="player-bar-container"></footer>
-        <!-- THÊM MỚI: Placeholder cho màn hình Now Playing -->
         <div id="now-playing-fullscreen-container"></div>
-
-        <!-- Placeholder cho Notification -->
         <div id="notification-container"></div>
     </div>
-    <script src="js/sidebar.js" defer></script> <!-- Nạp sidebar.js -->
-    <script src="data/music.js"></script>
-    <script src="js/utils.js"></script>
-    <script src="js/player.js"></script>
-    <!-- Trong các file HTML -->
-    <script src="js/footer.js" defer></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // --- Sidebar Playlist Links ---
-            const playlistUl = document.getElementById('playlist-links-list');
-            if (typeof ALL_MUSIC_SECTIONS !== 'undefined' && playlistUl && typeof window.renderPlaylistLinks === 'function') {
-                window.renderPlaylistLinks(ALL_MUSIC_SECTIONS, playlistUl);
-            }
 
-            // --- Sidebar Active Link ---
-            // Remove active from all first
-            document.querySelectorAll('.sidebar-nav a').forEach(link => link.classList.remove('active'));
-            // Add active to the current page's link
-            const aboutLink = document.querySelector('.sidebar-nav a[href="about.html"]');
-            if (aboutLink) {
-                aboutLink.classList.add('active');
-            }
-
-            // --- Language Tab Functionality ---
-            const langTabButtons = document.querySelectorAll('.lang-tab-btn');
-            const langContentDivs = document.querySelectorAll('.lang-content');
-
-            langTabButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    // Remove active class from all buttons and content
-                    langTabButtons.forEach(btn => btn.classList.remove('active'));
-                    langContentDivs.forEach(content => content.classList.remove('active'));
-
-                    // Add active class to the clicked button
-                    button.classList.add('active');
-
-                    // Show the corresponding content
-                    const lang = button.dataset.lang; // vi or en
-                    const activeContent = document.getElementById(`about-content-${lang}`);
-                    if (activeContent) {
-                        activeContent.classList.add('active');
-                    }
-                });
-            });
-        });
-    </script>
-
+    <!-- Scripts -->
+    <script src="/js/utils.js" defer></script>
+    <script src="/js/player.js" defer></script>
+    <script src="/js/sidebar.js" defer></script>
+    <script src="/js/appendMainFooter.js" defer></script>
 </body>
-
 </html>

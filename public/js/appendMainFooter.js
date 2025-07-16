@@ -23,17 +23,17 @@ function appendMainFooter() {
             <div class="footer-column">
                 <h4>Về MyMusic</h4>
                 <ul>
-                    <li><a href="about.html">Giới thiệu</a></li>
-                    <li><a href="tutorial.html">Hướng dẫn sử dụng</a></li>
-                    <li><a href="version.html">Lịch sử phiên bản</a></li>
+                    <li><a href="about">Giới thiệu</a></li>
+                    <li><a href="tutorial">Hướng dẫn sử dụng</a></li>
+                    <li><a href="version">Lịch sử phiên bản</a></li>
                 </ul>
             </div>
             <div class="footer-column">
                 <h4>Khám phá</h4>
                 <ul>
-                    <li><a href="library.html">Thư viện</a></li>
-                    <li><a href="artists.html">Nghệ sĩ</a></li>
-                    <li><a href="all_playlists.html">Tất cả Playlist</a></li>
+                    <li><a href="library">Thư viện</a></li>
+                    <li><a href="artists">Nghệ sĩ</a></li>
+                    <li><a href="all_playlists">Tất cả Playlist</a></li>
                 </ul>
             </div>
             <div class="footer-column">
@@ -65,9 +65,9 @@ function appendMainFooter() {
         <hr class="footer-divider">
         <div class="footer-bottom">
             <div class="legal-links">
-                <a href="legal.html">Pháp lý</a>
-                <a href="privacy.html">Quyền riêng tư</a>
-                <a href="cookie.html">Cookie</a>
+                <a href="legal">Pháp lý</a>
+                <a href="privacy">Quyền riêng tư</a>
+                <a href="cookie">Cookie</a>
             </div>
             <div class="copyright">
                 <span>© ${new Date().getFullYear()} MyMusic by Tran Huu Dat</span>

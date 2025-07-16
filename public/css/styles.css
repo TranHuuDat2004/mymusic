@@ -1831,3 +1831,159 @@ button:hover {
     color: #ffffff; /* Làm cho chữ in đậm có màu trắng để nổi bật hơn */
     font-weight: 600;
 }
+
+/* public/css/styles.css */
+
+/* --- STYLES FOR AUTHENTICATION PAGES (LOGIN/REGISTER) --- */
+
+/* public/css/styles.css */
+
+/* .auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+
+    /* --- BẮT ĐẦU THAY ĐỔI --- */
+    /* background: linear-gradient(-45deg, #121212, #1a0a1a, #0a0a1a, #0a1a1a);
+    background-size: 400% 400%; /* Kích thước background lớn để có không gian di chuyển */
+    /* animation: gradientAnimation 15s ease infinite; Gọi animation */ */
+    /* --- KẾT THÚC THAY ĐỔI --- */
+/* } */
+
+/* --- THÊM MỚI ĐỊNH NGHĨA ANIMATION --- */
+/* @keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+} */ */
+
+/* public/css/styles.css */
+
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+
+    /* --- BẮT ĐẦU THAY ĐỔI --- */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/img/auth-background.jpg');
+    background-size: cover; /* Phủ kín toàn bộ container */
+    background-position: center center; /* Căn ảnh ở giữa */
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Cố định ảnh nền khi cuộn */
+    /* --- KẾT THÚC THAY ĐỔI --- */
+}
+/* Auth Form Wrapper */
+.auth-form-wrapper {
+    background-color: #181818;
+    padding: 40px 50px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    max-width: 420px;
+    text-align: center;
+}
+
+.auth-logo {
+    width: 120px;
+    margin-bottom: 25px;
+}
+
+.auth-form-wrapper h1 {
+    color: #fff;
+    font-size: 2em;
+    margin-bottom: 15px;
+}
+
+.auth-form-wrapper p {
+    color: #b3b3b3;
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    color: #b3b3b3;
+    margin-bottom: 8px;
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+.form-input {
+    width: 100%;
+    padding: 14px 16px;
+    background-color: #282828;
+    border: 1px solid #444;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 1em;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #1DB954;
+    box-shadow: 0 0 0 2px rgba(29, 185, 84, 0.3);
+}
+
+.btn-auth {
+    width: 100%;
+    padding: 14px;
+    background-color: #1DB954;
+    border: none;
+    border-radius: 50px;
+    color: #121212;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 10px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.btn-auth:hover {
+    background-color: #1ed760;
+    transform: scale(1.02);
+}
+
+.auth-switch-link {
+    margin-top: 30px;
+    color: #b3b3b3;
+}
+
+.auth-switch-link a {
+    color: #fff;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.auth-switch-link a:hover {
+    color: #1DB954;
+    text-decoration: underline;
+}
+
+/* For error messages */
+.error-message-box {
+    background-color: rgba(224, 49, 49, 0.2);
+    border: 1px solid #e03131;
+    color: #ff8787;
+    padding: 12px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    font-size: 0.9em;
+    display: none; /* Hidden by default */
+}

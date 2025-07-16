@@ -10,6 +10,8 @@ const cors = require('cors');
 const Song = require('./models/Song');
 const Artist = require('./models/Artist');
 const Playlist = require('./models/Playlist');
+const User = require('./models/User'); // Import User model
+const authRoutes = require('./routes/authRoutes'); // Import auth routes
 // ------------------------------------------
 
 
@@ -206,8 +208,57 @@ app.get('/about', (req, res) => {
         title: 'Giới thiệu - My Music Player'
     });
 });
-// --- ===== API ROUTES ===== ---
 
+// --- THÊM ROUTE MỚI CHO TRANG CHÍNH SÁCH COOKIE ---
+app.get('/cookie', (req, res) => {
+    res.render('cookie', {
+        title: 'Chính sách Cookie - My Music Player'
+    });
+});
+
+// --- THÊM ROUTE MỚI CHO TRANG PHÁP LÝ ---
+app.get('/legal', (req, res) => {
+    res.render('legal', {
+        title: 'Pháp lý - My Music Player'
+    });
+});
+
+// --- THÊM ROUTE MỚI CHO TRANG QUYỀN RIÊNG TƯ ---
+app.get('/privacy', (req, res) => {
+    res.render('privacy', {
+        title: 'Chính sách Quyền riêng tư - My Music Player'
+    });
+});
+
+// --- THÊM ROUTE MỚI CHO TRANG HƯỚNG DẪN SỬ DỤNG ---
+app.get('/tutorial', (req, res) => {
+    res.render('tutorial', {
+        title: 'Hướng dẫn sử dụng - My Music Player'
+    });
+});
+
+// --- THÊM ROUTE MỚI CHO TRANG LỊCH SỬ PHIÊN BẢN ---
+app.get('/version', (req, res) => {
+    res.render('version', {
+        title: 'Lịch sử phiên bản - My Music Player'
+    });
+});
+
+// --- THÊM ROUTES ĐỂ RENDER TRANG LOGIN VÀ REGISTER ---
+app.get('/login', (req, res) => {
+    res.render('login', {
+        title: 'Đăng nhập - My Music Player'
+    });
+});
+
+app.get('/register', (req, res) => {
+    res.render('register', {
+        title: 'Đăng ký - My Music Player'
+    });
+});
+
+// --- ===== API ROUTES ===== ---
+app.use('/api/auth', authRoutes);
 // --- 1. API cho Artists ---
 
 // GET /api/artists - Lấy danh sách tất cả nghệ sĩ

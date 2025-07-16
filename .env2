@@ -1,3 +1,3 @@
 
-
+JWT_SECRET=day_la_mot_chuoi_bi_mat_rat_dai_nao_do_ban_tu_nghi_ra
 MONGO_URI=mongodb+srv://mymusic:<your_password>@cluster0.zrn27rz.mongodb.net/MyMusicDB?retryWrites=true&w=majority&appName=Cluster0
