@@ -860,7 +860,9 @@ button:hover {
 .song-list-container {
     margin-top: 20px;
 }
-.song-list-item, /* Áp dụng cho cả header và item */
+
+.song-list-item,
+/* Áp dụng cho cả header và item */
 .song-list-header {
     display: flex;
     align-items: center;
@@ -868,17 +870,22 @@ button:hover {
     border-radius: 4px;
     gap: 12px;
     transition: background-color 0.2s ease;
-    /* border-bottom: 1px solid rgba(255,255,255,0.05); */ /* Tùy chọn: đường kẻ mờ giữa các item */
+    /* border-bottom: 1px solid rgba(255,255,255,0.05); */
+    /* Tùy chọn: đường kẻ mờ giữa các item */
 }
 
-.song-list-header { /* Style riêng cho header nếu cần */
+.song-list-header {
+    /* Style riêng cho header nếu cần */
     color: #b3b3b3;
     font-size: 0.8em;
     text-transform: uppercase;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    cursor: default; /* Header không cần cursor pointer */
+    cursor: default;
+    /* Header không cần cursor pointer */
 }
-.song-list-header:hover { /* Bỏ hover effect cho header */
+
+.song-list-header:hover {
+    /* Bỏ hover effect cho header */
     background-color: transparent;
 }
 
@@ -891,35 +898,45 @@ button:hover {
     width: 25px;
     text-align: right;
     flex-shrink: 0;
-    padding-right: 8px; /* Thêm padding để số không sát ảnh */
+    padding-right: 8px;
+    /* Thêm padding để số không sát ảnh */
 }
-.song-list-header .song-index { /* Riêng cho header */
+
+.song-list-header .song-index {
+    /* Riêng cho header */
     font-weight: bold;
 }
 
 /* Cột ảnh bìa */
 .song-list-item .album-art-small,
-.song-list-header .song-art-placeholder { /* Placeholder cho header */
+.song-list-header .song-art-placeholder {
+    /* Placeholder cho header */
     width: 40px;
     height: 40px;
     border-radius: 4px;
     object-fit: cover;
     flex-shrink: 0;
-    background-color: transparent; /* Cho placeholder */
+    background-color: transparent;
+    /* Cho placeholder */
 }
 
 /* Cột Tiêu đề & Tên nghệ sĩ (trong item) hoặc chỉ Tiêu đề (trong header) */
 .song-list-item .song-details,
 .song-list-header .song-details {
-    flex-grow: 1; /* Quan trọng: Cho phép cột này co giãn */
+    flex-grow: 1;
+    /* Quan trọng: Cho phép cột này co giãn */
     overflow: hidden;
-    min-width: 0; /* Cho phép co lại đúng cách */
+    min-width: 0;
+    /* Cho phép co lại đúng cách */
     /* Có thể đặt flex-basis nếu muốn tỷ lệ cố định hơn */
     /* flex-basis: 40%; */
 }
-.song-list-header .song-details .song-title { /* Tiêu đề trong header */
-     font-weight: bold;
+
+.song-list-header .song-details .song-title {
+    /* Tiêu đề trong header */
+    font-weight: bold;
 }
+
 .song-list-item .song-title {
     font-weight: 500;
     color: #ffffff;
@@ -929,6 +946,7 @@ button:hover {
     font-size: 0.95em;
     margin-bottom: 2px;
 }
+
 .song-list-item .song-artist-name-in-list {
     font-size: 0.8em;
     color: #b3b3b3;
@@ -939,24 +957,33 @@ button:hover {
 
 /* Cột Nghệ sĩ RIÊNG (MỚI) */
 .song-list-item .song-artist-column,
-.song-list-header .song-artist-header { /* class cũ từ header */
-    flex-basis: 20%; /* Điều chỉnh % này cho phù hợp */
-    min-width: 100px; /* Đảm bảo không quá hẹp */
+.song-list-header .song-artist-header {
+    /* class cũ từ header */
+    flex-basis: 20%;
+    /* Điều chỉnh % này cho phù hợp */
+    min-width: 100px;
+    /* Đảm bảo không quá hẹp */
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     color: #b3b3b3;
     font-size: 0.85em;
-    padding-left: 10px; /* Khoảng cách với cột trước */
-    flex-shrink: 0; /* Không cho co lại nếu không cần */
+    padding-left: 10px;
+    /* Khoảng cách với cột trước */
+    flex-shrink: 0;
+    /* Không cho co lại nếu không cần */
 }
+
 .song-list-header .song-artist-header {
     font-weight: bold;
 }
-.song-list-item .song-artist-column a { /* Style cho link nghệ sĩ nếu có */
+
+.song-list-item .song-artist-column a {
+    /* Style cho link nghệ sĩ nếu có */
     color: #b3b3b3;
     text-decoration: none;
 }
+
 .song-list-item .song-artist-column a:hover {
     text-decoration: underline;
     color: #fff;
@@ -968,10 +995,12 @@ button:hover {
 .song-list-header .song-plays {
     font-size: 0.85em;
     color: #b3b3b3;
-    min-width: 70px; /* Điều chỉnh độ rộng */
+    min-width: 70px;
+    /* Điều chỉnh độ rộng */
     text-align: right;
     flex-shrink: 0;
 }
+
 .song-list-header .song-plays {
     font-weight: bold;
 }
@@ -981,10 +1010,12 @@ button:hover {
 .song-list-header .song-duration {
     font-size: 0.85em;
     color: #b3b3b3;
-    min-width: 50px; /* Điều chỉnh độ rộng */
+    min-width: 50px;
+    /* Điều chỉnh độ rộng */
     text-align: right;
     flex-shrink: 0;
 }
+
 .song-list-header .song-duration {
     font-weight: bold;
 }
@@ -995,25 +1026,34 @@ button:hover {
     display: flex;
     align-items: center;
     gap: 10px;
-    min-width: 45px; /* Tăng nhẹ để có không gian */
-    justify-content: center; /* Căn giữa nút like */
+    min-width: 45px;
+    /* Tăng nhẹ để có không gian */
+    justify-content: center;
+    /* Căn giữa nút like */
     flex-shrink: 0;
 }
+
 .song-list-header .song-actions-placeholder {
-    height: 1px; /* Chỉ để giữ chỗ */
+    height: 1px;
+    /* Chỉ để giữ chỗ */
 }
+
 /* ... (CSS cho nút like như cũ) ... */
 
 /* Responsive cho danh sách bài hát */
 @media (max-width: 768px) {
+
     .song-list-item .song-plays,
     .song-list-header .song-plays {
         display: none;
     }
-     .song-list-item .song-artist-column, /* Ẩn cột nghệ sĩ riêng trên tablet */
-     .song-list-header .song-artist-header {
+
+    .song-list-item .song-artist-column,
+    /* Ẩn cột nghệ sĩ riêng trên tablet */
+    .song-list-header .song-artist-header {
         display: none;
     }
+
     /* Khi ẩn cột nghệ sĩ, tên nghệ sĩ trong .song-details sẽ tự hiển thị */
 }
 
@@ -1023,26 +1063,33 @@ button:hover {
         gap: 8px;
         padding: 8px 5px;
     }
+
     .song-list-item .song-index {
         font-size: 0.9em;
         width: 20px;
     }
+
     .song-list-item img.album-art-small {
         width: 36px;
         height: 36px;
     }
+
     .song-list-item .song-title {
         font-size: 0.9em;
     }
+
     .song-list-item .song-artist-name-in-list {
         font-size: 0.75em;
     }
-     .song-list-item .song-actions {
+
+    .song-list-item .song-actions {
         min-width: 30px;
     }
-     .song-list-item .song-actions button {
+
+    .song-list-item .song-actions button {
         font-size: 1em;
     }
+
     /* Có thể ẩn cả duration nếu quá chật */
     /*
     .song-list-item .song-duration {
@@ -1395,11 +1442,13 @@ button:hover {
 
 /* Style cho mỗi mục commit (card) */
 .commit-entry {
-    background-color: #282828; /* Màu nền tối hơn một chút */
+    background-color: #282828;
+    /* Màu nền tối hơn một chút */
     border-radius: 8px;
     padding: 1rem 1.5rem;
     margin-bottom: 1rem;
-    border-left: 4px solid #1db954; /* Viền trái màu xanh lá đặc trưng */
+    border-left: 4px solid #1db954;
+    /* Viền trái màu xanh lá đặc trưng */
     transition: background-color 0.2s ease;
 }
 
@@ -1417,7 +1466,8 @@ button:hover {
 /* Thông tin meta (tác giả, ngày tháng) */
 .commit-entry .commit-meta {
     font-size: 0.9rem;
-    color: #b3b3b3; /* Màu xám nhạt */
+    color: #b3b3b3;
+    /* Màu xám nhạt */
     margin: 0 0 1rem 0;
 }
 
@@ -1428,10 +1478,12 @@ button:hover {
 
 /* Chi tiết của commit (nếu có) */
 .commit-entry .commit-body {
-    background-color: #121212; /* Nền tối hơn nữa cho khối code/chi tiết */
+    background-color: #121212;
+    /* Nền tối hơn nữa cho khối code/chi tiết */
     padding: 0.75rem;
     border-radius: 4px;
-    white-space: pre-wrap; /* Giữ các dòng mới */
+    white-space: pre-wrap;
+    /* Giữ các dòng mới */
     word-wrap: break-word;
     font-family: 'Courier New', Courier, monospace;
     font-size: 0.85rem;
@@ -1457,14 +1509,16 @@ button:hover {
 }
 
 /* Tin nhắn báo lỗi hoặc đang tải */
-.loading-message, .error-message {
+.loading-message,
+.error-message {
     color: #b3b3b3;
     text-align: center;
     padding: 2rem;
 }
 
 .error-message {
-    color: #f16363; /* Màu đỏ cho lỗi */
+    color: #f16363;
+    /* Màu đỏ cho lỗi */
 }
 
 
@@ -1472,14 +1526,17 @@ button:hover {
 /* --- Styling cho Notification --- */
 #notification-container {
     position: fixed;
-    bottom: 80px; /* Ngay trên thanh player-bar */
+    bottom: 80px;
+    /* Ngay trên thanh player-bar */
     left: 50%;
     transform: translateX(-50%);
-    background-color: #28a745; /* Màu xanh lá thành công */
+    background-color: #28a745;
+    /* Màu xanh lá thành công */
     color: white;
     padding: 10px 20px;
     border-radius: 20px;
-    z-index: 1050; /* Hiển thị trên mọi thứ */
+    z-index: 1050;
+    /* Hiển thị trên mọi thứ */
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease, bottom 0.3s ease;
@@ -1490,7 +1547,8 @@ button:hover {
 #notification-container.active {
     opacity: 1;
     visibility: visible;
-    bottom: 95px; /* Hiệu ứng trượt lên một chút */
+    bottom: 95px;
+    /* Hiệu ứng trượt lên một chút */
 }
 
 
@@ -1498,12 +1556,14 @@ button:hover {
 /* --- Styling cho các nút player đang active --- */
 /* Quy tắc này sẽ áp dụng cho tất cả các nút có class .active */
 .player-bar button.active {
-    color: #1db954; /* Màu xanh lá đặc trưng */
+    color: #1db954;
+    /* Màu xanh lá đặc trưng */
 }
 
 /* Áp dụng riêng cho nút Thích để tô đầy trái tim */
 .song-info .actions button#like-btn.active svg {
-    fill: #1db954; /* Tô đầy trái tim bằng màu xanh */
+    fill: #1db954;
+    /* Tô đầy trái tim bằng màu xanh */
 }
 
 /* styles.css */
@@ -1515,8 +1575,10 @@ button:hover {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 2000; /* Hiển thị trên mọi thứ khác */
-    pointer-events: none; /* Cho phép click xuyên qua khi bị ẩn */
+    z-index: 2000;
+    /* Hiển thị trên mọi thứ khác */
+    pointer-events: none;
+    /* Cho phép click xuyên qua khi bị ẩn */
 }
 
 .np-fullscreen {
@@ -1525,7 +1587,8 @@ button:hover {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(24, 24, 24, 0.95); /* Nền mờ */
+    background: rgba(24, 24, 24, 0.95);
+    /* Nền mờ */
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     display: flex;
@@ -1536,7 +1599,8 @@ button:hover {
     box-sizing: border-box;
     color: #fff;
     opacity: 0;
-    transform: translateY(100%); /* Bắt đầu từ dưới màn hình */
+    transform: translateY(100%);
+    /* Bắt đầu từ dưới màn hình */
     transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -1546,7 +1610,8 @@ button:hover {
 }
 
 #now-playing-fullscreen-container.active {
-    pointer-events: auto; /* Cho phép tương tác khi hiện ra */
+    pointer-events: auto;
+    /* Cho phép tương tác khi hiện ra */
 }
 
 
@@ -1559,9 +1624,11 @@ button:hover {
     cursor: pointer;
     padding: 10px;
 }
+
 .np-close-btn svg {
     fill: #b3b3b3;
 }
+
 .np-close-btn:hover svg {
     fill: #fff;
 }
@@ -1572,9 +1639,10 @@ button:hover {
     max-width: 350px;
     aspect-ratio: 1 / 1;
     margin-bottom: 30px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     border-radius: 12px;
 }
+
 #np-fullscreen-art {
     width: 100%;
     height: 100%;
@@ -1586,11 +1654,13 @@ button:hover {
     text-align: center;
     margin-bottom: 20px;
 }
+
 #np-fullscreen-title {
     font-size: 1.8em;
     font-weight: 700;
     margin: 0 0 5px;
 }
+
 #np-fullscreen-artist {
     font-size: 1.1em;
     color: #b3b3b3;
@@ -1606,6 +1676,7 @@ button:hover {
     font-size: 0.8em;
     color: #b3b3b3;
 }
+
 #np-fullscreen-progress-bar {
     flex-grow: 1;
 }
@@ -1617,6 +1688,7 @@ button:hover {
     gap: 30px;
     margin: 20px 0;
 }
+
 .np-controls button {
     background: none;
     border: none;
@@ -1624,11 +1696,13 @@ button:hover {
     color: #fff;
     padding: 0;
 }
+
 .np-controls .play-pause-btn svg {
     background-color: #fff;
     color: #000;
     border-radius: 50%;
 }
+
 .np-controls button:hover {
     transform: scale(1.05);
 }
@@ -1649,6 +1723,7 @@ button:hover {
     cursor: pointer;
     color: #b3b3b3;
 }
+
 .np-extra-controls button.active {
     color: #1DB954;
 }
@@ -1666,7 +1741,8 @@ button:hover {
     padding: 80px 0 40px 0;
     color: #fff;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
-    margin-top: 50px; /* Tạo khoảng cách với nội dung bên trên */
+    margin-top: 50px;
+    /* Tạo khoảng cách với nội dung bên trên */
 }
 
 .footer-links-container {
@@ -1727,9 +1803,11 @@ button:hover {
     color: #fff;
     transition: background-color 0.2s;
 }
+
 .social-icon:hover {
     background-color: #727272;
 }
+
 .social-icon svg {
     width: 20px;
     height: 20px;
@@ -1759,6 +1837,7 @@ button:hover {
     text-decoration: none;
     margin-right: 20px;
 }
+
 .legal-links a:hover {
     color: #fff;
 }
@@ -1770,28 +1849,37 @@ button:hover {
 
 /* Sử dụng một class chung cho các container chứa văn bản */
 .text-content-page {
-    padding: 20px 30px; /* Thêm padding */
-    line-height: 1.7;   /* Tăng khoảng cách dòng cho dễ đọc */
-    color: #b3b3b3;     /* Màu chữ chính: xám nhạt, dễ chịu hơn màu trắng tinh */
+    padding: 20px 30px;
+    /* Thêm padding */
+    line-height: 1.7;
+    /* Tăng khoảng cách dòng cho dễ đọc */
+    color: #b3b3b3;
+    /* Màu chữ chính: xám nhạt, dễ chịu hơn màu trắng tinh */
 }
 
 /* Định dạng cho tiêu đề chính H1 */
 .text-content-page h1 {
-    color: #ffffff; /* Tiêu đề chính có thể dùng màu trắng để nổi bật */
+    color: #ffffff;
+    /* Tiêu đề chính có thể dùng màu trắng để nổi bật */
     font-size: 2.5em;
-    font-weight: 900; /* Làm cho font đậm hơn */
+    font-weight: 900;
+    /* Làm cho font đậm hơn */
     margin-bottom: 10px;
-    text-align: left; /* Căn lề trái thay vì căn giữa */
+    text-align: left;
+    /* Căn lề trái thay vì căn giữa */
 }
 
 /* Định dạng cho các tiêu đề phụ H2 */
 .text-content-page h2 {
-    color: #ffffff; /* Tiêu đề phụ cũng có thể dùng màu trắng */
+    color: #ffffff;
+    /* Tiêu đề phụ cũng có thể dùng màu trắng */
     font-size: 1.5em;
     font-weight: 700;
-    margin-top: 40px; /* Tạo khoảng cách rõ ràng giữa các phần */
+    margin-top: 40px;
+    /* Tạo khoảng cách rõ ràng giữa các phần */
     margin-bottom: 20px;
-    border-bottom: 1px solid #333; /* Thêm đường gạch chân mờ */
+    border-bottom: 1px solid #333;
+    /* Thêm đường gạch chân mờ */
     padding-bottom: 8px;
 }
 
@@ -1815,57 +1903,30 @@ button:hover {
 
 /* Định dạng cho các thẻ link A */
 .text-content-page a {
-    color: #1DB954; /* Màu xanh lá đặc trưng của Spotify */
-    text-decoration: none; /* Bỏ gạch chân mặc định */
+    color: #1DB954;
+    /* Màu xanh lá đặc trưng của Spotify */
+    text-decoration: none;
+    /* Bỏ gạch chân mặc định */
     transition: color 0.2s;
 }
 
 .text-content-page a:hover {
-    color: #1ed760; /* Sáng hơn một chút khi hover */
-    text-decoration: underline; /* Thêm gạch chân khi hover */
+    color: #1ed760;
+    /* Sáng hơn một chút khi hover */
+    text-decoration: underline;
+    /* Thêm gạch chân khi hover */
 }
 
 /* Định dạng cho thẻ in đậm/nhấn mạnh */
 .text-content-page strong,
 .text-content-page b {
-    color: #ffffff; /* Làm cho chữ in đậm có màu trắng để nổi bật hơn */
+    color: #ffffff;
+    /* Làm cho chữ in đậm có màu trắng để nổi bật hơn */
     font-weight: 600;
 }
 
-/* public/css/styles.css */
 
 /* --- STYLES FOR AUTHENTICATION PAGES (LOGIN/REGISTER) --- */
-
-/* public/css/styles.css */
-
-/* .auth-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    padding: 20px;
-
-    /* --- BẮT ĐẦU THAY ĐỔI --- */
-    /* background: linear-gradient(-45deg, #121212, #1a0a1a, #0a0a1a, #0a1a1a);
-    background-size: 400% 400%; /* Kích thước background lớn để có không gian di chuyển */
-    /* animation: gradientAnimation 15s ease infinite; Gọi animation */ */
-    /* --- KẾT THÚC THAY ĐỔI --- */
-/* } */
-
-/* --- THÊM MỚI ĐỊNH NGHĨA ANIMATION --- */
-/* @keyframes gradientAnimation {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
-} */ */
-
-/* public/css/styles.css */
 
 .auth-container {
     display: flex;
@@ -1873,24 +1934,43 @@ button:hover {
     align-items: center;
     min-height: 100vh;
     padding: 20px;
-
-    /* --- BẮT ĐẦU THAY ĐỔI --- */
-    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/img/auth-background.jpg');
-    background-size: cover; /* Phủ kín toàn bộ container */
-    background-position: center center; /* Căn ảnh ở giữa */
-    background-repeat: no-repeat;
-    background-attachment: fixed; /* Cố định ảnh nền khi cuộn */
-    /* --- KẾT THÚC THAY ĐỔI --- */
+    /* background-image: url('/img/wallpaper5.webp'); */
+    background-image: url('/img/wallpaper5.webp'); /* Thay đổi ảnh nền nếu cần */
+    /* Đổi tên file nếu cần */
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    opacity: 0.9;
 }
-/* Auth Form Wrapper */
+
 .auth-form-wrapper {
-    background-color: #181818;
+    /*
+     * MÀU NỀN VÀ HIỆU ỨNG KÍNH MỜ
+     * - background-color: Màu đen (#181818) với độ trong suốt 75% (alpha = 0.75).
+     * - backdrop-filter: Làm mờ ảnh nền phía sau đi 10px.
+     */
+    background-color: rgba(24, 24, 24, 0.75);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    /* Tương thích Safari */
+
+    /* 
+     * VIỀN VÀ BO GÓC
+     * - border: Một đường viền rất nhẹ màu trắng với độ trong suốt 10%.
+     * - border-radius: Bo tròn các góc 16px để mềm mại hơn.
+     */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+
+    /* ĐỔ BÓNG (SHADOW) */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+
+    /* KÍCH THƯỚC VÀ CĂN CHỈNH */
     padding: 40px 50px;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     width: 100%;
     max-width: 420px;
     text-align: center;
+
 }
 
 .auth-logo {
@@ -1985,5 +2065,84 @@ button:hover {
     border-radius: 6px;
     margin-bottom: 20px;
     font-size: 0.9em;
-    display: none; /* Hidden by default */
+    display: none;
+    /* Hidden by default */
+}
+
+/* public/css/styles.css */
+
+/* --- STYLES FOR SIDEBAR AUTH & PROFILE --- */
+
+/* Profile section when logged in */
+.sidebar-profile {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #282828;
+}
+
+.profile-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 15px;
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-name {
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.logout-link {
+    color: #b3b3b3;
+    font-size: 0.9em;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.logout-link:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
+/* Auth buttons when logged out */
+.sidebar-auth-actions {
+    padding: 20px;
+    margin-top: 20px;
+    border-top: 1px solid #282828;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.btn-sidebar-auth {
+    padding: 12px;
+    border-radius: 50px;
+    text-align: center;
+    font-weight: bold;
+    text-decoration: none;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.btn-sidebar-auth:hover {
+    transform: scale(1.05);
+}
+
+.btn-sidebar-auth.login {
+    background-color: #fff;
+    color: #121212;
+}
+
+.btn-sidebar-auth.register {
+    background-color: transparent;
+    color: #fff;
+    border: 1px solid #fff;
 }
