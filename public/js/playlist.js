@@ -68,7 +68,7 @@ function createSongCard(songData) {
     artistP.classList.add('song-artist');
     if (songData.displayArtist && songData.displayArtist.id && songData.displayArtist.name) {
         const artistLink = document.createElement('a');
-        artistLink.href = `artist_page.html?artistId=${encodeURIComponent(songData.displayArtist.id)}`;
+        artistLink.href = `artist_page?artistId=${encodeURIComponent(songData.displayArtist.id)}`;
         artistLink.textContent = songData.displayArtist.name;
         artistLink.addEventListener('click', (e) => e.stopPropagation());
         artistP.appendChild(artistLink);
@@ -155,9 +155,9 @@ function renderPlaylistLinks(sectionsData, targetUlElement) {
         if (section && section.id && section.title) {
             const listItem = document.createElement('li');
             const link = document.createElement('a');
-            link.href = `playlist.html?id=${encodeURIComponent(section.id)}`;
+            link.href = `playlist?id=${encodeURIComponent(section.id)}`;
             link.textContent = section.title;
-            if (currentPage === 'playlist.html' && currentPlaylistId === section.id) {
+            if (currentPage === 'playlist' && currentPlaylistId === section.id) {
                 link.classList.add('active-playlist-link');
             }
             listItem.appendChild(link);

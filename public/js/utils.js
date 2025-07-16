@@ -56,9 +56,9 @@ function renderPlaylistLinks(sectionsData, targetUlElement) {
         if (section && section.id && section.title) {
             const listItem = document.createElement('li');
             const link = document.createElement('a');
-            link.href = `playlist.html?id=${encodeURIComponent(section.id)}`;
+            link.href = `playlist?id=${encodeURIComponent(section.id)}`;
             link.textContent = section.title;
-            if (currentPage === 'playlist.html' && currentPlaylistId === section.id) {
+            if (currentPage === 'playlist' && currentPlaylistId === section.id) {
                 link.classList.add('active-playlist-link');
             }
             listItem.appendChild(link);

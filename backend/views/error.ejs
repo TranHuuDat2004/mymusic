@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Biến title được truyền từ server.js -->
+    <title><%= title %> - My Music Player</title> 
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="icon" href="/img/favicon.png" type="image/png">
+    <style>
+        .error-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            min-height: 80vh; /* Chiếm gần hết chiều cao màn hình */
+            padding: 20px;
+        }
+        .error-container h1 {
+            font-size: 3em;
+            color: #e91e63; /* Màu sắc nổi bật cho lỗi */
+            margin-bottom: 20px;
+        }
+        .error-container p {
+            font-size: 1.2em;
+            color: #b3b3b3;
+            margin-bottom: 30px;
+        }
+        .error-container a {
+            padding: 12px 25px;
+            background-color: #1DB954; /* Màu xanh của Spotify */
+            color: #fff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .error-container a:hover {
+            background-color: #1ed760;
+        }
+    </style>
+</head>
+
+<body>
+    <button class="menu-toggle-btn" aria-label="Toggle menu">☰</button>
+    <audio id="audio-player"></audio>
+
+    <div class="music-player-container">
+        <!-- Sidebar -->
+        <nav id="sidebar-container" class="sidebar"></nav>
+
+        <main class="main-content">
+            <div class="error-container">
+                <!-- Biến title và message được truyền từ server.js -->
+                <h1><%= title %></h1>
+                <p><%= message %></p>
+                <a href="/">Quay về Trang chủ</a>
+            </div>
+        </main>
+        
+        <footer id="player-bar-container"></footer>
+        <div id="now-playing-fullscreen-container"></div>
+        <div id="notification-container"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/utils.js" defer></script>
+    <script src="/js/player.js" defer></script>
+    <script src="/js/sidebar.js" defer></script>
+        <script src="/js/appendMainFooter.js" defer></script>
+</body>
+</html>

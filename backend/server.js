@@ -61,7 +61,7 @@ app.get('/', async (req, res) => {
 });
 
 // --- THÊM ROUTE MỚI CHO TRANG ALL PLAYLISTS ---
-app.get('/all_playlists.html', async (req, res) => {
+app.get('/all_playlists', async (req, res) => {
     try {
         // Lấy tất cả các playlist từ database
         // Populate bài hát đầu tiên để lấy ảnh bìa
@@ -78,6 +78,45 @@ app.get('/all_playlists.html', async (req, res) => {
     } catch (error) {
         console.error("Error rendering all playlists page:", error);
         res.status(500).send("Lỗi tải trang");
+    }
+});
+
+// --- THÊM ROUTE MỚI CHO TRANG CHI TIẾT PLAYLIST ---
+app.get('/playlist', async (req, res) => {
+    // Lấy ID của playlist từ query parameter (?id=...)
+    const playlistId = req.query.id;
+
+    if (!playlistId) {
+        return res.status(400).render('error', { 
+            title: "Lỗi",
+            message: "Không tìm thấy ID của playlist." 
+        });
+    }
+
+    try {
+        // Tìm playlist trong database bằng ID và populate tất cả các bài hát của nó
+        const playlist = await Playlist.findById(playlistId).populate('songs');
+
+        if (!playlist) {
+            // Nếu không tìm thấy playlist, render trang lỗi 404
+            return res.status(404).render('error', { 
+                title: "Không tìm thấy",
+                message: "Playlist bạn yêu cầu không tồn tại hoặc đã bị xóa." 
+            });
+        }
+
+        // Render file playlist.ejs và truyền dữ liệu của playlist tìm được vào
+        res.render('playlist', {
+            title: `${playlist.title} - My Music Player`,
+            playlist: playlist // Truyền toàn bộ object playlist vào view
+        });
+
+    } catch (error) {
+        console.error(`Error rendering playlist page for ID ${playlistId}:`, error);
+        res.status(500).render('error', { 
+            title: "Lỗi Server",
+            message: "Đã có lỗi xảy ra khi tải trang playlist."
+        });
     }
 });
 

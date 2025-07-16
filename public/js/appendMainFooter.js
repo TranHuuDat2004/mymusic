@@ -79,5 +79,9 @@ function appendMainFooter() {
     mainContentContainer.appendChild(footerElement);
 }
 
-// "Expose" hàm ra global scope để các file khác có thể gọi
-window.appendMainFooter = appendMainFooter;
+// <<<<<<<<<<<< PHẦN QUAN TRỌNG NHẤT >>>>>>>>>>>>>
+// Thêm đoạn code này vào cuối file để nó tự động chạy
+document.addEventListener('DOMContentLoaded', () => {
+    // Đảm bảo rằng hàm chỉ chạy khi DOM đã hoàn toàn sẵn sàng.
+    appendMainFooter();
+});

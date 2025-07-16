@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <!-- Sửa đường dẫn CSS để trỏ ra thư mục public gốc -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="icon" href="/img/favicon.png" type="image/png">
+    <style>
+        /* Bạn có thể giữ lại các style này hoặc chuyển vào file styles.css */
+        .playlist-header-details {
+            display: flex;
+            align-items: flex-end;
+            gap: 20px;
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+        }
+        .playlist-cover-art img {
+            width: 180px;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 6px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+        .playlist-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+        .playlist-info .playlist-type {
+            font-size: 0.8em;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            color: #b3b3b3;
+        }
+        .playlist-info .playlist-main-title {
+            font-size: 2.5em;
+            font-weight: 700;
+            margin: 0;
+            line-height: 1.1;
+            color: #fff;
+        }
+        .playlist-info .playlist-description,
+        .playlist-info .playlist-stats {
+            font-size: 0.9em;
+            color: #b3b3b3;
+            margin-top: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <button class="menu-toggle-btn" aria-label="Toggle menu">☰</button>
+    <audio id="audio-player"></audio>
+
+    <div class="music-player-container">
+        <!-- Sidebar sẽ được chèn bởi sidebar.js -->
+        <nav id="sidebar-container" class="sidebar"></nav>
+
+        <main class="main-content" id="playlist-detail-container">
+            <!-- 1. HEADER CỦA PLAYLIST - Render trực tiếp từ server -->
+            <div class="playlist-header-details">
+                <div class="playlist-cover-art">
+                    <!-- Lấy ảnh bìa của bài hát đầu tiên, hoặc ảnh mặc định -->
+                    <img src="/<%= (playlist.songs && playlist.songs.length > 0) ? playlist.songs[0].artUrl : 'img/song-holder.png' %>" alt="<%= playlist.title %>">
+                </div>
+                <div class="playlist-info">
+                    <span class="playlist-type">Playlist</span>
+                    <h1 class="playlist-main-title"><%= playlist.title %></h1>
+                    <p class="playlist-description"><%= playlist.description || '' %></p>
+                    <div class="playlist-stats">
+                        <%= playlist.songs.length %> bài hát
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. DANH SÁCH BÀI HÁT - Render trực tiếp từ server -->
+            <div class="song-list-container">
+                <!-- Header của bảng -->
+                <div class="song-list-header song-list-item">
+                    <span class="song-index">#</span>
+                    <span class="song-art-placeholder"></span>
+                    <div class="song-details"><div class="song-title">TIÊU ĐỀ</div></div>
+                    <div class="song-artist-column">NGHỆ SĨ</div>
+                    <div class="song-plays">LƯỢT NGHE</div>
+                    <div class="song-duration">THỜI LƯỢNG</div>
+                </div>
+
+                <!-- Lặp qua từng bài hát và render -->
+                <% playlist.songs.forEach((song, index) => { %>
+                    <div class="song-list-item" 
+                         data-src="<%= song.audioSrc %>" 
+                         data-title="<%= song.title %>" 
+                         data-artist="<%= song.artistName %>" 
+                         data-art="<%= song.artUrl %>">
+                        
+                        <span class="song-index"><%= index + 1 %></span>
+                        <img src="/<%= song.artUrl %>" alt="<%= song.title %>" class="album-art-small">
+                        <div class="song-details">
+                            <div class="song-title"><%= song.title %></div>
+                        </div>
+                        <div class="song-artist-column"><%= song.artistName %></div>
+                        <div class="song-plays"><%= song.plays || 0 %></div>
+                        <!-- Thời lượng sẽ được player.js cập nhật sau, hoặc để trống -->
+                        <div class="song-duration">--:--</div> 
+                    </div>
+                <% }); %>
+            </div>
+        </main>
+        
+        <footer id="player-bar-container"></footer>
+        <div id="now-playing-fullscreen-container"></div>
+        <div id="notification-container"></div>
+    </div>
+
+    <!-- Scripts -->
+    <!-- Không cần data/music.js nữa -->
+    <script src="/js/utils.js" defer></script>
+    <script src="/js/player.js" defer></script>
+    <script src="/js/sidebar.js" defer></script>
+    <script src="/js/appendMainFooter.js" defer></script>
+    <!-- File playlist.js không còn cần thiết nữa vì EJS đã render hết -->
+    
+    <!-- Script inline để gắn listener cho các bài hát vừa được render -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const songItems = document.querySelectorAll('.song-list-item[data-src]');
+            
+            // Tạo một mảng chứa dữ liệu của tất cả bài hát trong playlist này
+            const playlistContext = [];
+            songItems.forEach(item => {
+                playlistContext.push({
+                    audioSrc: item.dataset.src,
+                    title: item.dataset.title,
+                    artistName: item.dataset.artist,
+                    artUrl: item.dataset.art,
+                    artistData: item.dataset.artist
+                });
+            });
+
+            // Gắn listener cho từng item
+            songItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    const songData = {
+                        audioSrc: item.dataset.src,
+                        title: item.dataset.title,
+                        artistName: item.dataset.artist,
+                        artUrl: item.dataset.art
+                    };
+                    
+                    if (typeof window.playSongFromData === 'function') {
+                        // Truyền cả bài hát được click và toàn bộ context của playlist
+                        window.playSongFromData(songData, playlistContext);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
