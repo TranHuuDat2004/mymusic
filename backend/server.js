@@ -200,6 +200,12 @@ app.get('/search', (req, res) => {
     });
 });
 
+// --- THÊM ROUTE MỚI CHO TRANG GIỚI THIỆU ---
+app.get('/about', (req, res) => {
+    res.render('about', {
+        title: 'Giới thiệu - My Music Player'
+    });
+});
 // --- ===== API ROUTES ===== ---
 
 // --- 1. API cho Artists ---
