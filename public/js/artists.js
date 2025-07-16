@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!artistData || !artistData.id || !artistData.name) return null;
 
         const card = document.createElement('a');
-        card.href = `artist_page.html?artistId=${encodeURIComponent(artistData.id)}`;
+        card.href = `artist_page?artistId=${encodeURIComponent(artistData.id)}`;
         card.classList.add('card', 'artist-card');
 
         card.innerHTML = `

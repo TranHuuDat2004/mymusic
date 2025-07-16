@@ -120,6 +120,77 @@ app.get('/playlist', async (req, res) => {
     }
 });
 
+// --- THÊM ROUTE MỚI CHO TRANG CHI TIẾT NGHỆ SĨ ---
+app.get('/artist', async (req, res) => {
+    const artistId = req.query.artistId;
+
+    if (!artistId) {
+        return res.status(400).render('error', { 
+            title: "Lỗi",
+            message: "Không tìm thấy ID của nghệ sĩ." 
+        });
+    }
+
+    try {
+        // Sử dụng Promise.all để thực hiện 2 truy vấn song song cho hiệu quả
+        const [artist, songs] = await Promise.all([
+            Artist.findById(artistId),
+            // Tìm tất cả bài hát của nghệ sĩ này, sắp xếp theo lượt nghe giảm dần
+            Song.find({ artistId: artistId }).sort({ plays: -1 }) 
+        ]);
+
+        if (!artist) {
+            return res.status(404).render('error', { 
+                title: "Không tìm thấy",
+                message: "Nghệ sĩ bạn yêu cầu không tồn tại." 
+            });
+        }
+
+        // Gộp dữ liệu nghệ sĩ và danh sách bài hát của họ vào một object
+        const artistData = {
+            ...artist.toObject(), // Chuyển Mongoose document thành plain object
+            songs: songs // Thêm mảng bài hát vào
+        };
+
+        // Render file artist.ejs và truyền dữ liệu đã gộp vào
+        res.render('artist', {
+            title: `${artist.name} - My Music Player`,
+            artist: artistData // Truyền toàn bộ object vào view
+        });
+
+    } catch (error) {
+        console.error(`Error rendering artist page for ID ${artistId}:`, error);
+        res.status(500).render('error', { 
+            title: "Lỗi Server",
+            message: "Đã có lỗi xảy ra khi tải trang nghệ sĩ."
+        });
+    }
+});
+
+// backend/server.js
+
+// ... các route khác ...
+
+// --- THÊM ROUTE MỚI CHO TRANG DANH SÁCH NGHỆ SĨ ---
+app.get('/artists', async (req, res) => {
+    try {
+        // Lấy tất cả nghệ sĩ từ database và sắp xếp theo tên A-Z
+        const allArtists = await Artist.find().sort({ name: 1 });
+
+        // Render file artists.ejs và truyền mảng nghệ sĩ vào
+        res.render('artists', {
+            title: 'Nghệ Sĩ - My Music Player',
+            artists: allArtists // 'artists' là tên biến sẽ dùng trong file .ejs
+        });
+
+    } catch (error) {
+        console.error("Error rendering artists list page:", error);
+        res.status(500).render('error', {
+            title: "Lỗi Server",
+            message: "Đã có lỗi xảy ra khi tải danh sách nghệ sĩ."
+        });
+    }
+});
 
 // --- ===== API ROUTES ===== ---
 
@@ -192,7 +263,7 @@ app.get('/api/songs/:id', async (req, res) => {
 
 // --- 3. API cho Playlists ---
 
-// GET /api/playlists - Lấy danh sách tất cả playlist (cho trang all_playlists.html)
+// GET /api/playlists - Lấy danh sách tất cả playlist (cho trang all_playlists)
 app.get('/api/playlists', async (req, res) => {
     try {
         // Chỉ lấy thông tin cơ bản của playlist, không cần populate toàn bộ bài hát

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <!-- Sửa đường dẫn CSS để trỏ ra thư mục public gốc -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="icon" href="/img/favicon.png" type="image/png">
+    <style>
+        /* Bạn có thể giữ lại các style này hoặc chuyển vào file styles.css */
+        .artists-main-title {
+            font-size: 2em;
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: #ffffff;
+        }
+        .card.artist-card {
+            text-decoration: none; /* Bỏ gạch chân của thẻ a */
+            color: inherit; /* Kế thừa màu chữ */
+            display: block; /* Để thẻ a chiếm toàn bộ không gian của card */
+            background-color: #181818;
+            transition: background-color 0.3s;
+        }
+        .card.artist-card:hover {
+            background-color: #282828;
+        }
+        .card.artist-card .album-art {
+            border-radius: 50%; /* Hiển thị ảnh đại diện dạng tròn */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+        .card.artist-card .artist-card-name {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #fff;
+        }
+        .card.artist-card .artist-card-type {
+            text-align: center;
+            font-size: 0.9em;
+            color: #b3b3b3;
+        }
+    </style>
+</head>
+<body>
+    <button class="menu-toggle-btn" aria-label="Toggle menu">☰</button>
+    <audio id="audio-player"></audio>
+
+    <div class="music-player-container">
+        <!-- Sidebar -->
+        <nav id="sidebar-container" class="sidebar"></nav>
+
+        <main class="main-content" id="artists-list-container">
+            <h1 class="artists-main-title">Nghệ Sĩ</h1>
+            
+            <div id="artists-grid" class="card-grid">
+                <!-- Lặp qua mảng 'artists' được truyền từ server -->
+                <% artists.forEach(artist => { %>
+                    <!-- Bọc toàn bộ card trong một thẻ <a> để có thể click được -->
+                    <a href="/artist?artistId=<%= artist._id %>" class="card artist-card">
+                        <img src="/<%= artist.avatarUrl || 'img/singer-holder.png' %>" alt="Avatar của <%= artist.name %>" class="album-art" loading="lazy">
+                        <h3 class="artist-card-name"><%= artist.name %></h3>
+                        <p class="artist-card-type">Nghệ sĩ</p>
+                    </a>
+                <% }); %>
+
+                <!-- Xử lý trường hợp không có nghệ sĩ nào -->
+                <% if (artists.length === 0) { %>
+                    <p>Không có nghệ sĩ nào trong thư viện.</p>
+                <% } %>
+            </div>
+            
+            <!-- Footer sẽ được chèn bởi appendMainFooter.js -->
+        </main>
+
+        <footer id="player-bar-container"></footer>
+        <div id="now-playing-fullscreen-container"></div>
+        <div id="notification-container"></div>
+    </div>
+
+    <!-- Scripts -->
+    <!-- Không cần file artists.js hay data/music.js nữa -->
+    <script src="/js/utils.js" defer></script>
+    <script src="/js/player.js" defer></script>
+    <script src="/js/sidebar.js" defer></script>
+    <script src="/js/appendMainFooter.js" defer></script>
+</body>
+</html>
