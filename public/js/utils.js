@@ -70,16 +70,19 @@ function renderPlaylistLinks(sectionsData, targetUlElement) {
 }
 
 
-// --- HÀM TẠO MỘT MỤC BÀI HÁT TRONG DANH SÁCH (DẠNG BẢNG) ---
+
+
+// --- HÀM TẠO MỘT MỤC BÀI HÁT TRONG DANH SÁCH (DẠNG BẢNG) - PHIÊN BẢN HOÀN CHỈNH ---
 function createSongListItem(songData, index, artistNameToDisplay) {
     const songItem = document.createElement('div');
     songItem.className = 'song-list-item';
     
-    // THÊM data-id VÀO ĐÂY
+    // Gán data-id để đồng bộ hóa trạng thái like
     songItem.dataset.id = songData._id || '';
 
     const artistName = artistNameToDisplay || songData.artistName || 'Nghệ sĩ không xác định';
 
+    // Cấu trúc HTML với cột Actions
     songItem.innerHTML = `
         <span class="song-index">${index}</span>
         <img src="/${songData.artUrl || 'img/song-holder.png'}" alt="${songData.title || 'Art'}" class="album-art-small">
@@ -99,22 +102,25 @@ function createSongListItem(songData, index, artistNameToDisplay) {
 
     const likeBtn = songItem.querySelector('.like-song-btn');
     if (likeBtn) {
-        // --- SỬA LẠI HOÀN TOÀN ---
-        // Chỉ cập nhật trạng thái ban đầu, không gắn listener gọi API ở đây nữa
+        // Kiểm tra trạng thái "like" ban đầu từ biến toàn cục
+        // `window.userLikedSongIds` được định nghĩa và tải trong player.js
         if (window.userLikedSongIds && window.userLikedSongIds.has(songData._id)) {
             likeBtn.classList.add('liked');
             likeBtn.querySelector('svg').setAttribute('fill', '#1DB954');
         }
 
-        // Gắn listener để gọi sự kiện chung
+        // Gắn sự kiện click để phát ra một sự kiện tùy chỉnh
         likeBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            // Phát ra một sự kiện tùy chỉnh mà player.js có thể lắng nghe
-            const likeEvent = new CustomEvent('toggleLike', { detail: { songId: songData._id } });
+            e.stopPropagation(); // Ngăn việc phát nhạc khi chỉ click vào nút tim
+            
+            // player.js sẽ lắng nghe sự kiện 'toggleLike' này
+            const likeEvent = new CustomEvent('toggleLike', { 
+                detail: { songId: songData._id } 
+            });
             document.dispatchEvent(likeEvent);
         });
-        // --- KẾT THÚC SỬA LẠI ---
     }
+
     return songItem;
 }
 

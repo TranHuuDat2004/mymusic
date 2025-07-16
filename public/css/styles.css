@@ -646,12 +646,15 @@ button:hover {
 /* Re-using .content-section and .card-grid from main styles */
 /* You might want specific styling for song list items if not using cards */
 .song-list-item {
-    display: flex;
+    display: grid;
+    /* #, Art, Title, Artist, Plays, Actions */
+    grid-template-columns: 24px 50px 1fr 1fr 100px 50px; 
+    gap: 16px;
     align-items: center;
-    padding: 8px 12px;
-    border-radius: 4px;
+    padding: 8px 16px;
+    border-radius: 6px;
+    transition: background-color 0.2s ease-in-out;
     cursor: pointer;
-    gap: 12px;
 }
 
 .song-list-item:hover {
@@ -702,7 +705,6 @@ button:hover {
     font-size: 1.2em;
     padding: 4px;
 }
-
 
 
 
@@ -1052,6 +1054,22 @@ button:hover {
     /* Ẩn cột nghệ sĩ riêng trên tablet */
     .song-list-header .song-artist-header {
         display: none;
+    }
+
+    .song-list-item {
+        /* #, Details, Actions */
+        grid-template-columns: 24px 1fr 40px; 
+    }
+
+    .song-artist-column,
+    .song-plays,
+    .album-art-small {
+        display: none;
+    }
+    
+    /* Đảm bảo cột actions không bị ẩn trên mobile */
+    .song-actions {
+        display: flex;
     }
 
     /* Khi ẩn cột nghệ sĩ, tên nghệ sĩ trong .song-details sẽ tự hiển thị */
@@ -2145,4 +2163,21 @@ button:hover {
     background-color: transparent;
     color: #fff;
     border: 1px solid #fff;
+}
+
+.song-actions {
+    display: flex;
+    justify-content: center; /* Căn nút tim ra giữa */
+}
+
+.like-song-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #b3b3b3;
+    padding: 0;
+}
+
+.like-song-btn.liked svg {
+    fill: #1DB954; /* Màu xanh khi đã thích */
 }

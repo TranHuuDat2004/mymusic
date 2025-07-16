@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= title %></title>
+    <title>
+        <%= title %>
+    </title>
     <!-- Sửa đường dẫn CSS để trỏ ra thư mục public gốc -->
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="icon" href="/img/favicon.png" type="image/png">
     <style>
         /* CSS cho banner nghệ sĩ. Dùng biến CSS để EJS chèn URL ảnh vào */
         .artist-header {
-            background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.9)), var(--artist-banner-url);
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.9)), var(--artist-banner-url);
             background-size: cover;
             background-position: center;
         }
@@ -27,14 +30,17 @@
 
         <main class="main-content" id="artist-main-content">
             <!-- HEADER - Dữ liệu được render trực tiếp từ server -->
-            <header class="artist-header" id="artist-header-banner" style="--artist-banner-url: url('/<%= artist.bannerUrl || artist.avatarUrl %>');">
+            <header class="artist-header" id="artist-header-banner"
+                style="--artist-banner-url: url('/<%= artist.bannerUrl || artist.avatarUrl %>');">
                 <div class="artist-header-content">
                     <div class="artist-avatar">
                         <img src="/<%= artist.avatarUrl %>" alt="Avatar của <%= artist.name %>" id="artist-avatar-img">
                     </div>
                     <div class="artist-info">
                         <span class="artist-type">Nghệ sĩ</span>
-                        <h1 class="artist-name" id="artist-profile-name"><%= artist.name %></h1>
+                        <h1 class="artist-name" id="artist-profile-name">
+                            <%= artist.name %>
+                        </h1>
                         <div class="artist-stats" id="artist-profile-stats">
                             <%= (artist.monthlyListeners || 0).toLocaleString('vi-VN') %> người nghe hàng tháng
                         </div>
@@ -44,7 +50,8 @@
 
             <!-- CÁC NÚT HÀNH ĐỘNG -->
             <div class="artist-actions">
-                <button class="play-button-large" id="play-artist-btn" title="Phát nhạc của <%= artist.name %>">▶</button>
+                <button class="play-button-large" id="play-artist-btn"
+                    title="Phát nhạc của <%= artist.name %>">▶</button>
                 <button class="follow-button" id="artist-follow-btn">Theo dõi</button>
                 <button class="artist-more-options" title="Tùy chọn khác">•••</button>
             </div>
@@ -53,40 +60,48 @@
             <section class="content-section">
                 <h2>Bài hát nổi bật</h2>
                 <div id="artist-popular-songs" class="song-list-container">
-                    <% if (artist.songs && artist.songs.length > 0) { %>
-                        <% artist.songs.slice(0, 50).forEach((song, index) => { %>
-                            <div class="song-list-item" 
-                                 data-src="<%= song.audioSrc %>" 
-                                 data-title="<%= song.title %>" 
-                                 data-artist="<%= song.artistName %>" 
-                                 data-art="<%= song.artUrl %>">
-                                
-                                <span class="song-index"><%= index + 1 %></span>
+                    <% if (artist.songs && artist.songs.length> 0) { %>
+                        <% artist.songs.slice(0, 50).forEach((song, index)=> { %>
+                            <div class="song-list-item" data-id="<%= song._id %>" data-src="<%= song.audioSrc %>"
+                                data-title="<%= song.title %>" data-artist="<%= song.artistName %>"
+                                data-art="<%= song.artUrl %>">
+
+                                <span class="song-index">
+                                    <%= index + 1 %>
+                                </span>
                                 <img src="/<%= song.artUrl %>" alt="<%= song.title %>" class="album-art-small">
                                 <div class="song-details">
-                                    <div class="song-title"><%= song.title %></div>
+                                    <div class="song-title">
+                                        <%= song.title %>
+                                    </div>
                                 </div>
-                                <div class="song-artist-column"><%= song.artistName %></div>
-                                <div class="song-plays"><%= (song.plays || 0).toLocaleString('vi-VN') %></div>
+                                <div class="song-artist-column">
+                                    <%= song.artistName %>
+                                </div>
+                                <div class="song-plays">
+                                    <%= (song.plays || 0).toLocaleString('vi-VN') %>
+                                </div>
                                 <div class="song-duration">--:--</div>
                             </div>
-                        <% }); %>
-                    <% } else { %>
-                        <p>Nghệ sĩ này chưa có bài hát nào.</p>
-                    <% } %>
+                            <% }); %>
+                                <% } else { %>
+                                    <p>Nghệ sĩ này chưa có bài hát nào.</p>
+                                    <% } %>
                 </div>
             </section>
 
             <!-- CÁC SECTION KHÁC (ALBUM, SINGLE, GIỚI THIỆU) -->
             <section class="content-section">
                 <h2>Giới thiệu</h2>
-                <p id="artist-bio"><%= artist.bio || `Thông tin về nghệ sĩ ${artist.name} đang được cập nhật.` %></p>
+                <p id="artist-bio">
+                    <%= artist.bio || `Thông tin về nghệ sĩ ${artist.name} đang được cập nhật.` %>
+                </p>
             </section>
-            
+
             <!-- Footer sẽ được chèn bởi appendMainFooter.js -->
 
         </main>
-        
+
         <footer id="player-bar-container"></footer>
         <div id="now-playing-fullscreen-container"></div>
         <div id="notification-container"></div>
@@ -97,14 +112,15 @@
     <script src="/js/player.js" defer></script>
     <script src="/js/sidebar.js" defer></script>
     <script src="/js/appendMainFooter.js" defer></script>
-    
+
     <!-- Script inline để xử lý các tương tác trên trang này -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const allSongItems = document.querySelectorAll('.song-list-item[data-src]');
-            
+
             // Tạo playlist context từ tất cả các bài hát trên trang
             const playlistContext = Array.from(allSongItems).map(item => ({
+                _id: item.dataset.id, // << QUAN TRỌNG: Thêm dòng này
                 audioSrc: item.dataset.src,
                 title: item.dataset.title,
                 artistName: item.dataset.artist,
@@ -116,6 +132,7 @@
             allSongItems.forEach(item => {
                 item.addEventListener('click', () => {
                     const songData = {
+                        _id: item.dataset.id, // << QUAN TRỌNG: Thêm dòng này
                         audioSrc: item.dataset.src,
                         title: item.dataset.title,
                         artistName: item.dataset.artist,
@@ -140,4 +157,5 @@
         });
     </script>
 </body>
+
 </html>

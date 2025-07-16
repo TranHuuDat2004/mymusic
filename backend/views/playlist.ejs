@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= title %></title>
+    <title>
+        <%= title %>
+    </title>
     <!-- Sửa đường dẫn CSS để trỏ ra thư mục public gốc -->
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="icon" href="/img/favicon.png" type="image/png">
@@ -18,6 +21,7 @@
             background-color: rgba(255, 255, 255, 0.05);
             border-radius: 8px;
         }
+
         .playlist-cover-art img {
             width: 180px;
             height: 180px;
@@ -25,11 +29,13 @@
             border-radius: 6px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
+
         .playlist-info {
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
         }
+
         .playlist-info .playlist-type {
             font-size: 0.8em;
             font-weight: bold;
@@ -37,6 +43,7 @@
             margin-bottom: 8px;
             color: #b3b3b3;
         }
+
         .playlist-info .playlist-main-title {
             font-size: 2.5em;
             font-weight: 700;
@@ -44,6 +51,7 @@
             line-height: 1.1;
             color: #fff;
         }
+
         .playlist-info .playlist-description,
         .playlist-info .playlist-stats {
             font-size: 0.9em;
@@ -66,12 +74,17 @@
             <div class="playlist-header-details">
                 <div class="playlist-cover-art">
                     <!-- Lấy ảnh bìa của bài hát đầu tiên, hoặc ảnh mặc định -->
-                    <img src="/<%= (playlist.songs && playlist.songs.length > 0) ? playlist.songs[0].artUrl : 'img/song-holder.png' %>" alt="<%= playlist.title %>">
+                    <img src="/<%= (playlist.songs && playlist.songs.length > 0) ? playlist.songs[0].artUrl : 'img/song-holder.png' %>"
+                        alt="<%= playlist.title %>">
                 </div>
                 <div class="playlist-info">
                     <span class="playlist-type">Playlist</span>
-                    <h1 class="playlist-main-title"><%= playlist.title %></h1>
-                    <p class="playlist-description"><%= playlist.description || '' %></p>
+                    <h1 class="playlist-main-title">
+                        <%= playlist.title %>
+                    </h1>
+                    <p class="playlist-description">
+                        <%= playlist.description || '' %>
+                    </p>
                     <div class="playlist-stats">
                         <%= playlist.songs.length %> bài hát
                     </div>
@@ -84,34 +97,42 @@
                 <div class="song-list-header song-list-item">
                     <span class="song-index">#</span>
                     <span class="song-art-placeholder"></span>
-                    <div class="song-details"><div class="song-title">TIÊU ĐỀ</div></div>
+                    <div class="song-details">
+                        <div class="song-title">TIÊU ĐỀ</div>
+                    </div>
                     <div class="song-artist-column">NGHỆ SĨ</div>
                     <div class="song-plays">LƯỢT NGHE</div>
                     <div class="song-duration">THỜI LƯỢNG</div>
                 </div>
 
                 <!-- Lặp qua từng bài hát và render -->
-                <% playlist.songs.forEach((song, index) => { %>
-                    <div class="song-list-item" 
-                         data-src="<%= song.audioSrc %>" 
-                         data-title="<%= song.title %>" 
-                         data-artist="<%= song.artistName %>" 
-                         data-art="<%= song.artUrl %>">
-                        
-                        <span class="song-index"><%= index + 1 %></span>
+                <% playlist.songs.forEach((song, index)=> { %>
+                    <div class="song-list-item" data-id="<%= song._id %>" data-src="<%= song.audioSrc %>"
+                        data-title="<%= song.title %>" data-artist="<%= song.artistName %>"
+                        data-art="<%= song.artUrl %>">
+
+                        <span class="song-index">
+                            <%= index + 1 %>
+                        </span>
                         <img src="/<%= song.artUrl %>" alt="<%= song.title %>" class="album-art-small">
                         <div class="song-details">
-                            <div class="song-title"><%= song.title %></div>
+                            <div class="song-title">
+                                <%= song.title %>
+                            </div>
                         </div>
-                        <div class="song-artist-column"><%= song.artistName %></div>
-                        <div class="song-plays"><%= song.plays || 0 %></div>
+                        <div class="song-artist-column">
+                            <%= song.artistName %>
+                        </div>
+                        <div class="song-plays">
+                            <%= song.plays || 0 %>
+                        </div>
                         <!-- Thời lượng sẽ được player.js cập nhật sau, hoặc để trống -->
-                        <div class="song-duration">--:--</div> 
+                        <div class="song-duration">--:--</div>
                     </div>
-                <% }); %>
+                    <% }); %>
             </div>
         </main>
-        
+
         <footer id="player-bar-container"></footer>
         <div id="now-playing-fullscreen-container"></div>
         <div id="notification-container"></div>
@@ -124,16 +145,17 @@
     <script src="/js/sidebar.js" defer></script>
     <script src="/js/appendMainFooter.js" defer></script>
     <!-- File playlist.js không còn cần thiết nữa vì EJS đã render hết -->
-    
+
     <!-- Script inline để gắn listener cho các bài hát vừa được render -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const songItems = document.querySelectorAll('.song-list-item[data-src]');
-            
+
             // Tạo một mảng chứa dữ liệu của tất cả bài hát trong playlist này
             const playlistContext = [];
             songItems.forEach(item => {
                 playlistContext.push({
+                    _id: item.dataset.id, // << QUAN TRỌNG: Thêm dòng này
                     audioSrc: item.dataset.src,
                     title: item.dataset.title,
                     artistName: item.dataset.artist,
@@ -146,12 +168,13 @@
             songItems.forEach(item => {
                 item.addEventListener('click', () => {
                     const songData = {
+                        _id: item.dataset.id, // << QUAN TRỌNG: Thêm dòng này
                         audioSrc: item.dataset.src,
                         title: item.dataset.title,
                         artistName: item.dataset.artist,
                         artUrl: item.dataset.art
                     };
-                    
+
                     if (typeof window.playSongFromData === 'function') {
                         // Truyền cả bài hát được click và toàn bộ context của playlist
                         window.playSongFromData(songData, playlistContext);
@@ -161,4 +184,5 @@
         });
     </script>
 </body>
+
 </html>
