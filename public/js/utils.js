@@ -2,58 +2,30 @@
 
 // --- Hàm tạo một card bài hát ---
 // Hàm này sẽ được gọi từ main.js và search.js
+// --- Hàm tạo một card bài hát ---
 function createSongCard(songData) {
     const card = document.createElement('div');
     card.classList.add('card');
+    
+    // Gán dataset để player.js có thể đọc
     card.dataset.src = songData.audioSrc || '';
     card.dataset.title = songData.title || 'Không có tiêu đề';
-    card.dataset.artist = songData.artistData || songData.displayArtist?.name || 'N/A';
-    card.dataset.art = songData.artUrl || 'https://via.placeholder.com/200';
+    card.dataset.artist = songData.artistData || songData.displayArtist?.name || songData.artistName || 'N/A';
+    card.dataset.art = songData.artUrl || '/img/song-holder.png';
 
-    const img = document.createElement('img');
-    img.src = songData.artUrl || 'https://via.placeholder.com/200';
-    img.alt = songData.title || 'Album Art';
-    img.classList.add('album-art');
-    img.loading = 'lazy';
+    // Dùng artistName từ dữ liệu API nếu có
+    const artistText = songData.displayArtist?.name || songData.artistName || 'Nghệ sĩ không xác định';
+    
+    card.innerHTML = `
+        <img src="/${songData.artUrl || 'img/song-holder.png'}" alt="${songData.title}" class="album-art" loading="lazy">
+        <h3 class="song-title">${songData.title || 'Không có tiêu đề'}</h3>
+        <p class="song-artist">${artistText}</p>
+        <button class="play-button-overlay">▶</button>
+    `;
 
-    const titleH3 = document.createElement('h3');
-    titleH3.classList.add('song-title');
-    titleH3.textContent = songData.title || 'Không có tiêu đề';
-
-    const artistP = document.createElement('p');
-    artistP.classList.add('song-artist');
-    if (songData.displayArtist && songData.displayArtist.id && songData.displayArtist.name) {
-        const artistLink = document.createElement('a');
-        artistLink.href = `artist_page.html?artistId=${songData.displayArtist.id}`;
-        artistLink.textContent = songData.displayArtist.name;
-        // Ngăn link nghệ sĩ tự kích hoạt phát nhạc của card cha
-        artistLink.addEventListener('click', (e) => e.stopPropagation());
-        artistP.appendChild(artistLink);
-    } else if (songData.displayArtist && songData.displayArtist.name) {
-        artistP.textContent = songData.displayArtist.name;
-    } else {
-        artistP.textContent = 'Nghệ sĩ không xác định';
-    }
-
-    const playButton = document.createElement('button');
-    playButton.classList.add('play-button-overlay');
-    playButton.innerHTML = '▶';
-    // Ngăn nút play tự kích hoạt sự kiện click của card cha (nếu cần)
-    // playButton.addEventListener('click', (e) => e.stopPropagation());
-
-    card.appendChild(img);
-    card.appendChild(titleH3);
-    card.appendChild(artistP);
-    card.appendChild(playButton);
-
-    // **QUAN TRỌNG:** Gắn listener sẽ được thực hiện bởi hàm gọi createSongCard
-    // thông qua hàm addCardClickListener được expose từ player.js
-    if (typeof window.addCardClickListener === 'function') {
-         window.addCardClickListener(card);
-    } else {
-        console.warn('Hàm window.addCardClickListener không tồn tại khi tạo card.');
-    }
-
+    // **QUAN TRỌNG:** Xóa bỏ hoàn toàn khối if (typeof window.addCardClickListener)
+    // Việc gắn listener sẽ do file gọi hàm này (main.js, library.js...) hoặc script inline đảm nhiệm.
+    
     return card;
 }
 

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Tiêu đề được truyền từ server -->
+    <title><%= title %></title> 
+    
+    <link rel="stylesheet" href="/styles.css"> 
+    <link rel="icon" href="/img/favicon.png" type="image/png">
+</head>
+<body>
+    <button class="menu-toggle-btn" aria-label="Toggle menu">☰</button>
+    <audio id="audio-player"></audio>
+
+    <div class="music-player-container">
+        <!-- Sidebar -->
+        <nav id="sidebar-container" class="sidebar"></nav>
+
+        <!-- Nội dung chính -->
+        <main class="main-content" id="all-playlists-content">
+            <h1>Tất cả Playlist</h1>
+            
+            <div class="card-grid">
+                <!-- EJS sẽ lặp qua mảng playlists và render từng card -->
+                <% if (playlists && playlists.length > 0) { %>
+                    <% playlists.forEach(playlist => { %>
+                        <a href="/playlist.html?id=<%= playlist._id %>" class="card playlist-card">
+                            <% 
+                                // Lấy ảnh bìa của bài hát đầu tiên, hoặc ảnh dự phòng
+                                const coverArt = (playlist.songs && playlist.songs.length > 0 && playlist.songs[0].artUrl) 
+                                               ? playlist.songs[0].artUrl 
+                                               : 'img/song-holder.png';
+                            %>
+                            <img src="/<%= coverArt %>" alt="<%= playlist.title %>" class="album-art" loading="lazy">
+                            <h3 class="song-title"><%= playlist.title %></h3>
+                            <p class="song-artist">Playlist</p>
+                        </a>
+                    <% }); %>
+                <% } else { %>
+                    <p>Không có playlist nào để hiển thị.</p>
+                <% } %>
+            </div>
+
+        </main>
+
+        <!-- Player bar và các thành phần khác -->
+        <footer id="player-bar-container"></footer>
+        <div id="now-playing-fullscreen-container"></div>
+        <div id="notification-container"></div>
+    </div>
+
+    <!-- Scripts -->
+    <!-- Không cần file data.js vì dữ liệu đã được render từ server -->
+    <script src="/js/utils.js" defer></script>
+    <script src="/js/player.js" defer></script>
+    <script src="/js/sidebar.js" defer></script>
+    <!-- Không cần file all_playlists.js nữa vì logic đã được xử lý ở đây -->
+</body>
+</html>

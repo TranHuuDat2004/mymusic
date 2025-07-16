@@ -60,6 +60,28 @@ app.get('/', async (req, res) => {
     }
 });
 
+// --- THÊM ROUTE MỚI CHO TRANG ALL PLAYLISTS ---
+app.get('/all_playlists.html', async (req, res) => {
+    try {
+        // Lấy tất cả các playlist từ database
+        // Populate bài hát đầu tiên để lấy ảnh bìa
+        const playlists = await Playlist.find().populate({
+            path: 'songs',
+            perDocumentLimit: 1 // Chỉ lấy 1 bài hát đầu tiên cho mỗi playlist
+        });
+
+        res.render('all_playlists', {
+            title: 'Tất cả Playlist - My Music Player',
+            playlists: playlists // Truyền dữ liệu playlists vào view
+        });
+
+    } catch (error) {
+        console.error("Error rendering all playlists page:", error);
+        res.status(500).send("Lỗi tải trang");
+    }
+});
+
+
 // --- ===== API ROUTES ===== ---
 
 // --- 1. API cho Artists ---

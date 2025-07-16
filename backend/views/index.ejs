@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- EJS có thể chèn biến từ server -->
-    <title><%= title %></title> 
-    
+    <title>
+        <%= title %>
+    </title>
+
     <!-- SỬA ĐƯỜNG DẪN: Bắt đầu bằng '/' để trỏ đến thư mục public gốc -->
-    <link rel="stylesheet" href="/css/styles.css"> 
+    <link rel="stylesheet" href="/css/styles.css">
     <link rel="icon" href="/img/favicon.png" type="image/png">
 </head>
+
 <body>
     <button class="menu-toggle-btn" aria-label="Toggle menu">☰</button>
     <audio id="audio-player"></audio>
@@ -21,23 +25,32 @@
         <!-- Nội dung chính -->
         <main class="main-content" id="home-content">
             <!-- Dữ liệu này sẽ được EJS chèn vào từ server -->
-            <h1><%= welcomeMessage %></h1>
-            
-            <% sections.forEach(section => { %>
+            <h1>
+                <%= welcomeMessage %>
+            </h1>
+
+            <% sections.forEach(section=> { %>
                 <section class="content-section">
-                    <h2 class="section-title"><%= section.title %></h2>
+                    <h2 class="section-title">
+                        <%= section.title %>
+                    </h2>
                     <div class="card-grid">
-                        <% section.songs.slice(0, 6).forEach(song => { %>
-                            <div class="card" data-src="<%= song.audioSrc %>" data-title="<%= song.title %>" data-artist="<%= song.artistName %>" data-art="<%= song.artUrl %>">
+                        <% section.songs.slice(0, 50).forEach(song=> { %>
+                            <div class="card" data-src="<%= song.audioSrc %>" data-title="<%= song.title %>"
+                                data-artist="<%= song.artistName %>" data-art="<%= song.artUrl %>">
                                 <img src="/<%= song.artUrl %>" alt="<%= song.title %>" class="album-art" loading="lazy">
-                                <h3 class="song-title"><%= song.title %></h3>
-                                <p class="song-artist"><%= song.artistName %></p>
+                                <h3 class="song-title">
+                                    <%= song.title %>
+                                </h3>
+                                <p class="song-artist">
+                                    <%= song.artistName %>
+                                </p>
                                 <button class="play-button-overlay">▶</button>
                             </div>
-                        <% }); %>
+                            <% }); %>
                     </div>
                 </section>
-            <% }); %>
+                <% }); %>
 
         </main>
 
@@ -47,24 +60,14 @@
         <div id="notification-container"></div>
     </div>
 
+
+
     <!-- Scripts -->
-    <!-- SỬA ĐƯỜNG DẪN: Tất cả các script cũng cần '/' ở đầu -->
+    <!-- CHỈ CẦN GIỮ LẠI CÁC DÒNG NÀY, XÓA HẾT SCRIPT INLINE -->
     <script src="/js/utils.js" defer></script>
-    <script src="/js/player.js" defer></script>
     <script src="/js/sidebar.js" defer></script>
-    
-    <!-- File main.js không còn cần thiết nếu bạn render tĩnh như trên -->
-    <!-- Thay vào đó, bạn có thể nhúng các listener cần thiết ở đây -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Gắn listener cho các card vừa được EJS render
-            const cards = document.querySelectorAll('.card');
-            cards.forEach(card => {
-                if(typeof window.addCardClickListener === 'function') {
-                    window.addCardClickListener(card);
-                }
-            });
-        });
-    </script>
+    <script src="/js/player.js" defer></script>
+
 </body>
+
 </html>
