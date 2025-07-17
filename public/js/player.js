@@ -442,3 +442,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
     console.log("Player đã khởi tạo hoàn tất.");
 });
+// Hiển thị thông báo ngắn
+window.showNotification = function(message) { // << THÊM window. VÀO ĐÂY
+    const notificationContainer = document.getElementById('notification-container');
+    if (!notificationContainer) return;
+    clearTimeout(notificationContainer.timeoutId);
+    notificationContainer.textContent = message;
+    notificationContainer.classList.add('active');
+    notificationContainer.timeoutId = setTimeout(() => {
+        notificationContainer.classList.remove('active');
+    }, 2500);
+}
+
+// public/js/player.js
+
+window.showNotification = function(message, type = 'success') { // Thêm tham số type
+    const notificationContainer = document.getElementById('notification-container');
+    if (!notificationContainer) return;
+
+    // Xóa các class cũ
+    notificationContainer.classList.remove('success', 'error');
+    // Thêm class mới dựa vào type
+    notificationContainer.classList.add(type);
+
+    clearTimeout(notificationContainer.timeoutId);
+    notificationContainer.textContent = message;
+    notificationContainer.classList.add('active');
+    
+    notificationContainer.timeoutId = setTimeout(() => {
+        notificationContainer.classList.remove('active');
+    }, 3000); // Tăng thời gian hiển thị một chút
+}

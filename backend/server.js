@@ -13,8 +13,9 @@ const Playlist = require('./models/Playlist');
 const User = require('./models/User'); // Import User model
 const authRoutes = require('./routes/authRoutes'); // Import auth routes
 const songRoutes = require('./routes/songRoutes');
+const userRoutes = require('./routes/userRoutes');
 // ------------------------------------------
-
+const { protect } = require('./middleware/authMiddleware'); 
 
 const app = express();
 
@@ -273,10 +274,22 @@ app.get('/favorite', (req, res) => {
         title: 'Nhạc yêu thích - My Music Player'
     });
 });
+
+
+
+app.get('/account', (req, res) => {
+    // req.user được gắn bởi middleware 'protect'
+    const user = req.user; 
+    res.render('account', {
+        title: 'Cài đặt tài khoản - My Music Player',
+        user: user // Truyền thông tin người dùng vào view
+    });
+});
+
 // --- ===== API ROUTES ===== ---
 app.use('/api/auth', authRoutes);
 app.use('/api/songs', songRoutes); // THÊM DÒNG NÀY
-
+app.use('/api/user', userRoutes);
 // --- 1. API cho Artists ---
 
 // GET /api/artists - Lấy danh sách tất cả nghệ sĩ

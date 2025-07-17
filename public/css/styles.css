@@ -1569,7 +1569,10 @@ button:hover {
     /* Hiệu ứng trượt lên một chút */
 }
 
-
+/* Thêm style cho lỗi */
+#notification-container.error {
+    background-color: #e03131; /* Màu đỏ cho lỗi */
+}
 
 /* --- Styling cho các nút player đang active --- */
 /* Quy tắc này sẽ áp dụng cho tất cả các nút có class .active */

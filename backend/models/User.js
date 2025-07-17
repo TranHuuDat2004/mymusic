@@ -19,6 +19,12 @@ const userSchema = new mongoose.Schema({
         lowercase: true,
         match: [/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/, 'Vui lòng nhập một địa chỉ email hợp lệ']
     },
+    // --- BẮT ĐẦU THÊM MỚI ---
+    avatarUrl: {
+        type: String,
+        default: 'img/avatar.png' // Đặt một ảnh đại diện mặc định
+    },
+
     password: {
         type: String,
         required: [true, 'Vui lòng nhập mật khẩu'],

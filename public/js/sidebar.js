@@ -10,20 +10,22 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- 1. KIỂM TRA TRẠNG THÁI ĐĂNG NHẬP ---
     const userInfo = JSON.parse(localStorage.getItem('userInfo'));
     const isLoggedIn = !!userInfo; // true nếu userInfo tồn tại, ngược lại là false
-
+    const userAvatar = userInfo.avatarUrl ? `/${userInfo.avatarUrl}` : '/img/avatar.png';
     // --- 2. ĐỊNH NGHĨA HTML CHO CÁC TRẠNG THÁI ---
     let sidebarHTML = '';
 
     if (isLoggedIn) {
         // --- Giao diện KHI ĐÃ ĐĂNG NHẬP ---
         sidebarHTML = `
+<a href="/account" class="sidebar-profile-link"> <!-- BỌC TRONG THẺ A -->
             <div class="sidebar-profile">
-                <img src="/img/avatar.PNG" alt="Avatar" class="profile-avatar">
+                <img src="${userAvatar}" alt="Avatar" class="profile-avatar">
                 <div class="profile-info">
                     <span class="profile-name">${userInfo.username}</span>
-                    <a href="#" id="logout-btn" class="logout-link">Đăng xuất</a>
+                    <span class="profile-view">Xem tài khoản</span>
                 </div>
             </div>
+        </a>
             <div class="sidebar-nav">
                 <ul>
                     <li><a href="/"><svg viewBox="0 0 24 24" class="icon-home"><path d="M12 3L4 9v12h5v-7h6v7h5V9z"></path></svg>Trang chủ</a></li>
@@ -34,8 +36,14 @@ document.addEventListener('DOMContentLoaded', () => {
                  <li><a href="/tutorial"><svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" class="icon-tutorial"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"></path></svg>Hướng dẫn</a></li>
                 <li><a href="/about"><svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" class="icon-info"><path d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"></path></svg>Giới thiệu</a></li>
                 <li><a href="/version"><svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" class="icon-version"><path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"></path></svg>Phiên bản</a></li>
-                    </ul>
+                <li><a href="/login" id="logout-btn" class="logout-link">
+                <svg viewBox="0 0 24 24"width="24" height="24" fill="currentColor" class="icon-version"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"></path></svg>
+                <span>Đăng xuất</span>
+             </a></li>    
+                </ul>
             </div>
+
+        </div>
             <div class="sidebar-playlists">
                 <h4>PLAYLISTS</h4>
                 <ul id="playlist-links-list">

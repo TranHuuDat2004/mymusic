@@ -30,12 +30,14 @@ router.post('/register', async (req, res) => {
             email,
             password
         });
-        
+
         // Trả về thông tin người dùng và token
+        // --- SỬA Ở ĐÂY ---
         res.status(201).json({
             _id: user._id,
             username: user.username,
             email: user.email,
+            avatarUrl: user.avatarUrl, // Trả về avatarUrl (sẽ là giá trị default)
             token: generateToken(user._id)
         });
 
@@ -59,6 +61,7 @@ router.post('/login', async (req, res) => {
                 _id: user._id,
                 username: user.username,
                 email: user.email,
+                avatarUrl: user.avatarUrl, // Trả về avatarUrl đã lưu của user
                 token: generateToken(user._id)
             });
         } else {
