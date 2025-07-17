@@ -10,11 +10,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- 1. KIỂM TRA TRẠNG THÁI ĐĂNG NHẬP ---
     const userInfo = JSON.parse(localStorage.getItem('userInfo'));
     const isLoggedIn = !!userInfo; // true nếu userInfo tồn tại, ngược lại là false
-    const userAvatar = userInfo.avatarUrl ? `/${userInfo.avatarUrl}` : '/img/avatar.png';
+
     // --- 2. ĐỊNH NGHĨA HTML CHO CÁC TRẠNG THÁI ---
     let sidebarHTML = '';
 
     if (isLoggedIn) {
+        const userAvatar = userInfo.avatarUrl ? `/${userInfo.avatarUrl}` : '/img/avatar.png';
         // --- Giao diện KHI ĐÃ ĐĂNG NHẬP ---
         sidebarHTML = `
 <a href="/account" class="sidebar-profile-link"> <!-- BỌC TRONG THẺ A -->
