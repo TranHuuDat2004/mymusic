@@ -3,7 +3,7 @@
 # MyMusic Player v2.0.0
 
 <p align="center">
-  <img src="public/img/logo.png" alt="MyMusic Player Logo" width="150"/>
+  <img src="screenshot/logo.png" alt="MyMusic Player Logo" width="150"/>
 </p>
 
 <p align="center">
@@ -18,7 +18,7 @@
 </p>
 
 <p align="center">
-  <a href="https://tranhuudat2004.github.io/mymusic/" target="_blank">
+  <a href="https://tranhuudat2004.github.io/mymusic-demo/" target="_blank">
     <img src="https://img.shields.io/badge/Live-Demo-brightgreen?style=for-the-badge&logo=google-chrome" alt="Live Demo"/>
   </a>
   <a href="https://github.com/TranHuuDat2004/mymusic/releases/latest" target="_blank">
