@@ -1,126 +1,153 @@
-<div align="center">
-
-# MyMusic Player - A Modern Web-Based Music Interface
-*Giao diện trình phát nhạc hiện đại trên nền tảng web*
-
-</div>
+# MyMusic Player v2.0.0
 
 <p align="center">
-  <a href="https://tranhuudat2004.github.io/mymusic/" target="_blank">
-    <img src="https://img.shields.io/badge/Live-Demo-brightgreen?style=for-the-badge&logo=google-chrome" alt="Live Demo"/>
-  </a>
-  <a href="https://github.com/TranHuuDat2004/mymusic/releases/latest" target="_blank">
-    <img src="https://img.shields.io/github/v/release/TranHuuDat2004/mymusic?style=for-the-badge&logo=github" alt="Latest Release"/>
-  </a>
+  <img src="screenshot/logo.png" alt="MyMusic Player Logo" width="150"/>
 </p>
 
-Project link (Fullstack - Coming soon): https://github.com/TranHuuDat2004/mymusic
+<p align="center">
+  <strong>Một trình phát nhạc trực tuyến hiện đại được xây dựng với Node.js, Express, MongoDB và EJS.</strong>
+  <br>
+  <em>A modern web-based music player built with Node.js, Express, MongoDB, and EJS.</em>
+</p>
 
-Live demo (HTML, CSS, JS): https://tranhuudat2004.github.io/mymusic-demo/
+<p align="center">
+  <a href="https://github.com/TranHuuDat2004/mymusic/stargazers"><img src="https://img.shields.io/github/stars/TranHuuDat2004/mymusic?style=for-the-badge&logo=github&color=1DB954" alt="Stars"></a>
+  <a href="https://github.com/TranHuuDat2004/mymusic/network/members"><img src="https://img.shields.io/github/forks/TranHuuDat2004/mymusic?style=for-the-badge&logo=github&color=1DB954" alt="Forks"></a>
+  <a href="https://github.com/TranHuuDat2004/mymusic/issues"><img src="https://img.shields.io/github/issues/TranHuuDat2004/mymusic?style=for-the-badge&logo=github&color=orange" alt="Issues"></a>
+  <a href="https://github.com/TranHuuDat2004/mymusic/blob/main/LICENSE"><img src="https://img.shields.io/github/license/TranHuuDat2004/mymusic?style=for-the-badge&color=blue" alt="License"></a>
+</p>
+
 
 ---
 
 <details>
-<summary><strong> Tiếng Việt (Nhấn để xem)</strong></summary>
+<summary><strong>🇻🇳 Giới thiệu (Tiếng Việt)</strong></summary>
 
-![MyMusic Player Screenshot](screenshot/demo.jpg)
+**MyMusic Player** là một ứng dụng web full-stack, đóng vai trò là một trình phát nhạc trực tuyến với giao diện hiện đại, lấy cảm hứng từ các nền tảng phổ biến như Spotify. Dự án này không chỉ là một sản phẩm để nghe nhạc mà còn là một minh chứng (proof-of-concept) về việc xây dựng một ứng dụng web hoàn chỉnh từ đầu đến cuối, bao gồm backend, database, API, và hệ thống xác thực người dùng.
 
-MyMusic Player là một giao diện trình phát nhạc trực tuyến được thiết kế và phát triển nhằm mang đến trải nghiệm nghe nhạc đơn giản, hiện đại và trực quan, lấy cảm hứng từ các nền tảng phổ biến như Spotify.
+### ✨ Tính năng nổi bật (v2.0.0)
 
-**Bản dùng thử trực tiếp:** [**https://tranhuudat2004.github.io/mymusic-demo/**](https://tranhuudat2004.github.io/mymusic-demo/)
+- **Giao diện người dùng hiện đại:** Thiết kế đáp ứng (responsive), hoạt động mượt mà trên cả máy tính và thiết bị di động.
+- **Trình phát nhạc đầy đủ chức năng:** Bao gồm phát/dừng, thanh tiến trình, điều chỉnh âm lượng, phát ngẫu nhiên (shuffle), và các chế độ lặp lại.
+- **Quản lý dữ liệu động:** Toàn bộ bài hát, nghệ sĩ, và playlist được quản lý thông qua cơ sở dữ liệu MongoDB.
+- **Hệ thống người dùng:**
+  - Đăng ký và Đăng nhập tài khoản.
+  - Mã hóa mật khẩu an toàn phía server.
+  - Xác thực bằng JSON Web Tokens (JWT).
+- **Cá nhân hóa:**
+  - Tính năng "Bài hát đã thích".
+  - Trang Cài đặt tài khoản cho phép đổi thông tin, avatar, và mật khẩu.
+- **Tương tác động:** Tìm kiếm, thêm vào danh sách yêu thích, và các thao tác khác diễn ra nhanh chóng thông qua việc gọi API mà không cần tải lại trang.
 
-### ✨ Tính Năng Nổi Bật
+### 🛠️ Công nghệ sử dụng
 
-*   **🎧 Trải nghiệm Nghe nhạc Toàn diện:**
-    *   **Trình phát nhạc đầy đủ chức năng:** Phát, tạm dừng, tua nhạc, điều khiển âm lượng, lặp lại (tất cả/một bài), và phát ngẫu nhiên.
-    *   **Giao diện "Now Playing" toàn màn hình:** Một giao diện đắm chìm, đồng bộ hoàn hảo với thanh phát nhạc chính.
-*   **📱 Tích hợp Hệ thống (Native Integration):**
-    *   **Media Session API:** Điều khiển nhạc trực tiếp từ Màn hình khóa, Trung tâm điều khiển (iOS/Android) và các thiết bị phần cứng (như tai nghe). Ảnh bìa và thông tin bài hát được hiển thị đẹp mắt trên toàn hệ thống.
-    *   **Favicon & Tiêu đề Động:** Favicon và tiêu đề tab trình duyệt tự động cập nhật theo bài hát đang phát.
-*   **🎨 Giao diện Hiện đại & Đáp ứng (Responsive):**
-    *   Thiết kế gọn gàng, trực quan và hoạt động tối ưu trên mọi kích thước màn hình, từ máy tính để bàn đến thiết bị di động.
-*   **✨ Tương tác Động:**
-    *   Được xây dựng hoàn toàn bằng **JavaScript thuần (Vanilla JS)** để tạo ra các yếu tố giao diện động và phản hồi mượt mà.
+| Lĩnh vực      | Công nghệ                                 |
+| :------------- | :---------------------------------------- |
+| **Backend**    | Node.js, Express.js                       |
+| **Database**   | MongoDB (với Mongoose ODM)                |
+| **Frontend**   | HTML5, CSS3, JavaScript (ES6+)            |
+| **View Engine**| EJS (Embedded JavaScript templating)      |
+| **Xác thực**   | JSON Web Tokens (JWT), bcrypt.js          |
+| **Upload File**| Multer                                    |
+| **Môi trường** | dotenv, nodemon                           |
 
-### 🛠️ Công Nghệ Sử Dụng
-
-*   **HTML5:** Cung cấp cấu trúc ngữ nghĩa cho trang web.
-*   **CSS3:** Định dạng giao diện, sử dụng Flexbox, Grid Layout và Biến CSS (Custom Properties).
-*   **JavaScript (ES6+):** Xử lý toàn bộ logic ứng dụng, tương tác người dùng, và quản lý trạng thái. Dự án được xây dựng **không sử dụng framework/thư viện** để tập trung vào kỹ năng JS cốt lõi.
-*   **Hosting:** Triển khai dưới dạng trang web tĩnh qua [GitHub Pages](https://tranhuudat2004.github.io/mymusic-demo/).
-
-### 📜 Phạm Vi và Giới Hạn
-
-MyMusic Player là một **ứng dụng web tĩnh** và hoạt động hoàn toàn phía client (trình duyệt). Do đó, dự án có các giới hạn sau:
-*   **Dữ liệu tĩnh:** Danh sách bài hát được định nghĩa sẵn trong mã nguồn.
-*   **Không có tính năng phía máy chủ:** Không có cơ sở dữ liệu, đăng nhập người dùng, hay lưu trữ playlist trên server.
-*   **Hoạt động độc lập:** Trạng thái nghe nhạc không được đồng bộ hóa giữa các thiết bị.
-
-Các giới hạn này phản ánh bản chất của một dự án front-end tập trung vào việc trình diễn kỹ năng thiết kế giao diện và tương tác phía client.
-
-### 🚀 Bắt đầu
-
-1.  **Dùng thử trực tiếp:** Cách dễ nhất là truy cập bản demo tại: [**https://tranhuudat2004.github.io/mymusic-demo/**](https://tranhuudat2004.github.io/mymusic-demo/)
-2.  **Cài đặt tại máy:**
-    *   Clone repository này:
-        ```bash
-        git clone https://github.com/TranHuuDat2004/mymusic.git
-        ```
-    *   Mở file `index.html` trong trình duyệt của bạn.
-
----
 </details>
 
+<br>
+
 <details open>
-<summary><strong> English (Click to view)</strong></summary>
+<summary><strong>🇬🇧 / 🇺🇸 Introduction (English)</strong></summary>
 
-![MyMusic Player Screenshot](screenshot/demo.jpg)
+**MyMusic Player** is a full-stack web application that serves as a modern online music player, with an interface inspired by popular platforms like Spotify. This project is not only a product for listening to music but also a proof-of-concept for building a complete web application from scratch, including a backend, database, API, and user authentication system.
 
-MyMusic Player is an online music player interface designed and developed to provide a simple, modern, and intuitive music listening experience, inspired by popular platforms like Spotify.
+### ✨ Key Features (v2.0.0)
 
-**Live Demo:** [**https://tranhuudat2004.github.io/mymusic-demo/**](https://tranhuudat2004.github.io/mymusic-demo/)
-
-### ✨ Key Features
-
-*   **🎧 Comprehensive Listening Experience:**
-    *   **Full-Featured Player:** Play, pause, seek, volume control, repeat (all/one), and shuffle functionalities.
-    *   **"Now Playing" Fullscreen Mode:** An immersive interface, perfectly synchronized with the main player bar.
-*   **📱 Native Integration:**
-    *   **Media Session API:** Control your music directly from the Lock Screen, Control Center (iOS/Android), and hardware devices (like headphones). Album art and track metadata are beautifully displayed system-wide.
-    *   **Dynamic Favicon & Title:** The browser tab's favicon and title dynamically update to reflect the currently playing song.
-*   **🎨 Modern & Responsive Design:**
-    *   A clean, intuitive interface that functions optimally across all screen sizes, from desktop to mobile.
-*   **✨ Dynamic Interaction:**
-    *   Built entirely with **Vanilla JavaScript** to create dynamic UI elements and smooth user interactions.
+- **Modern User Interface:** A responsive design that works smoothly on both desktop and mobile devices.
+- **Fully-Functional Music Player:** Includes play/pause, progress bar, volume control, shuffle, and repeat modes.
+- **Dynamic Data Management:** All songs, artists, and playlists are dynamically managed through a MongoDB database.
+- **User System:**
+  - Account Registration and Login.
+  - Secure server-side password hashing.
+  - Authentication using JSON Web Tokens (JWT).
+- **Personalization:**
+  - "Liked Songs" feature for each user.
+  - Account Settings page to change profile information, avatar, and password.
+- **Dynamic Interactions:** Searching, liking songs, and other actions are handled quickly via API calls without page reloads.
 
 ### 🛠️ Technology Stack
 
-*   **HTML5:** Provides the semantic structure for the web page.
-*   **CSS3:** Styles the interface, including modern layout techniques like Flexbox, Grid Layout, and CSS Custom Properties.
-*   **JavaScript (ES6+):** Handles all application logic, user interactions, and state management. This project was built **without relying on external frameworks/libraries** to focus on core JS capabilities.
-*   **Hosting:** Deployed as a static website via [GitHub Pages](https://tranhuudat2004.github.io/mymusic-demo/).
+| Area           | Technologies                              |
+| :------------- | :---------------------------------------- |
+| **Backend**    | Node.js, Express.js                       |
+| **Database**   | MongoDB (with Mongoose ODM)               |
+| **Frontend**   | HTML5, CSS3, JavaScript (ES6+)            |
+| **View Engine**| EJS (Embedded JavaScript templating)      |
+| **Authentication** | JSON Web Tokens (JWT), bcrypt.js      |
+| **File Uploads** | Multer                                    |
+| **Environment**| dotenv, nodemon                           |
 
-### 📜 Scope and Limitations
-
-MyMusic Player is a **static web application** and operates entirely on the client-side. Due to this, it has the following limitations:
-*   **Static Data:** Song lists are hardcoded within the JavaScript source.
-*   **No Server-Side Features:** No database, user login, or server-side playlist storage.
-*   **Standalone Operation:** Listening status is not synchronized across devices.
-
-These limitations are inherent to a front-end project focused on demonstrating client-side UI/UX and interaction design.
-
-### 🚀 Getting Started
-
-1.  **Live Demo:** The easiest way to experience MyMusic Player is through the live demo: [**https://tranhuudat2004.github.io/mymusic-demo/**](https://tranhuudat2004.github.io/mymusic-demo/)
-2.  **Local Setup:**
-    *   Clone the repository:
-        ```bash
-        git clone https://github.com/TranHuuDat2004/mymusic.git
-        ```
-    *   Open the `index.html` file in your web browser.
+</details>
 
 ---
+
+## 🚀 Bắt đầu (Getting Started)
+
+<details>
+<summary><strong>Click để xem hướng dẫn cài đặt (Click to view installation guide)</strong></summary>
+<br>
+
+Để chạy dự án này trên máy cục bộ của bạn, hãy làm theo các bước sau.
+
+### Điều kiện tiên quyết (Prerequisites)
+
+- [Node.js](https://nodejs.org/) (phiên bản 16.x trở lên)
+- [MongoDB](https://www.mongodb.com/try/download/community) (cài đặt cục bộ) hoặc một tài khoản [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) (khuyến khích)
+
+### Cài đặt (Installation)
+
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/TranHuuDat2004/mymusic.git
+    cd mymusic
+    ```
+
+2.  **Install backend dependencies:**
+    ```bash
+    cd backend
+    npm install
+    ```
+
+3.  **Create a `.env` file** in the `backend` directory and add the following environment variables:
+    ```env
+    PORT=5001
+    MONGO_URI=your_mongodb_connection_string
+    JWT_SECRET=your_super_secret_jwt_key
+    ```
+    *   Thay `your_mongodb_connection_string` bằng chuỗi kết nối MongoDB của bạn.
+    *   Thay `your_super_secret_jwt_key` bằng một chuỗi bí mật dài và ngẫu nhiên.
+
+4.  **Import initial data (Optional):**
+    Nếu bạn muốn có sẵn dữ liệu nhạc, bạn có thể chạy script import.
+    ```bash
+    node importData.js
+    ```
+
+5.  **Start the server:**
+    ```bash
+    npm start
+    ```
+    Hoặc để chạy với nodemon cho việc phát triển:
+    ```bash
+    npm run dev
+    ```
+
+6.  Mở trình duyệt và truy cập `http://localhost:5001`.
+
 </details>
+
+---
+
+
 
 ### 🖼️ Screenshots
 
@@ -131,6 +158,25 @@ These limitations are inherent to a front-end project focused on demonstrating c
 | ![Fullscreen View](screenshot/card_view_iPadOS.png) | ![Fullscreen View](screenshot/fullscreen_view.PNG)  | ![Media Session Widget](screenshot/media_session_view.png) |
 
 
+## 📄 Giấy phép (License)
+
+<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a>
+<br />
+Tác phẩm này được cấp phép theo <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Giấy phép Quốc tế Creative Commons Ghi công - Phi thương mại 4.0</a>.
+
+---
+
+This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>.
+
+## 🤝 Đóng góp (Contributing)
+
+Mọi đóng góp đều được chào đón! Nếu bạn muốn đóng góp cho dự án, vui lòng fork repository và tạo một Pull Request.
+
+1.  Fork the Project
+2.  Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3.  Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4.  Push to the Branch (`git push origin feature/AmazingFeature`)
+5.  Open a Pull Request
 
 ### 🧑‍💻 Developer
 
