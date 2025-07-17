@@ -14,7 +14,7 @@
   <a href="https://github.com/TranHuuDat2004/mymusic/stargazers"><img src="https://img.shields.io/github/stars/TranHuuDat2004/mymusic?style=for-the-badge&logo=github&color=1DB954" alt="Stars"></a>
   <a href="https://github.com/TranHuuDat2004/mymusic/network/members"><img src="https://img.shields.io/github/forks/TranHuuDat2004/mymusic?style=for-the-badge&logo=github&color=1DB954" alt="Forks"></a>
   <a href="https://github.com/TranHuuDat2004/mymusic/issues"><img src="https://img.shields.io/github/issues/TranHuuDat2004/mymusic?style=for-the-badge&logo=github&color=orange" alt="Issues"></a>
-  <a href="https://github.com/TranHuuDat2004/mymusic/blob/main/LICENSE"><img src="https://img.shields.io/github/license/TranHuuDat2004/mymusic?style=for-the-badge&color=blue" alt="License"></a>
+  <!-- <a href="https://github.com/TranHuuDat2004/mymusic/blob/main/LICENSE"><img src="https://img.shields.io/github/license/TranHuuDat2004/mymusic?style=for-the-badge&color=blue" alt="License"></a> -->
 </p>
 
 <p align="center">
