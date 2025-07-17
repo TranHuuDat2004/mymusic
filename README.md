@@ -65,13 +65,15 @@
 
 ## 🖼️ Screenshots
 
-| Homepage | Library (Grid) | Library (List) |
-| :---: | :---: |:---: |
-| ![Homepage](screenshot/home_view.jpg) | ![Card View](screenshot/card_view.jpg) | ![List View](screenshot/list_view.jpg) |
-| **Playlist View** | **Artist Page** | **Fullscreen Player** |
-| ![Playlist View](screenshot/playlist_view.jpg) | ![Artist Page](screenshot/artist_page.jpg) | ![Fullscreen View](screenshot/fullscreen_view.PNG) |
+| Homepage | Playlist / Artist Page | Fullscreen Player |
+| :---: | :---: | :---: |
+| ![Homepage](screenshot/demo.jpg) | ![Playlist View](screenshot/playlist_view.jpg) | ![Fullscreen View](screenshot/fullscreen_view.PNG) |
+| **Login Page** | **Account Settings** | **Change Avatar** |
+| ![Login Page](screenshot/login.png) | ![Account Settings](screenshot/settings.png) | ![Change Avatar](screenshot/avatar.png) |
 
-*(Note: Please replace the image paths with your actual screenshot files.)*
+
+
+
 
 ---
 
