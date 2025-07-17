@@ -114,7 +114,7 @@ To run this project on your local machine, follow these steps.
 
 4.  **Import initial data (Optional):**
     ```bash
-    node importData.js
+    node backend/importData.js
     ```
 
 5.  **Start the server:**
