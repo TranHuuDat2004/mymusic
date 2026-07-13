@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <!-- Sửa đường dẫn CSS -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="icon" href="/img/favicon.png" type="image/png">
+</head>
+
+<body>
+    <button class="menu-toggle-btn" aria-label="Toggle menu">☰</button>
+    <audio id="audio-player"></audio>
+
+    <div class="music-player-container">
+        <!-- Sidebar -->
+        <nav id="sidebar-container" class="sidebar"></nav>
+
+        <main class="main-content">
+            <!-- Sử dụng class chung cho các trang nội dung văn bản -->
+            <div class="text-content-page"> 
+                <h1 style="text-align: center;">Chính sách Cookie</h1>
+                <p style="text-align: center;">Cập nhật lần cuối: Ngày 18 tháng 6 năm 2025</p>
+
+                <p>Chính sách này giải thích về việc sử dụng cookie trên trang web MyMusic Player.</p>
+
+                <h2>Cookie là gì?</h2>
+                <p>Cookie là các tệp văn bản nhỏ được lưu trữ trên trình duyệt của bạn khi bạn truy cập một trang web.
+                    Chúng thường được sử dụng để ghi nhớ các tùy chọn, duy trì trạng thái đăng nhập, hoặc phân tích lưu
+                    lượng truy cập.</p>
+
+                <h2>MyMusic Player có sử dụng Cookie không?</h2>
+                <p><strong>Không.</strong></p>
+                <p>Trang web MyMusic Player hiện tại <b>không chủ động đặt hoặc sử dụng bất kỳ cookie nào</b> để theo dõi
+                    người dùng, lưu trữ tùy chọn, hay cho mục đích quảng cáo. Vì đây là một ứng dụng full-stack với cơ sở dữ liệu nhưng chưa có chức năng đăng nhập, chúng tôi chưa cần đến cookie để duy trì phiên làm việc của người dùng.</p>
+
+                <h2>Cookie của bên thứ ba</h2>
+                <p>Trong tương lai, nếu chúng tôi tích hợp các dịch vụ của bên thứ ba (ví dụ: Google Analytics để phân tích lưu lượng truy cập), các dịch vụ đó có thể đặt cookie của riêng họ. Mọi thay đổi sẽ được cập nhật trong chính sách này.</p>
+
+                <h2>Làm thế nào để quản lý Cookie?</h2>
+                <p>Mặc dù chúng tôi không sử dụng cookie, bạn luôn có toàn quyền kiểm soát cookie trên trình duyệt của
+                    mình. Bạn có thể xem, xóa, hoặc chặn cookie từ bất kỳ trang web nào thông qua phần cài đặt của trình
+                    duyệt (thường là trong mục "Cài đặt" > "Quyền riêng tư và Bảo mật").</p>
+            </div>
+            
+            <!-- Footer -->
+        </main>
+        
+        <footer id="player-bar-container"></footer>
+        <div id="now-playing-fullscreen-container"></div>
+        <div id="notification-container"></div>
+    </div>
+
+    <!-- Scripts -->
+    <!-- Các trang tĩnh chỉ cần các script chung này -->
+    <script src="/js/utils.js" defer></script>
+    <script src="/js/player.js" defer></script>
+    <script src="/js/sidebar.js" defer></script>
+    <script src="/js/appendMainFooter.js" defer></script>
+</body>
+</html>

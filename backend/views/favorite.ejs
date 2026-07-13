@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài hát đã thích - My Music Player</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="icon" href="/img/favicon.png" type="image/png">
+</head>
+<body>
+    <button class="menu-toggle-btn" aria-label="Toggle menu">☰</button>
+    <audio id="audio-player"></audio>
+
+    <div class="music-player-container">
+        <nav id="sidebar-container" class="sidebar"></nav>
+
+        <main class="main-content" id="favorite-content-container">
+            <div class="library-header">
+                <h1>Bài hát đã thích</h1>
+                <!-- Có thể thêm nút chuyển đổi view ở đây nếu muốn -->
+            </div>
+            <div id="favorite-songs-display" class="song-list-container">
+                <p class="loading-message">Đang tải danh sách yêu thích...</p>
+            </div>
+        </main>
+        
+        <footer id="player-bar-container"></footer>
+        <div id="now-playing-fullscreen-container"></div>
+        <div id="notification-container"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/utils.js" defer></script>
+    <script src="/js/player.js" defer></script>
+    <script src="/js/sidebar.js" defer></script>
+    <script src="/js/favorite.js" defer></script> <!-- JS cho trang này -->
+    <script src="/js/appendMainFooter.js" defer></script>
+</body>
+</html>

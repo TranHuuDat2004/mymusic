@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= title %>
+    </title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="icon" href="/img/favicon.png" type="image/png">
+    <style>
+        /* CSS cho trang cài đặt tài khoản - Dark Theme */
+        .account-page-container {
+            padding: 20px 30px;
+        }
+
+        .account-settings-card {
+            background-color: #181818;
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+        }
+
+        .account-settings-nav {
+            background-color: #121212;
+            width: 220px;
+            padding: 20px 0;
+            flex-shrink: 0;
+        }
+
+        .account-settings-nav a {
+            display: block;
+            padding: 12px 20px;
+            color: #b3b3b3;
+            text-decoration: none;
+            transition: background-color 0.2s, color 0.2s;
+            border-left: 3px solid transparent;
+        }
+
+        .account-settings-nav a:hover {
+            background-color: #282828;
+            color: #fff;
+        }
+
+        .account-settings-nav a.active {
+            background-color: #282828;
+            color: #fff;
+            border-left-color: #1DB954;
+            /* Màu xanh lá đặc trưng */
+        }
+
+        .account-content {
+            padding: 30px 40px;
+            flex-grow: 1;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            color: #b3b3b3;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            background-color: #282828;
+            border: 1px solid #444;
+            border-radius: 4px;
+            color: #fff;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #1DB954;
+        }
+
+        .form-control[readonly] {
+            background-color: #222;
+            cursor: not-allowed;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            justify-content: flex-end;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background-color: #1DB954;
+            color: #121212;
+        }
+
+        .btn-secondary {
+            background-color: #535353;
+            color: #fff;
+        }
+
+        .btn-danger {
+            background-color: #e03131;
+            color: #fff;
+        }
+
+        @media (max-width: 768px) {
+            .account-settings-card {
+                flex-direction: column;
+            }
+
+            .account-settings-nav {
+                width: 100%;
+                display: flex;
+                overflow-x: auto;
+            }
+
+            .account-content {
+                padding: 20px;
+            }
+        }
+
+        /* --- CSS MỚI CHO CÁC TAB --- */
+        .account-content {
+            display: none;
+        }
+
+        /* Ẩn tất cả các tab content ban đầu */
+        .account-content.active {
+            display: block;
+        }
+
+        /* Chỉ hiện tab đang active */
+
+        /* CSS cho phần đổi avatar */
+        .avatar-preview-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .avatar-preview {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #333;
+        }
+
+        .avatar-upload-btn {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .avatar-upload-btn input[type="file"] {
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            cursor: pointer;
+            width: 100%;
+            height: 100%;
+        }
+
+        .default-avatars {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .default-avatars img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: border-color 0.2s;
+        }
+
+        .default-avatars img:hover,
+        .default-avatars img.selected {
+            border-color: #1DB954;
+        }
+    </style>
+</head>
+
+<body>
+    <button class="menu-toggle-btn" aria-label="Toggle menu">☰</button>
+    <audio id="audio-player"></audio>
+
+    <div class="music-player-container">
+        <nav id="sidebar-container" class="sidebar"></nav>
+
+        <main class="main-content">
+            <div class="account-page-container">
+                <h1 class="mb-4">Cài đặt tài khoản</h1>
+                <div class="account-settings-card">
+                    <nav class="account-settings-nav">
+                        <a href="#general" class="tab-link active" data-tab="general">Chung</a>
+                        <a href="#avatar" class="tab-link" data-tab="avatar">Đổi Avatar</a>
+                        <a href="#password" class="tab-link" data-tab="password">Đổi Mật khẩu</a>
+                    </nav>
+
+                    <div id="general-content" class="account-content active" >
+                        <h2>Thông tin chung</h2>
+                        <hr>
+                        <form id="account-form" method="POST" action="/api/user/update">
+                            <!-- backend/views/account.ejs -->
+                            <div class="form-group">
+                                <label class="form-label">User ID:</label>
+                                <input type="text" class="form-control" id="user-id-display" value="Đang tải..."
+                                    readonly>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Username:</label>
+                                <input type="text" class="form-control" name="username" value="">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Email:</label>
+                                <input type="email" class="form-control" name="email" value="">
+                            </div>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-secondary" id="cancelButton">Hủy</button>
+                                <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div id="avatar-content" class="account-content">
+                        <h2>Đổi Avatar</h2>
+                        <hr>
+                        <form id="avatar-form">
+                            <div class="avatar-preview-container">
+                                <img src="/img/upload.png" alt="Avatar Preview" id="avatar-preview"
+                                    class="avatar-preview">
+                                <div>
+                                    <label class="btn btn-primary avatar-upload-btn">
+                                        Tải ảnh lên
+                                        <input type="file" name="avatar" accept="image/*">
+                                    </label>
+                                    <p class="text-muted mt-2" style="font-size: 0.8em;">Ảnh vuông, PNG hoặc JPG, dưới
+                                        2MB.</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Hoặc chọn avatar có sẵn</label>
+                                <div class="default-avatars">
+                                    <img src="/img/avatars/avatar.png" data-path="img/avatars/avatar.png">
+                                    <img src="/img/avatars/avatar1.png" data-path="img/avatars/avatar1.png">
+                                    <img src="/img/avatars/male.jpg" data-path="img/avatars/male.jpg">
+                                    <img src="/img/avatars/female.jpg" data-path="img/avatars/female.jpg">
+                                </div>
+                                <input type="hidden" name="defaultAvatarPath">
+                            </div>
+                            <div class="btn-group">
+                                <button type="submit" class="btn btn-primary">Lưu Avatar</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div id="password-content" class="account-content">
+                        <h2>Đổi Mật khẩu</h2>
+                        <hr>
+                        <form id="password-form">
+                            <div class="form-group">
+                                <label class="form-label">Mật khẩu hiện tại</label>
+                                <input type="password" class="form-control" name="currentPassword" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Mật khẩu mới</label>
+                                <input type="password" class="form-control" name="newPassword" minlength="6" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Xác nhận mật khẩu mới</label>
+                                <input type="password" class="form-control" name="confirmNewPassword" required>
+                            </div>
+                            <div class="btn-group">
+                                <button type="submit" class="btn btn-primary">Đổi Mật khẩu</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer id="player-bar-container"></footer>
+        <div id="now-playing-fullscreen-container"></div>
+        <div id="notification-container"></div>
+    </div>
+
+    <!-- ... scripts ... -->
+    <script src="/js/utils.js" defer></script>
+    <script src="/js/player.js" defer></script>
+    <script src="/js/sidebar.js" defer></script>
+    <script src="/js/account.js" defer></script>
+</body>
+
+</html>

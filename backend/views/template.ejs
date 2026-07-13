@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Music Player (Interactive)</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link tới file CSS chung -->
+
+    <link rel="icon" href="img/favicon.png" type="image/png">
+</head>
+
+<body>
+
+    <button class="menu-toggle-btn" aria-label="Toggle menu">☰</button>
+    <audio id="audio-player"></audio> <!-- THE AUDIO ELEMENT -->
+
+    <div class="music-player-container">
+        <!-- 1. Sidebar (NO CHANGES HERE FROM PREVIOUS) -->
+        <!-- Sidebar sẽ được chèn tự động bởi sidebar.js -->
+        <nav id="sidebar-container" class="sidebar"></nav>
+
+        <!-- 2. Main Content Area -->
+        <main class="main-content" id="main-music-content">
+            <h1>Chào Trần Hữu Đạt</h1>
+            <!-- Các section nhạc sẽ được tạo bởi JavaScript ở đây -->
+             <div id="footer-placeholder"></div>
+        </main>
+
+        <!-- 3. Player Bar -->
+        <!-- Placeholder cho Player Bar, player.js sẽ tự động điền vào đây -->
+        <footer id="player-bar-container"></footer>
+
+                <!-- THÊM MỚI: Placeholder cho màn hình Now Playing -->
+        <div id="now-playing-fullscreen-container"></div>
+        
+        <!-- Placeholder cho Notification -->
+        <div id="notification-container"></div>
+    </div>
+</body>
+<!-- Scripts -->
+
+<script src="data/music.js"></script>
+<script src="js/utils.js"></script> <!-- Nạp file utils -->
+<script src="js/player.js"></script>
+<script src="js/main.js"></script> <!-- Thay vì search.js -->
+<!-- <script src="artist_page.js"></script> Nếu dùng -->
+    <script src="js/sidebar.js" defer></script> <!-- Nạp sidebar.js -->
+    <!-- Trong các file HTML -->
+<script src="js/footer.js" defer></script>
+</html>

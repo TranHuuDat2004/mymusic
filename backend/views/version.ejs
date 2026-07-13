@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= title %>
+    </title>
+    <!-- Sửa đường dẫn CSS -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="icon" href="/img/favicon.png" type="image/png">
+    <style>
+        /* CSS cho trang version */
+        #commit-history-container {
+            margin-top: 20px;
+        }
+
+        .commit-item {
+            background-color: #181818;
+            border-left: 4px solid #333;
+            padding: 15px 20px;
+            /* Tăng padding phải một chút */
+            margin-bottom: 15px;
+            border-radius: 4px;
+
+            /* --- BẮT ĐẦU SỬA ĐỔI --- */
+            display: flex;
+            /* Biến thành flex container */
+            justify-content: space-between;
+            /* Đẩy các nhóm phần tử ra hai bên */
+            align-items: center;
+            /* Căn giữa các phần tử theo chiều dọc */
+            gap: 15px;
+            /* Tạo khoảng cách giữa các phần tử */
+            /* --- KẾT THÚC SỬA ĐỔI --- */
+        }
+
+        .commit-item:hover {
+            border-left-color: #1DB954;
+        }
+
+        .commit-message {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 5px;
+            /* Giảm margin bottom */
+            color: #fff;
+        }
+
+        .commit-meta {
+            font-size: 0.9em;
+            color: #b3b3b3;
+        }
+
+        .commit-meta .author {
+            font-weight: bold;
+        }
+
+        /* --- BẮT ĐẦU SỬA ĐỔI CHO NÚT --- */
+        .commit-link {
+            /* Bỏ float và các thuộc tính không cần thiết */
+            color: #b3b3b3;
+            background-color: #282828;
+            border: 1px solid #444;
+            padding: 6px 12px;
+            border-radius: 20px;
+            /* Bo tròn nút */
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.85em;
+            white-space: nowrap;
+            /* Ngăn nút bị xuống dòng */
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        .commit-link:hover {
+            background-color: #333;
+            color: #fff;
+            text-decoration: none;
+            /* Vẫn giữ để chắc chắn */
+        }
+
+        /* --- KẾT THÚC SỬA ĐỔI CHO NÚT --- */
+
+        /* Gom nhóm message và meta lại để dễ sắp xếp */
+        .commit-details {
+            flex-grow: 1;
+            /* Cho phép nhóm này co giãn để chiếm không gian thừa */
+        }
+    </style>
+</head>
+
+<body>
+    <button class="menu-toggle-btn" aria-label="Toggle menu">☰</button>
+    <audio id="audio-player"></audio>
+
+    <div class="music-player-container">
+        <!-- Sidebar -->
+        <nav id="sidebar-container" class="sidebar"></nav>
+
+        <main class="main-content">
+            <h1>Lịch sử phiên bản (Lấy từ GitHub)</h1>
+            <p>Dữ liệu được cập nhật tự động từ kho mã nguồn <a href="https://github.com/TranHuuDat2004/mymusic"
+                    target="_blank" rel="noopener noreferrer">TranHuuDat2004/mymusic</a>.</p>
+
+            <!-- Vùng chứa này sẽ được JavaScript sử dụng để hiển thị lịch sử commit -->
+            <div id="commit-history-container">
+                <p class="loading-message">Đang tải lịch sử commit...</p>
+            </div>
+
+            <!-- Footer -->
+        </main>
+
+        <footer id="player-bar-container"></footer>
+        <div id="now-playing-fullscreen-container"></div>
+        <div id="notification-container"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/utils.js" defer></script>
+    <script src="/js/player.js" defer></script>
+    <script src="/js/sidebar.js" defer></script>
+    <script src="/js/appendMainFooter.js" defer></script>
+    <!-- File JS chính cho trang này -->
+    <script src="/js/version.js" defer></script>
+</body>
+
+</html>

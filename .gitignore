@@ -1,0 +1,17 @@
+.env
+node_modules/
+
+public/audio/
+public/uploads/
+
+# Chỉ track các ảnh giao diện gốc, bỏ qua ảnh bìa bài hát/nghệ sĩ/ảnh tải lên tự do
+public/img/*
+!public/img/logo.png
+!public/img/favicon.png
+!public/img/singer-holder.png
+!public/img/song-holder.png
+!public/img/avatar.png
+!public/img/default-avatar.png
+!public/img/upload.png
+!public/img/core-img/
+!public/img/bg-img/

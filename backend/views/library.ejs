@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <!-- Sửa đường dẫn CSS -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="icon" href="/img/favicon.png" type="image/png">
+</head>
+
+<body>
+    <button class="menu-toggle-btn" aria-label="Toggle menu">☰</button>
+    <audio id="audio-player"></audio>
+
+    <div class="music-player-container">
+        <!-- Sidebar -->
+        <nav id="sidebar-container" class="sidebar"></nav>
+        
+        <main class="main-content" id="library-content-container">
+            <!-- Header và các nút chuyển đổi view sẽ được JS chèn vào đây -->
+            <!-- Container chính cho nội dung, sẽ thay đổi class dựa trên view -->
+            <div id="library-songs-display" class="card-grid"> <!-- Mặc định là card-grid -->
+                <p class="loading-message">Đang tải thư viện...</p>
+            </div>
+            
+            <!-- Footer -->
+        </main>
+
+        <footer id="player-bar-container"></footer>
+        <div id="now-playing-fullscreen-container"></div>
+        <div id="notification-container"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/utils.js" defer></script>
+    <script src="/js/player.js" defer></script>
+    <script src="/js/sidebar.js" defer></script>
+    <script src="/js/library.js" defer></script> <!-- File JS chính cho trang này -->
+    <script src="/js/appendMainFooter.js" defer></script>
+</body>
+</html>

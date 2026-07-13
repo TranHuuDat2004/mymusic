@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="icon" href="/img/favicon.png" type="image/png">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-form-wrapper">
+            <img src="/img/logo.png" alt="MyMusic Logo" class="auth-logo">
+            <h1>Đăng nhập</h1>
+            <p>Chào mừng trở lại!</p>
+
+            <div id="error-box" class="error-message-box"></div>
+
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Mật khẩu</label>
+                    <input type="password" id="password" class="form-input" required>
+                </div>
+                <button type="submit" class="btn-auth">Đăng nhập</button>
+            </form>
+
+            <div class="auth-switch-link">
+                <p>Chưa có tài khoản? <a href="/register">Tạo tài khoản mới</a></p>
+            </div>
+        </div>
+    </div>
+    <script src="/js/login.js"></script>
+</body>
+</html>

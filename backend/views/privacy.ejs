@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <!-- Sửa đường dẫn CSS -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="icon" href="/img/favicon.png" type="image/png">
+</head>
+
+<body>
+    <button class="menu-toggle-btn" aria-label="Toggle menu">☰</button>
+    <audio id="audio-player"></audio>
+
+    <div class="music-player-container">
+        <!-- Sidebar -->
+        <nav id="sidebar-container" class="sidebar"></nav>
+
+        <main class="main-content">
+            <div class="text-content-page">
+                <h1 style="text-align: center;">Chính sách Quyền riêng tư</h1>
+                <p style="text-align: center;">Cập nhật lần cuối: Ngày 18 tháng 6 năm 2025</p>
+
+                <p>Sự riêng tư của bạn rất quan trọng đối với chúng tôi. Chính sách này giải thích rõ ràng về việc
+                    MyMusic Player thu thập và xử lý dữ liệu như thế nào.</p>
+
+                <h2>1. Dữ liệu chúng tôi thu thập</h2>
+                <p>MyMusic Player là một ứng dụng full-stack với cơ sở dữ liệu. Tuy nhiên, ở phiên bản hiện tại, chúng tôi <b>không</b> yêu cầu đăng ký tài khoản và do đó <b>không</b> thu thập bất kỳ Thông tin Nhận dạng Cá nhân (PII) nào như tên, email, hay số điện thoại.</p>
+                <p>Dữ liệu duy nhất được lưu trữ trong cơ sở dữ liệu của chúng tôi là dữ liệu về bài hát, nghệ sĩ, và playlist mà quản trị viên nhập vào để phục vụ nội dung cho ứng dụng.</p>
+
+                <h2>2. Dữ liệu được lưu trữ trên trình duyệt của bạn (Client-Side)</h2>
+                <p>Mọi trạng thái tạm thời của ứng dụng, chẳng hạn như bài hát bạn đang nghe, mức âm lượng, hoặc danh sách phát hiện tại, chỉ tồn tại trong phiên làm việc của trình duyệt và sẽ bị mất khi bạn đóng tab. Chúng tôi không sử dụng Local Storage hay các cơ chế lưu trữ lâu dài khác trên trình duyệt để theo dõi hành vi của bạn.</p>
+
+                <h2>3. Dịch vụ của bên thứ ba</h2>
+                <p>Trang web này có thể sử dụng các font chữ từ Google Fonts hoặc các dịch vụ CDN khác. Các dịch vụ này có thể thu thập dữ liệu ẩn danh theo chính sách riêng của họ. Chúng tôi không chịu trách nhiệm về việc thu thập dữ liệu của các bên thứ ba này.</p>
+
+                <h2>4. Liên kết đến các trang web khác</h2>
+                <p>Trang web có thể chứa các liên kết đến các trang khác (ví dụ: GitHub). Chúng tôi không chịu trách
+                    nhiệm về nội dung hay chính sách quyền riêng tư của các trang web đó. Chúng tôi khuyến khích bạn đọc
+                    chính sách của họ khi truy cập.</p>
+
+                <h2>5. Thay đổi chính sách</h2>
+                <p>Chúng tôi có thể cập nhật chính sách này trong tương lai để phản ánh các tính năng mới (ví dụ: chức năng đăng nhập). Mọi thay đổi sẽ được đăng tải trên trang này.</p>
+            </div>
+            
+            <!-- Footer -->
+        </main>
+        
+        <footer id="player-bar-container"></footer>
+        <div id="now-playing-fullscreen-container"></div>
+        <div id="notification-container"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/utils.js" defer></script>
+    <script src="/js/player.js" defer></script>
+    <script src="/js/sidebar.js" defer></script>
+    <script src="/js/appendMainFooter.js" defer></script>
+</body>
+</html>
